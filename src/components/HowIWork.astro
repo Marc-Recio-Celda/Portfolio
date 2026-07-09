@@ -1,0 +1,99 @@
+---
+/**
+ * HowIWork — bloque NEXUS discreto. Result-first, sin lenguaje defensivo
+ * sobre IA. Describe el método de trabajo (estructurado, versionado,
+ * reproducible), no una herramienta. Un único bloque, tono sobrio.
+ */
+import SectionHeader from "./SectionHeader.astro";
+import { withBase } from "../utils/url";
+---
+
+<section class="section how section--alt" aria-labelledby="how-title">
+  <div class="container">
+    <SectionHeader kicker="How I work" title="Structured, versioned, reproducible" id="how-title" />
+    <div class="how__body">
+      <p>
+        I work inside a personal system I call NEXUS: every project keeps its
+        own architecture and living state, decisions are logged with their
+        rationale, and each step is gated before the next begins. It keeps work
+        traceable and reproducible, the same discipline I apply to seeds,
+        schemas and pipelines.
+      </p>
+    </div>
+
+    <div class="how__shots">
+      <figure class="how__shot">
+        <img
+          src={withBase("/how/nexus.png")}
+          alt="The NEXUS vault: numbered domain folders from capture and storage to modelling and visualization."
+          width="836"
+          height="416"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mono-label">
+          One vault, every domain in its own versioned space
+        </figcaption>
+      </figure>
+      <figure class="how__shot">
+        <img
+          src={withBase("/how/graph.png")}
+          alt="Knowledge graph of the vault: hundreds of notes linked into one connected network."
+          width="768"
+          height="576"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mono-label">
+          Notes linked into one navigable knowledge graph
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="how__note">
+      This site is itself a NEXUS instance, planned, versioned and built in blocks.
+    </p>
+  </div>
+</section>
+
+<style>
+  .how__body {
+    max-width: var(--measure);
+  }
+  .how__body p {
+    font-size: var(--text-md);
+  }
+
+  .how__shots {
+    display: grid;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+  }
+  @media (min-width: 40rem) {
+    .how__shots {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+  }
+
+  .how__shot {
+    margin: 0;
+  }
+  .how__shot img {
+    width: 100%;
+    height: auto;
+    border: var(--border);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  .how__shot figcaption {
+    margin-top: var(--space-2xs);
+  }
+
+  .how__note {
+    margin-top: var(--space-lg);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    font-style: italic;
+  }
+</style>

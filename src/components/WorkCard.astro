@@ -1,0 +1,118 @@
+---
+/**
+ * WorkCard — tarjeta de navegación a una página de detalle.
+ * La tarjeta entera es un enlace (sin JS): accesible por teclado y sin
+ * estado que mantener. La etiqueta describe el tipo de pieza, nunca un
+ * número. Interactividad = estados hover/focus en CSS.
+ */
+interface Props {
+  href: string;
+  kind: string;
+  title: string;
+  summary: string;
+  status?: string;
+  thumb?: string;
+  thumbAlt?: string;
+}
+import { withBase } from "../utils/url";
+const { href, kind, title, summary, status, thumb, thumbAlt } = Astro.props;
+---
+
+<a class="card" href={href}>
+  {
+    thumb && (
+      <img
+        class="card__thumb"
+        src={withBase(thumb)}
+        alt={thumbAlt ?? ""}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+  <div class="card__top">
+    <span class="mono-label card__kind">{kind}</span>
+    {status && <span class="card__status">{status}</span>}
+  </div>
+  <h3 class="card__title">{title}</h3>
+  <p class="card__summary">{summary}</p>
+  <span class="card__cue" aria-hidden="true">Read more →</span>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: var(--space-md);
+    background: var(--paper);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    color: inherit;
+    text-decoration: none;
+    transition:
+      border-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+
+  .card:hover,
+  .card:focus-visible {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px -18px var(--accent-deep);
+  }
+
+  .card__thumb {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: contain;
+    background: var(--paper-2);
+    border: var(--border);
+    border-radius: var(--radius);
+    margin-bottom: var(--space-md);
+  }
+
+  .card__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .card__status {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 999px;
+    padding: 0.1em 0.6em;
+  }
+
+  .card__title {
+    font-size: var(--text-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .card__summary {
+    color: var(--muted);
+    flex: 1;
+  }
+
+  .card__cue {
+    margin-top: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--accent-deep);
+    transition: transform var(--dur) var(--ease);
+  }
+
+  .card:hover .card__cue,
+  .card:focus-visible .card__cue {
+    transform: translateX(3px);
+    color: var(--accent);
+  }
+</style>

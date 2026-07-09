@@ -1,0 +1,151 @@
+---
+/**
+ * Studies — formación reglada + certificados de cursos. El máster de DS está en
+ * curso (aquí consta el curso preparatorio de acceso, UOC); los dos títulos UPV
+ * están finalizados. Sin descargas: es una web personal, no un dossier.
+ */
+import SectionHeader from "./SectionHeader.astro";
+
+const degrees = [
+  {
+    title: "MSc in Data Science",
+    meta: "Universitat Oberta de Catalunya · in progress",
+    body: "The master's is under way. Before it, the access/preparatory course (programming, data-science programming, databases for data warehousing and networks), all passed with distinction.",
+  },
+  {
+    title: "MSc in Plant Genetic Breeding",
+    meta: "Universitat Politècnica de València (COMAV) · 2024",
+    body: "The plant-genomics and molecular-biology grounding behind my domain. Thesis graded 10/10.",
+  },
+  {
+    title: "BSc in Food Science & Technology",
+    meta: "Universitat Politècnica de València",
+    body: "My first degree: the science, chemistry and quality-analysis foundation I build on.",
+  },
+];
+
+const certificates = [
+  {
+    title: "CS50's Introduction to Programming with Python",
+    meta: "HarvardX · edX",
+  },
+  {
+    title: "Data Science: R Basics",
+    meta: "HarvardX (PH125.1x) · edX",
+  },
+  {
+    title: "Cambridge English: B2 First",
+    meta: "Cambridge Assessment English",
+  },
+  {
+    title: "Valencian language · level C1",
+    meta: "JQCV",
+  },
+  {
+    title: "French language · level A2",
+    meta: "CEFR",
+  },
+];
+---
+
+<section class="section" aria-labelledby="studies-title">
+  <div class="container">
+    <SectionHeader
+      kicker="Background · credentials"
+      title="My studies"
+      id="studies-title"
+    />
+
+    <div class="studies__grid">
+      <div class="studies__col">
+        <p class="mono-label">Degrees</p>
+        <ul class="studies__list">
+          {
+            degrees.map((d) => (
+              <li class="study">
+                <div class="study__head">
+                  <h3 class="study__title">{d.title}</h3>
+                  <span class="study__meta">{d.meta}</span>
+                </div>
+                <p class="study__body">{d.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="studies__col">
+        <p class="mono-label">Courses &amp; certificates</p>
+        <ul class="studies__list">
+          {
+            certificates.map((c) => (
+              <li class="study study--compact">
+                <div class="study__head">
+                  <h3 class="study__title">{c.title}</h3>
+                  <span class="study__meta">{c.meta}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .studies__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .studies__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  .studies__col .mono-label {
+    display: block;
+    padding-bottom: var(--space-2xs);
+    margin-bottom: var(--space-md);
+    border-bottom: var(--border);
+  }
+
+  .studies__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .study__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2xs) var(--space-sm);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .study__title {
+    font-size: var(--text-md);
+  }
+
+  .study--compact .study__title {
+    font-size: var(--text-base);
+  }
+
+  .study__meta {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .study__body {
+    color: var(--muted);
+    font-size: var(--text-base);
+    margin-bottom: var(--space-2xs);
+  }
+</style>

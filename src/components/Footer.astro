@@ -1,0 +1,133 @@
+---
+/**
+ * Footer — contacto y CV. CV descargable + email + GitHub + LinkedIn.
+ * Enlaces desde consts.ts (placeholders hasta que Marc confirme).
+ */
+import { SITE, LINKS } from "../consts";
+import { withBase } from "../utils/url";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer" id="contact">
+  <div class="container footer__inner">
+    <div class="footer__lead">
+      <img
+        class="footer__portrait"
+        src={withBase("/portrait.jpg")}
+        alt="Marc Recio"
+        width="96"
+        height="96"
+        loading="lazy"
+      />
+      <div class="footer__lead-text">
+        <p class="mono-label">Get in touch</p>
+        <p class="footer__pitch">
+          Open to research collaborations and positions in data science for
+          plant genomics.
+        </p>
+        <a class="footer__cv" href={withBase(LINKS.cv)} download>Download CV (PDF)</a>
+      </div>
+    </div>
+
+    <nav class="footer__links" aria-label="Contact and social">
+      <a href={`mailto:${LINKS.email}`}>Email</a>
+      <a href={`tel:${LINKS.phone.replace(/\s/g, "")}`}>{LINKS.phone}</a>
+      <a href={LINKS.github} rel="me noopener" target="_blank">GitHub</a>
+      <a href={LINKS.linkedin} rel="me noopener" target="_blank">LinkedIn</a>
+    </nav>
+  </div>
+
+  <div class="container footer__base">
+    <span>© {year} {SITE.name}</span>
+    <span class="mono-label">Built with Astro · static</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: var(--border);
+    padding-block: var(--space-2xl) var(--space-lg);
+  }
+
+  .footer__inner {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .footer__inner {
+      grid-template-columns: 1fr auto;
+      align-items: start;
+    }
+  }
+
+  .footer__lead {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .footer__portrait {
+    flex: none;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--line);
+  }
+
+  .footer__lead-text .mono-label {
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .footer__pitch {
+    font-size: var(--text-lg);
+    font-family: var(--font-display);
+    max-width: 28ch;
+    margin-bottom: var(--space-md);
+  }
+
+  .footer__cv {
+    display: inline-block;
+    padding: var(--space-2xs) var(--space-md);
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    transition: background var(--dur) var(--ease);
+  }
+
+  .footer__cv:hover,
+  .footer__cv:focus-visible {
+    background: var(--accent-deep);
+    color: var(--paper);
+  }
+
+  .footer__links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  @media (min-width: 48rem) {
+    .footer__links {
+      align-items: flex-end;
+    }
+  }
+
+  .footer__base {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: var(--border);
+    color: var(--muted);
+    font-size: var(--text-sm);
+  }
+</style>

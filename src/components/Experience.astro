@@ -1,0 +1,136 @@
+---
+/**
+ * Experience — trayectoria laboral en investigación y laboratorio (biotech
+ * vegetal). Encuadre honesto y orientado a lo que aporta al perfil de DS:
+ * generación de datos experimentales, análisis estadístico, biología molecular.
+ * Cada rol = qué hice + qué me llevo. Sin inflar.
+ */
+import SectionHeader from "./SectionHeader.astro";
+
+const roles = [
+  {
+    title: "Research staff",
+    org: "COMAV, Institute for Conservation & Improvement of Valencian Agrodiversity (UPV)",
+    period: "May 2024 – Dec 2024",
+    did: [
+      "Developed a protocol to obtain transgenic rapeseed, and ran in vitro microspore cultures (gametophytic development and androgenesis).",
+      "Performed PCR and sequencing for genetic analysis, and histological work on the salinity impact on reproductive development of Cakile maritima.",
+      "Designed and ran the statistical analyses behind the experimental results.",
+    ],
+    took: "Generating clean experimental data end to end, and having to defend it statistically, is where my move toward data science took root.",
+  },
+  {
+    title: "Laboratory technician (internship)",
+    org: "Semillas Fitó, Cabrera de Mar, Barcelona",
+    period: "Jun 2023 – Nov 2023",
+    did: [
+      "Ran in vitro procedures to produce double haploids in pepper, cucumber and watermelon.",
+      "Executed DNA-extraction protocols in the molecular-biology department.",
+    ],
+    took: "A first, hands-on look at how an industrial breeding programme turns biology into reproducible, high-throughput pipelines.",
+  },
+];
+---
+
+<section class="section section--alt" aria-labelledby="experience-title">
+  <div class="container">
+    <SectionHeader
+      kicker="Background · experience"
+      title="Work experience"
+      id="experience-title"
+    />
+
+    <ul class="exp__list">
+      {
+        roles.map((r) => (
+          <li class="exp">
+            <div class="exp__head">
+              <h3 class="exp__title">{r.title}</h3>
+              <span class="exp__period">{r.period}</span>
+            </div>
+            <p class="exp__org">{r.org}</p>
+            <ul class="exp__did">
+              {r.did.map((d) => (
+                <li>{d}</li>
+              ))}
+            </ul>
+            <p class="exp__took">{r.took}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .exp__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .exp__list {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  .exp__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2xs) var(--space-sm);
+    padding-bottom: var(--space-2xs);
+    border-bottom: var(--border);
+    margin-bottom: var(--space-sm);
+  }
+
+  .exp__title {
+    font-size: var(--text-md);
+  }
+
+  .exp__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .exp__org {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .exp__did {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2xs);
+    margin-bottom: var(--space-sm);
+  }
+
+  .exp__did li {
+    position: relative;
+    padding-left: var(--space-sm);
+    color: var(--ink);
+    font-size: var(--text-base);
+  }
+
+  .exp__did li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .exp__took {
+    color: var(--muted);
+    font-size: var(--text-base);
+    font-style: italic;
+  }
+</style>

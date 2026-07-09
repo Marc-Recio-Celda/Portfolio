@@ -1,0 +1,28 @@
+---
+/**
+ * SectionHeader — kicker mono + título de sección.
+ * Uniforma el ritmo vertical de la landing. El "kicker" da textura de
+ * datos (label mono en mayúsculas); el título usa la fuente display.
+ */
+interface Props {
+  kicker: string;
+  title: string;
+  id?: string;
+}
+const { kicker, title, id } = Astro.props;
+---
+
+<header class="section-header">
+  <p class="mono-label">{kicker}</p>
+  <h2 id={id}>{title}</h2>
+</header>
+
+<style>
+  .section-header {
+    margin-bottom: var(--space-lg);
+  }
+  .section-header .mono-label {
+    display: block;
+    margin-bottom: var(--space-2xs);
+  }
+</style>

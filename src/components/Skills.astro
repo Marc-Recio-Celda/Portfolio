@@ -1,0 +1,157 @@
+---
+/**
+ * Skills — formación / qué aporto como científico de datos.
+ * Honesto y sin jerga de grupo: fuertes (ML + bases de datos), trayectoria
+ * activa (DL/RL en curso, base matemática asentada) y dominio (genómica).
+ * Result-first, sin lenguaje defensivo ni superioridad comparativa.
+ */
+import SectionHeader from "./SectionHeader.astro";
+
+const groups = [
+  {
+    label: "Core strengths",
+    items: [
+      {
+        title: "Classical machine learning",
+        note: "Top grade (matrícula de honor)",
+        body: "Supervised and unsupervised methods with an eye for what a model can and cannot claim, from feature work to honest, statistically grounded evaluation. I earned the top grade in the master's machine-learning course.",
+      },
+      {
+        title: "Databases & data engineering",
+        note: "SQL · NoSQL · schema design",
+        body: "Modelling, querying and structuring data so it stays consistent, queryable and reusable, and judging which kind of database fits the problem at hand.",
+      },
+      {
+        title: "Data collection, prep & visualization",
+        note: "End-to-end workflow",
+        body: "Gathering data (scraping, APIs), cleaning and preprocessing it so the analysis rests on solid ground, and building visualizations that make the point land fast for the reader.",
+      },
+    ],
+  },
+  {
+    label: "In progress",
+    items: [
+      {
+        title: "Deep learning & reinforcement learning",
+        note: "Active trajectory",
+        body: "An active learning track built on a settled mathematical foundation. In progress, stated plainly.",
+      },
+    ],
+  },
+  {
+    label: "Domain",
+    items: [
+      {
+        title: "Plant genomics & breeding",
+        note: "Field of application",
+        body: "A plant-breeding and molecular-biology background (in vitro culture, PCR and sequencing, transgenics) that lets me read biological data from the inside, not just as numbers.",
+      },
+    ],
+  },
+];
+---
+
+<section class="section" aria-labelledby="skills-title">
+  <div class="container">
+    <SectionHeader
+      kicker="Formation · what I bring"
+      title="A multidisciplinary data scientist"
+      id="skills-title"
+    />
+    <p class="skills__lede">
+      I work across the stack of applied data science: solid classical ML and
+      databases as the foundation, with deep learning and reinforcement
+      learning as an honest, in-progress trajectory.
+    </p>
+    <p class="skills__aside">
+      Alongside the technical side, I bring initiative, creativity and
+      analytical problem-solving to collaborative teams, with a responsible,
+      ethical approach to the work.
+    </p>
+
+    <div class="skills__grid">
+      {
+        groups.map((g) => (
+          <div class="skills__group">
+            <p class="mono-label">{g.label}</p>
+            <ul class="skills__list">
+              {g.items.map((it) => (
+                <li class="skill">
+                  <div class="skill__head">
+                    <h3 class="skill__title">{it.title}</h3>
+                    <span class="skill__note">{it.note}</span>
+                  </div>
+                  <p class="skill__body">{it.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__lede {
+    font-size: var(--text-md);
+    color: var(--muted);
+    margin-top: calc(-1 * var(--space-md));
+    margin-bottom: var(--space-sm);
+  }
+
+  .skills__aside {
+    font-size: var(--text-base);
+    color: var(--muted);
+    margin-bottom: var(--space-lg);
+  }
+
+  .skills__grid {
+    display: grid;
+    gap: var(--space-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .skills__grid {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+  }
+
+  .skills__group .mono-label {
+    display: block;
+    padding-bottom: var(--space-2xs);
+    margin-bottom: var(--space-md);
+    border-bottom: var(--border);
+  }
+
+  .skills__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-md);
+  }
+
+  .skill__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2xs) var(--space-sm);
+    margin-bottom: var(--space-2xs);
+  }
+
+  .skill__title {
+    font-size: var(--text-lg);
+  }
+
+  .skill__note {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--accent);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  .skill__body {
+    color: var(--muted);
+    font-size: var(--text-base);
+  }
+</style>

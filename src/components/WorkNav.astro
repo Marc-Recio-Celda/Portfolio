@@ -1,0 +1,52 @@
+---
+/**
+ * WorkNav — navegación interactiva a las páginas de detalle.
+ * Las tarjetas las provee la collection `work` (orden por `order`). Etiqueta
+ * por tipo, nunca por número.
+ */
+import { getCollection } from "astro:content";
+import SectionHeader from "./SectionHeader.astro";
+import WorkCard from "./WorkCard.astro";
+import { withBase } from "../utils/url";
+
+const items = (await getCollection("work", ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<section class="section worknav" aria-labelledby="worknav-title">
+  <div class="container">
+    <SectionHeader
+      kicker="Projects · go deeper"
+      title="Go deeper in my projects"
+      id="worknav-title"
+    />
+    <div class="worknav__grid">
+      {
+        items.map((it) => (
+          <WorkCard
+            href={withBase(`/work/${it.id}`)}
+            kind={it.data.kind}
+            title={it.data.title}
+            summary={it.data.summary}
+            status={it.data.status}
+            thumb={it.data.thumb}
+            thumbAlt={it.data.thumbAlt}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .worknav__grid {
+    display: grid;
+    gap: var(--space-md);
+  }
+  @media (min-width: 48rem) {
+    .worknav__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
