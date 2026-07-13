@@ -13,7 +13,7 @@ import Base from "../../layouts/Base.astro";
 import { withBase } from "../../utils/url";
 
 type Fig = { img: string; alt: string; caption?: string };
-type Step = { title: string; body: string; figs?: Fig[] };
+type Step = { title: string; body: string; figs?: Fig[]; split?: boolean };
 type Phase = { phase: string; steps: Step[] };
 
 const DIR = "/how/closer/";
@@ -36,11 +36,17 @@ const walkthrough: Phase[] = [
       {
         title: "A vault that grows without breaking",
         body: "NEXUS is a set of numbered domain folders. Indexes link all the work together, so it can grow without limit and the connections never break. The domains map my whole data-science master's; everything I do is logged, which lets me learn efficiently and never lose the reasoning behind a past decision.",
+        split: true,
         figs: [
           {
             img: DIR + "nexus-vault.png",
             alt: "The NEXUS vault: numbered domain folders from indices and capture to modelling, visualization and systems.",
-            caption: "One vault, every domain in its own numbered space",
+            caption: "Numbered domain folders",
+          },
+          {
+            img: "/how/graph.png",
+            alt: "Knowledge graph of the vault: hundreds of notes linked into one connected network.",
+            caption: "The same notes, linked into one graph",
           },
         ],
       },
@@ -216,14 +222,18 @@ let n = 0;
                   <div class="closer__content">
                     <h3>{step.title}</h3>
                     <p>{step.body}</p>
-                    {step.figs && step.figs.map((fig) => (
-                      <figure class="closer__fig">
-                        <a href={withBase(fig.img)} target="_blank" rel="noopener" aria-label={`Open full-size: ${fig.caption ?? fig.alt}`}>
-                          <img src={withBase(fig.img)} alt={fig.alt} loading="lazy" decoding="async" />
-                        </a>
-                        {fig.caption && <figcaption class="mono-label">{fig.caption}</figcaption>}
-                      </figure>
-                    ))}
+                    {step.figs && (
+                      <div class:list={["closer__figs", { "closer__figs--split": step.split }]}>
+                        {step.figs.map((fig) => (
+                          <figure class="closer__fig">
+                            <a href={withBase(fig.img)} target="_blank" rel="noopener" aria-label={`Open full-size: ${fig.caption ?? fig.alt}`}>
+                              <img src={withBase(fig.img)} alt={fig.alt} loading="lazy" decoding="async" />
+                            </a>
+                            {fig.caption && <figcaption class="mono-label">{fig.caption}</figcaption>}
+                          </figure>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </li>
               ))}
@@ -320,8 +330,19 @@ let n = 0;
     color: var(--muted);
   }
 
+  .closer__figs {
+    margin-top: var(--space-md);
+    display: grid;
+    gap: var(--space-md);
+  }
+  @media (min-width: 40rem) {
+    .closer__figs--split {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+    }
+  }
   .closer__fig {
-    margin: var(--space-md) 0 0;
+    margin: 0;
   }
   .closer__fig a {
     display: block;
