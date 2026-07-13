@@ -24,19 +24,6 @@ import { withBase } from "../utils/url";
     <div class="how__shots">
       <figure class="how__shot">
         <img
-          src={withBase("/how/closer/nexus-vault.png")}
-          alt="The NEXUS vault: numbered domain folders from capture and storage to modelling and visualization."
-          width="836"
-          height="416"
-          loading="lazy"
-          decoding="async"
-        />
-        <figcaption class="mono-label">
-          One vault, every domain in its own versioned space
-        </figcaption>
-      </figure>
-      <figure class="how__shot">
-        <img
           src={withBase("/how/graph.png")}
           alt="Knowledge graph of the vault: hundreds of notes linked into one connected network."
           width="768"
@@ -70,19 +57,14 @@ import { withBase } from "../utils/url";
   }
 
   .how__shots {
-    display: grid;
-    gap: var(--space-md);
+    display: flex;
+    justify-content: center;
     margin-top: var(--space-lg);
-  }
-  @media (min-width: 40rem) {
-    .how__shots {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-lg);
-    }
   }
 
   .how__shot {
     margin: 0;
+    max-width: 34rem;
   }
   .how__shot img {
     width: 100%;
