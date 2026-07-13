@@ -1,0 +1,362 @@
+---
+/**
+ * Página "A closer look" — recorrido paso a paso, con capturas reales, de
+ * cómo llevo un proyecto (autocatalogue / TFM) de la idea al resultado
+ * verificado. Convierte el uso de IA en factor diferencial: el juicio lo
+ * define el humano (arquitectura, decisiones, verificación); el LLM ejecuta
+ * dentro de límites, con trazabilidad total y cero cajas negras.
+ *
+ * Para añadir ejemplos: sube la captura a `public/how/closer/` y añade una
+ * entrada a `figs` del paso. Cada figura abre a tamaño completo al clic.
+ */
+import Base from "../../layouts/Base.astro";
+import { withBase } from "../../utils/url";
+
+type Fig = { img: string; alt: string; caption?: string };
+type Step = { title: string; body: string; figs?: Fig[] };
+type Phase = { phase: string; steps: Step[] };
+
+const DIR = "/how/closer/";
+
+const walkthrough: Phase[] = [
+  {
+    phase: "The knowledge base",
+    steps: [
+      {
+        title: "One home for everything I learn",
+        body: "It starts in Claude. Using two dedicated assistants — one to create, one to audit — I built NEXUS: a single place to pour everything I learn, kept simple and connected, so I can always go back and recover something I did or studied.",
+        figs: [
+          {
+            img: DIR + "claude-projects.png",
+            alt: "Claude projects list: NEXUS-Creation, NEXUS-Projects, NEXUS-Audit and per-project assistants.",
+            caption: "Dedicated assistants: one creates, one audits",
+          },
+        ],
+      },
+      {
+        title: "A vault that grows without breaking",
+        body: "NEXUS is a set of numbered domain folders. Indexes link all the work together, so it can grow without limit and the connections never break. The domains map my whole data-science master's; everything I do is logged, which lets me learn efficiently and never lose the reasoning behind a past decision.",
+        figs: [
+          {
+            img: DIR + "nexus-vault.png",
+            alt: "The NEXUS vault: numbered domain folders from indices and capture to modelling, visualization and systems.",
+            caption: "One vault, every domain in its own numbered space",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    phase: "Starting the project",
+    steps: [
+      {
+        title: "Frame the idea first",
+        body: "A real example: my master's thesis. To begin, I open the Projects assistant and write down the idea my supervisors gave me, together with my own view of where the work should start.",
+        figs: [
+          {
+            img: DIR + "start-idea.png",
+            alt: "A Claude conversation where I paste the thesis brief and my own take on where to begin.",
+            caption: "The brief, and my own read on where to start",
+          },
+        ],
+      },
+      {
+        title: "Define, then create the base files",
+        body: "After iterating with Claude I create the base files of a new project and start working in a structured way — confirming every part by hand (zero black boxes) and checking each decision with myself and my supervisors. A step never starts until the previous one is closed. The project even generates its own cheat-sheet: current block, next action, and the gated B0–B9 progression.",
+        figs: [
+          {
+            img: DIR + "define-and-create.png",
+            alt: "Claude generating the three base files of the project, each with a download button.",
+            caption: "The project's base files, created and confirmed by hand",
+          },
+          {
+            img: DIR + "work-guide.png",
+            alt: "Auto-generated project cheat-sheet showing the current block, next action and the gated B0–B9 progression.",
+            caption: "The self-generated work guide: what to load, what's next",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    phase: "The files that keep it honest",
+    steps: [
+      {
+        title: "A record in the main vault",
+        body: "Back in the main NEXUS vault I add a project record, so the vault always stays up to date on what I'm working on and where it lives.",
+        figs: [
+          {
+            img: DIR + "vault-record.png",
+            alt: "The project record note inside the main NEXUS vault, with status and a summary of the project.",
+            caption: "The vault always knows what I'm working on",
+          },
+        ],
+      },
+      {
+        title: "A nexus folder inside the project",
+        body: "Inside the project repository I keep a folder called nexus with all its definition, state, architecture and the link back to the main vault. Code and knowledge live side by side.",
+        figs: [
+          {
+            img: DIR + "project-repo.png",
+            alt: "The project repository root with the nexus folder highlighted among code folders.",
+            caption: "Code and knowledge, side by side",
+          },
+          {
+            img: DIR + "project-nexus-contents.png",
+            alt: "Inside the project's nexus folder: router, architecture, state, definition, decision log and workflow files.",
+            caption: "Definition, state, architecture and the up-link",
+          },
+        ],
+      },
+      {
+        title: "A router that connects both",
+        body: "The router is the bridge between the main NEXUS vault and the project. It describes the project's structural files and maps where, in the vault, the knowledge to carry it out can be found.",
+        figs: [
+          {
+            img: DIR + "router.png",
+            alt: "The project router note: up-link to NEXUS and a map of where each structural file lives.",
+            caption: "The bridge between vault and project",
+          },
+        ],
+      },
+      {
+        title: "State: what's done, what's next",
+        body: "The state file holds the current status: which blocks are already closed, and all the relevant information about the workflow still to run before the final result.",
+        figs: [
+          {
+            img: DIR + "state.png",
+            alt: "The state file: a table of blocks B0–B9 with their status and notes on the workflow.",
+            caption: "Blocks B0–B9, closed and open, at a glance",
+          },
+        ],
+      },
+      {
+        title: "Architecture: the axioms",
+        body: "The architecture file stores the project's axioms — design decisions the project must honour. If I ever try something that contradicts a past decision of mine, I notice immediately.",
+        figs: [
+          {
+            img: DIR + "architecture.png",
+            alt: "The architecture file: rules of immutability and auditability, and the first fixed axiom AX-1.",
+            caption: "Fixed axioms, referable by code (AX-n)",
+          },
+        ],
+      },
+      {
+        title: "Decision log: full traceability",
+        body: "Every design decision is logged, the approved and the discarded alike, so I have complete traceability of what I did, why, and how the project evolved.",
+        figs: [
+          {
+            img: DIR + "decision-log.png",
+            alt: "The decision log table: numbered decisions with rationale and date; a superseded one struck through.",
+            caption: "Approved and discarded, each with its rationale",
+          },
+        ],
+      },
+      {
+        title: "The instructions Claude works under",
+        body: "These are the instructions Claude receives. They describe the project and set the ground rules for how we work together: efficient, rigorous and precise.",
+        figs: [
+          {
+            img: DIR + "instructions.png",
+            alt: "The project's instruction cartridge for Claude: identity, domain and working rules.",
+            caption: "The rules of engagement, written down",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    phase: "Working on it, day to day",
+    steps: [
+      {
+        title: "Start each step with the full picture",
+        body: "To start a new step I open the project with its state and architecture up to date, tell it what I've already done and how I'd move forward. That keeps the whole project I defined in view — no forgotten axioms or decisions — so I always make the best call with the tools I have.",
+        figs: [
+          {
+            img: DIR + "working-day.png",
+            alt: "A working session: I state what's done and my plan; the assistant confirms the current block and resume point.",
+            caption: "Every session resumes with 100% of the context I defined",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+let n = 0;
+---
+
+<Base
+  title="A closer look — how I work"
+  description="A concrete, step-by-step walkthrough with real screenshots of how I take a project from a blank page to a verified result, with AI kept inside deterministic limits."
+>
+  <article class="closer">
+    <div class="container closer__wrap">
+      <a class="closer__back" href={withBase("/#how-title")}>← Back to how I work</a>
+
+      <header class="closer__header">
+        <span class="mono-label">How I work · a closer look</span>
+        <h1>One project, step by step</h1>
+        <p class="closer__lede">
+          A concrete walkthrough, with real screenshots, of how a project
+          actually moves from a blank page to a verified result. The example is
+          autocatalogue, my master's thesis: a pipeline that reads a scientific
+          paper and classifies the evidence level for each gene it reports.
+        </p>
+      </header>
+
+      <div class="closer__walk">
+        {walkthrough.map((group) => (
+          <section class="closer__phase">
+            <h2 class="closer__phase-title">{group.phase}</h2>
+            <ol class="closer__steps">
+              {group.steps.map((step) => (
+                <li class="closer__step">
+                  <span class="closer__num" aria-hidden="true">{String(++n).padStart(2, "0")}</span>
+                  <div class="closer__content">
+                    <h3>{step.title}</h3>
+                    <p>{step.body}</p>
+                    {step.figs && step.figs.map((fig) => (
+                      <figure class="closer__fig">
+                        <a href={withBase(fig.img)} target="_blank" rel="noopener" aria-label={`Open full-size: ${fig.caption ?? fig.alt}`}>
+                          <img src={withBase(fig.img)} alt={fig.alt} loading="lazy" decoding="async" />
+                        </a>
+                        {fig.caption && <figcaption class="mono-label">{fig.caption}</figcaption>}
+                      </figure>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+        ))}
+      </div>
+
+      <p class="closer__outro">
+        AI accelerates the work. The architecture, the decisions and the
+        verification stay mine.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .closer {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+  .closer__wrap {
+    max-width: 54rem;
+  }
+  .closer__back {
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  .closer__header {
+    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    border-bottom: var(--border);
+  }
+  .closer__header h1 {
+    margin-top: var(--space-sm);
+    font-size: var(--text-2xl);
+  }
+  .closer__lede {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+    color: var(--muted);
+  }
+
+  .closer__walk {
+    counter-reset: step;
+    display: grid;
+    gap: var(--space-2xl);
+  }
+  .closer__phase-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  .closer__steps {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-xl);
+  }
+  .closer__step {
+    max-width: none;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-sm) var(--space-md);
+    align-items: start;
+  }
+  .closer__num {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    color: var(--accent);
+  }
+  .closer__content h3 {
+    font-size: var(--text-lg);
+  }
+  .closer__content p {
+    margin-top: var(--space-2xs);
+    color: var(--muted);
+  }
+
+  .closer__fig {
+    margin: var(--space-md) 0 0;
+  }
+  .closer__fig a {
+    display: block;
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper-2);
+    transition: border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+  .closer__fig a:hover {
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.08);
+  }
+  .closer__fig img {
+    width: 100%;
+    height: auto;
+  }
+  .closer__fig figcaption {
+    margin-top: var(--space-2xs);
+  }
+
+  .closer__outro {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: var(--border);
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+  }
+
+  @media (max-width: 34rem) {
+    .closer__step {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+  }
+</style>

@@ -24,7 +24,7 @@ import { withBase } from "../utils/url";
     <div class="how__shots">
       <figure class="how__shot">
         <img
-          src={withBase("/how/nexus.png")}
+          src={withBase("/how/closer/nexus-vault.png")}
           alt="The NEXUS vault: numbered domain folders from capture and storage to modelling and visualization."
           width="836"
           height="416"
@@ -53,6 +53,11 @@ import { withBase } from "../utils/url";
     <p class="how__note">
       This site is itself a NEXUS instance, planned, versioned and built in blocks.
     </p>
+
+    <a class="how__closer" href={withBase("/how")}>
+      Take a closer look — one project, step by step
+      <span aria-hidden="true">→</span>
+    </a>
   </div>
 </section>
 
@@ -95,5 +100,23 @@ import { withBase } from "../utils/url";
     font-size: var(--text-sm);
     color: var(--muted);
     font-style: italic;
+  }
+
+  /* ---- Enlace a la página "closer look" ----------------------- */
+  .how__closer {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-lg);
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-md);
+    text-decoration: none;
+    color: var(--accent-deep);
+    transition: gap var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .how__closer:hover {
+    color: var(--accent);
+    gap: var(--space-sm);
   }
 </style>
