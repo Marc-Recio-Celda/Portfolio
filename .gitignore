@@ -22,3 +22,9 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# obsidian vault config (created when opening a folder as a vault)
+.obsidian/
+
+# temporary: English source files for re-screenshotting NEXUS notes (not part of the site)
+translations-en/
