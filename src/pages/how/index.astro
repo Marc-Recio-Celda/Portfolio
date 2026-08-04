@@ -143,9 +143,12 @@ const logFig = {
           <p class="closer__phase-intro">
             Every kind of file has exactly one owner. The agent is the sole
             author of code and tooling — that is genuinely its job, and I don't
-            pretend to review every line. It is never the author of knowledge or
-            method. Between the two sits a class of files that are generated:
-            nobody edits those by hand, a script rebuilds them from the source.
+            pretend to review every line. What it is never allowed to be is
+            the <em>originator</em> of a change to knowledge or method: when I ask
+            for one it writes it and records it, but it never concludes on its
+            own that one is needed and goes ahead. Between the two sits a class
+            of files that are generated, where nobody edits anything by hand and
+            a script rebuilds them from the source.
           </p>
 
           <PermissionTable />
@@ -153,11 +156,11 @@ const logFig = {
           <h3 class="closer__rule-title">Proposals go to a mailbox, not into the file</h3>
           <p class="closer__phase-intro">
             When an agent concludes a structural document should change — and it
-            is often right — it doesn't change it. It leaves a signed, dated
-            entry in a mailbox, drafted in the target document's own style, with
-            a destination drawn from a closed vocabulary so triage stays
-            scriptable. Then I integrate it, or I don't. Either way the proposal
-            and its author survive in the log.
+            is often right — it doesn't act on that conclusion. It leaves a
+            signed, dated entry in a mailbox, drafted in the target document's
+            own style, with a destination drawn from a closed vocabulary so
+            triage stays scriptable. Then I integrate it, or I don't. Either way
+            the proposal and its author survive in the log.
           </p>
           <pre class="closer__sample"><code>### [pending] → charter §5 — Agents commit to a branch, never to the stable one
 · (claude-code, 2026-07-29)
@@ -189,6 +192,33 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
             the logs exist to fill, and it's the whole difference between a
             repository and a record.
           </p>
+
+          <h3 class="closer__rule-title">And the method improves itself</h3>
+          <p class="closer__phase-intro">
+            None of this would be worth much if the rules were fixed. The same
+            mailbox that catches an agent's proposals also catches every
+            inconsistency it stumbles on and every task it refuses — and all of
+            it gets triaged into numbered method decisions, each carrying its
+            reasoning and what was rejected. Using the system is what produces
+            the next version of it.
+          </p>
+          <p class="closer__phase-intro">
+            That loop isn't a flattering story I tell about my own process; it's
+            visible in the log, which records who originated each decision.
+            Several of the rules now governing the agents were proposed by an
+            agent — including the one that changed how work is handed to me for
+            review, which came from the executor finding the old way expensive
+            and saying so.
+          </p>
+          <p class="closer__phase-intro">
+            And because the method is a single layer sitting above every project
+            rather than a habit inside each one, an improvement found while
+            working on the thesis lands in this site, in the next tool, and in
+            whatever comes after. I fix it once, where the rules live, and it
+            applies everywhere I work. That compounding is the real return: not
+            that any one project runs well, but that each one leaves the method
+            better than it found it.
+          </p>
         </section>
 
         <!-- Self-consistency -->
@@ -209,12 +239,13 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
         <section class="closer__phase">
           <h2 class="closer__phase-title">Built to scale</h2>
           <p class="closer__phase-intro">
-            New domains, new projects, the same three fixes — and, in time, a
-            consultable knowledge base over the whole vault. The system that
-            organized a master's is how I'd approach doctoral research. The
-            governance layer is the part I'd expect to matter most in a group,
-            where the question is no longer whether people will use AI, but
-            whether anyone can reconstruct what it did.
+            New domains, new projects, the same three fixes — each project
+            leaving the method sharper for the next, and, in time, a consultable
+            knowledge base over the whole vault. The system that organized a
+            master's is how I'd approach doctoral research. The governance layer
+            is the part I'd expect to matter most in a group, where the question
+            is no longer whether people will use AI, but whether anyone can
+            reconstruct what it did.
           </p>
         </section>
       </div>

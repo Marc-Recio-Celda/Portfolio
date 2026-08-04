@@ -13,8 +13,9 @@
     <title id="gl-title">How work passes between me and an AI agent</title>
     <desc id="gl-desc">
       I send defined tasks down to the agent; the agent sends signed proposals
-      back up through a mailbox. Only I write to the record — the agent never
-      writes to it directly.
+      back up through a mailbox. The agent writes to the record only when the
+      change originated with me — anything it originates itself goes through
+      the mailbox first.
     </desc>
 
     <!-- flows -->
@@ -36,11 +37,12 @@
       <path d="M547 55 L556 62 L547 69 Z" />
     </g>
 
-    <!-- blocked path: agent → record -->
-    <g class="loop__blocked">
-      <path d="M510 336 H 646 V 314" fill="none" stroke-dasharray="5 5" />
-      <line x1="570" y1="328" x2="586" y2="344" />
-      <line x1="586" y1="328" x2="570" y2="344" />
+    <!-- gated path: agent → record. No es un muro: el agente SÍ escribe ahí,
+         pero solo cuando el cambio lo origina Marc (M-34). La válvula dice
+         "hay un control", no "está prohibido". -->
+    <g class="loop__gated">
+      <path d="M510 336 H 646 V 318" fill="none" stroke-dasharray="5 5" />
+      <path class="loop__valve" d="M578 327 L587 336 L578 345 L569 336 Z" />
     </g>
 
     <!-- me -->
@@ -86,10 +88,10 @@
     <text class="loop__edge" x="174" y="134">a defined task</text>
     <text class="loop__edge" x="378" y="266" text-anchor="end">a signed proposal</text>
     <text class="loop__edge" x="514" y="52">integrate</text>
-    <text class="loop__edge loop__edge--blocked" x="578" y="366" text-anchor="middle">never direct</text>
+    <text class="loop__edge loop__edge--gated" x="578" y="368" text-anchor="middle">only at my request</text>
   </svg>
   <figcaption class="mono-label">
-    The separation is the design — an agent's reach ends at the mailbox
+    What's gated is the agent's initiative, not its hands
   </figcaption>
 </figure>
 
@@ -176,10 +178,15 @@
     fill: var(--accent);
   }
 
-  .loop__blocked path,
-  .loop__blocked line {
-    stroke: var(--muted);
-    stroke-width: 1.8;
+  .loop__gated path {
+    fill: none;
+    stroke: var(--accent-deep);
+    stroke-width: 1.6;
+  }
+  .loop__valve {
+    fill: var(--paper);
+    stroke: var(--accent-deep);
+    stroke-width: 1.6;
   }
 
   .loop__edge {
@@ -188,7 +195,7 @@
     letter-spacing: 0.04em;
     fill: var(--muted);
   }
-  .loop__edge--blocked {
-    fill: var(--ink);
+  .loop__edge--gated {
+    fill: var(--accent-deep);
   }
 </style>
