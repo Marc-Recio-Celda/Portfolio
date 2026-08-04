@@ -33,6 +33,12 @@ const logFig = {
   alt: "A decision log table: numbered decisions with their justification and date, one of them struck through and marked as replaced by a later decision.",
   caption: "A superseded decision stays on the record, struck through — never deleted",
 };
+
+const methodFig = {
+  img: "/how/closer/log_method.png",
+  alt: "The method's own decision log: numbered rules, each with a status, a destination and its reasoning, and one shown revised by a later rule rather than overwritten.",
+  caption: "The rules have their own log — numbered, with reasoning, revised in place of overwritten",
+};
 ---
 
 <Base
@@ -219,6 +225,17 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
             that any one project runs well, but that each one leaves the method
             better than it found it.
           </p>
+          <figure class="closer__fig closer__fig--solo">
+            <a
+              href={withBase(methodFig.img)}
+              target="_blank"
+              rel="noopener"
+              aria-label={`Open full-size: ${methodFig.caption}`}
+            >
+              <img src={withBase(methodFig.img)} alt={methodFig.alt} loading="lazy" decoding="async" />
+            </a>
+            <figcaption class="mono-label">{methodFig.caption}</figcaption>
+          </figure>
         </section>
 
         <!-- Self-consistency -->
