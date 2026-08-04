@@ -1,0 +1,201 @@
+---
+/**
+ * GovernanceLoop — diagrama on-brand del contrato humano↔agente.
+ * Esquema propio (no captura, no IA). Dos carriles separados y los artefactos
+ * que hacen de interfaz entre ellos: tareas hacia abajo, buzón hacia arriba.
+ * La flecha tachada es la pieza que más se lee: el agente nunca escribe el
+ * registro directamente.
+ * Usa solo tokens del sitio; la rampa viridis queda reservada al scatter (AX-6).
+ */
+---
+<figure class="loop">
+  <svg viewBox="0 0 760 400" role="img" aria-labelledby="gl-title gl-desc" class="loop__svg">
+    <title id="gl-title">How work passes between me and an AI agent</title>
+    <desc id="gl-desc">
+      I send defined tasks down to the agent; the agent sends signed proposals
+      back up through a mailbox. The agent writes to the record only when the
+      change originated with me — anything it originates itself goes through
+      the mailbox first.
+    </desc>
+
+    <!-- flows -->
+    <g class="loop__flow">
+      <!-- me → tasks -->
+      <line x1="161" y1="100" x2="161" y2="156" />
+      <path d="M154 149 L161 158 L168 149 Z" />
+      <!-- tasks → agent -->
+      <line x1="161" y1="228" x2="161" y2="284" />
+      <path d="M154 277 L161 286 L168 277 Z" />
+      <!-- agent → mailbox -->
+      <line x1="389" y1="290" x2="389" y2="234" />
+      <path d="M382 241 L389 232 L396 241 Z" />
+      <!-- mailbox → me -->
+      <line x1="389" y1="162" x2="389" y2="106" />
+      <path d="M382 113 L389 104 L396 113 Z" />
+      <!-- me → record -->
+      <line x1="510" y1="62" x2="554" y2="62" />
+      <path d="M547 55 L556 62 L547 69 Z" />
+    </g>
+
+    <!-- gated path: agent → record. No es un muro: el agente SÍ escribe ahí,
+         pero solo cuando el cambio lo origina Marc (M-34). La válvula dice
+         "hay un control", no "está prohibido". -->
+    <g class="loop__gated">
+      <path d="M510 336 H 646 V 318" fill="none" stroke-dasharray="5 5" />
+      <path class="loop__valve" d="M578 327 L587 336 L578 345 L569 336 Z" />
+    </g>
+
+    <!-- me -->
+    <g>
+      <rect class="loop__band loop__band--me" x="40" y="24" width="470" height="76" rx="12" />
+      <rect class="loop__pill" x="60" y="47" width="54" height="30" rx="8" />
+      <text class="loop__tag" x="87" y="67" text-anchor="middle">ME</text>
+      <text class="loop__title" x="130" y="58">Plan · integrate · gate</text>
+      <text class="loop__desc" x="130" y="82">Every structural change lands through me.</text>
+    </g>
+
+    <!-- artifacts -->
+    <g>
+      <rect class="loop__artifact" x="76" y="158" width="170" height="70" rx="10" />
+      <text class="loop__artifact-tag" x="161" y="188" text-anchor="middle">TASKS</text>
+      <text class="loop__artifact-desc" x="161" y="208" text-anchor="middle">each with its why</text>
+    </g>
+    <g>
+      <rect class="loop__artifact" x="304" y="158" width="170" height="70" rx="10" />
+      <text class="loop__artifact-tag" x="389" y="188" text-anchor="middle">MAILBOX</text>
+      <text class="loop__artifact-desc" x="389" y="208" text-anchor="middle">signed proposals</text>
+    </g>
+
+    <!-- agent -->
+    <g>
+      <rect class="loop__band loop__band--agent" x="40" y="286" width="470" height="76" rx="12" />
+      <rect class="loop__pill" x="60" y="309" width="54" height="30" rx="8" />
+      <text class="loop__tag" x="87" y="329" text-anchor="middle">AI</text>
+      <text class="loop__title" x="130" y="320">Execute · sweep · propose</text>
+      <text class="loop__desc" x="130" y="344">Sole author of code. Can refuse an incoherent order.</text>
+    </g>
+
+    <!-- the record -->
+    <g>
+      <rect class="loop__record" x="566" y="86" width="160" height="228" rx="12" />
+      <text class="loop__artifact-tag" x="646" y="150" text-anchor="middle">THE RECORD</text>
+      <text class="loop__record-line" x="646" y="188" text-anchor="middle">Vault</text>
+      <text class="loop__record-line" x="646" y="214" text-anchor="middle">Axioms</text>
+      <text class="loop__record-line" x="646" y="240" text-anchor="middle">Decision logs</text>
+    </g>
+
+    <!-- edge labels -->
+    <text class="loop__edge" x="174" y="134">a defined task</text>
+    <text class="loop__edge" x="378" y="266" text-anchor="end">a signed proposal</text>
+    <text class="loop__edge" x="514" y="52">integrate</text>
+    <text class="loop__edge loop__edge--gated" x="578" y="368" text-anchor="middle">only at my request</text>
+  </svg>
+  <figcaption class="mono-label">
+    What's gated is the agent's initiative, not its hands
+  </figcaption>
+</figure>
+
+<style>
+  .loop {
+    margin: 0;
+  }
+  .loop__svg {
+    width: 100%;
+    height: auto;
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    padding: var(--space-md);
+  }
+  .loop figcaption {
+    margin-top: var(--space-2xs);
+  }
+
+  .loop__band {
+    stroke: var(--line);
+    stroke-width: 1;
+  }
+  .loop__band--me { fill: color-mix(in srgb, var(--accent) 16%, var(--paper)); }
+  .loop__band--agent { fill: color-mix(in srgb, var(--accent) 7%, var(--paper)); }
+
+  .loop__artifact {
+    fill: var(--paper);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+  .loop__record {
+    fill: color-mix(in srgb, var(--accent-deep) 10%, var(--paper));
+    stroke: var(--accent-deep);
+    stroke-width: 1.4;
+  }
+
+  .loop__pill {
+    fill: var(--paper);
+    stroke: var(--accent);
+    stroke-width: 1.2;
+  }
+  .loop__tag {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 600;
+    fill: var(--accent);
+  }
+  .loop__title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    fill: var(--ink);
+  }
+  .loop__desc {
+    font-family: var(--font-body);
+    font-size: 13px;
+    fill: var(--muted);
+  }
+
+  .loop__artifact-tag {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: var(--tracking-wide);
+    fill: var(--ink);
+  }
+  .loop__artifact-desc {
+    font-family: var(--font-body);
+    font-size: 12px;
+    fill: var(--muted);
+  }
+  .loop__record-line {
+    font-family: var(--font-body);
+    font-size: 14px;
+    fill: var(--ink);
+  }
+
+  .loop__flow line {
+    stroke: var(--accent);
+    stroke-width: 2;
+  }
+  .loop__flow path {
+    fill: var(--accent);
+  }
+
+  .loop__gated path {
+    fill: none;
+    stroke: var(--accent-deep);
+    stroke-width: 1.6;
+  }
+  .loop__valve {
+    fill: var(--paper);
+    stroke: var(--accent-deep);
+    stroke-width: 1.6;
+  }
+
+  .loop__edge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    fill: var(--muted);
+  }
+  .loop__edge--gated {
+    fill: var(--accent-deep);
+  }
+</style>
