@@ -23,6 +23,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# agent tooling config — holds absolute machine-specific paths
+.claude/
+
 # obsidian vault config (created when opening a folder as a vault)
 .obsidian/
 
