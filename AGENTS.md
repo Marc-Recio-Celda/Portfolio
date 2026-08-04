@@ -113,11 +113,12 @@ rules: **only what you cross** · **one line, no investigating** · **never fix 
 
 - **Neighbour rule:** NEXUS and this repo are cloned at the same level, which is what makes
   §2's `../NEXUS` path resolve.
-- Git: stable branch **`main`** — ⚠️ **not `master`**, unlike NEXUS, autocatalogue and
-  aynimd. Working branch: **`portfolio`**; commit there freely.
-- ⚠️ **`main` is the published branch: a push to it deploys to the world**
-  (`.github/workflows/deploy.yml`, AX-7). Committing on `main` here isn't untidy, it's
-  publishing. **Never commit on `main`, and never push** — Marc merges and pushes.
+- Git: stable branch **`master`**, working branch **`portfolio`**; commit there freely. Same
+  shape as NEXUS, autocatalogue and aynimd — the repo was renamed off `main` (D10) precisely
+  so there is no per-repo exception to remember.
+- ⚠️ **`master` is the published branch: a push to it deploys to the world**
+  (`.github/workflows/deploy.yml`, AX-7). Committing on `master` here isn't untidy, it's
+  publishing. **Never commit on `master`, and never push** — Marc merges and pushes.
 - **Never commit a build.** `dist/` and `.astro/` are generated and gitignored.
 - No `push --force`, ever.
 
