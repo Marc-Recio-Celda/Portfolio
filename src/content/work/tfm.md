@@ -1,7 +1,7 @@
 ---
 title: "Data-science thesis"
 kind: "Master's thesis"
-summary: "My data-science master's thesis, with the TomsBioLab research group: an automated pipeline that turns grapevine-genomics papers into an evidence-graded gene catalogue — LLMs to read the papers, deterministic code for the calls that must be reproducible, and a human expert in the loop. Built to feed the PlantaeViz platform."
+summary: "A pipeline that turns grapevine-genomics papers into an evidence-graded gene catalogue: language models to read, deterministic code for every call that must be reproducible."
 status: "In progress"
 order: 1
 draft: false

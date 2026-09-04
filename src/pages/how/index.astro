@@ -20,7 +20,6 @@
 import Base from "../../layouts/Base.astro";
 import SessionLoop from "../../components/SessionLoop.astro";
 import ClauseGrid from "../../components/ClauseGrid.astro";
-import GovernanceLoop from "../../components/GovernanceLoop.astro";
 import PermissionTable from "../../components/PermissionTable.astro";
 import { withBase } from "../../utils/url";
 import { LINKS } from "../../consts";
@@ -39,9 +38,9 @@ import { LINKS } from "../../consts";
         <h1>A research record that AI can write into</h1>
         <p class="closer__lede">
           Three things slowed me down: I couldn't hold everything I'd studied,
-          I lost time to planning itself, and then AI agents started writing
-          files inside my projects that I'd have to trust months later. This is
-          what I run daily, across a thesis, a lab platform and this site.
+          I lost time to planning, and then AI agents began writing files inside
+          my projects that I'd have to trust months later. This is what I run
+          daily, across a thesis, a lab platform and this site.
         </p>
       </header>
 
@@ -50,9 +49,9 @@ import { LINKS } from "../../consts";
         <section class="closer__phase">
           <h2 class="closer__phase-title">What a working session looks like</h2>
           <p class="closer__phase-intro">
-            One front is active at a time; everything else waits in order,
-            saying what it waits on. A list of eight parallel priorities never
-            contradicts reality, so it never gets corrected.
+            One front is active at a time; everything else waits in order. A
+            list of eight parallel priorities never contradicts reality, so it
+            never gets corrected.
           </p>
           <SessionLoop />
         </section>
@@ -62,8 +61,8 @@ import { LINKS } from "../../consts";
           <h2 class="closer__phase-title">What governs it</h2>
           <p class="closer__phase-intro">
             When two rules collide, the clause they serve breaks the tie. It is
-            slower than not doing it, and that's the trade, stated as one:
-            productivity spent to buy traceability and understanding.
+            slower than not doing it, and that's the trade: productivity spent to
+            buy traceability and understanding.
           </p>
           <ClauseGrid />
         </section>
@@ -74,16 +73,14 @@ import { LINKS } from "../../consts";
           <p class="closer__phase-intro">
             Agents don't just answer — they execute, and they write into the
             record I rely on. An agent that tidies a decision log has destroyed
-            the evidence that log existed to hold, and nothing in the diff looks
+            the evidence it existed to hold, and nothing in the diff looks
             alarming.
           </p>
-
-          <GovernanceLoop />
 
           <p class="closer__phase-intro">
             The agent is the sole author of code. What it may never be is the{" "}
             <em>originator</em> of a change to the record: what it concludes on
-            its own goes to a mailbox, signed, and I integrate it or I don't.
+            its own goes to a mailbox, and I integrate it or I don't.
           </p>
 
           <PermissionTable />
@@ -92,7 +89,7 @@ import { LINKS } from "../../consts";
             The other half is an obligation to refuse. Whoever plans is reading
             a conversation; whoever executes is reading the repository, and only
             one of them sees the real state. Executing an instruction you can
-            demonstrate is wrong is the failure. Refusing isn't.
+            prove wrong is the failure. Refusing isn't.
           </p>
         </section>
 
@@ -100,17 +97,15 @@ import { LINKS } from "../../consts";
         <section class="closer__phase">
           <h2 class="closer__phase-title">Where it breaks, and what I'm building next</h2>
           <p class="closer__phase-intro">
-            It names the volume it was built for — ten projects, fifty open
-            items — and which step goes manual first. A design that hasn't
-            stated its breaking point was designed for today.
+            It names the volume it was built for — ten projects, fifty open items
+            — and which step goes manual first. A design that hasn't stated its
+            breaking point was designed for today.
           </p>
           <p class="closer__phase-intro">
-            It also pays a cost I chose: everything live sits in one central
-            set, because you never choose work one project at a time. One long
-            file is harder to read than eleven short ones — <em>until something
-            filters it</em>. I'm building that filter: a visual environment over
-            the live set, for me and for anyone with more projects than a list
-            can hold.
+            It also pays a cost I chose: everything live sits in one central set,
+            because you never choose work one project at a time. One long file is
+            harder to read than eleven short ones — <em>until something filters
+            it</em>. I'm building that filter now.
           </p>
         </section>
       </div>
@@ -121,15 +116,15 @@ import { LINKS } from "../../consts";
         <ul class="closer__door-list">
           <li>
             <a href={withBase("/work/mlabs")}>The methodology as its own project</a>
-            <span>Public and versioned — split off so that whether it generalises is testable rather than flattering.</span>
+            <span>Public and versioned, split off so that whether it generalises is testable.</span>
           </li>
           <li>
             <a href={withBase("/work/tfm/process")}>The thesis, decision by decision</a>
-            <span>Thirteen design calls, each with the alternative it turned down and what choosing cost.</span>
+            <span>The flow, how its accuracy was won, and the two decisions behind it.</span>
           </li>
           <li>
             <a href={`mailto:${LINKS.email}`}>Ask me about any of it</a>
-            <span>Deliberately short. What's worth asking is what got cut, and which rules turned out to be theatre.</span>
+            <span>What's worth asking is what got cut, and which rules turned out to be theatre.</span>
           </li>
         </ul>
       </section>

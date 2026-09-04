@@ -14,19 +14,11 @@ import { withBase } from "../utils/url";
     <SectionHeader kicker="How I work" title="Structured, versioned, reproducible" id="how-title" />
     <div class="how__body">
       <p>
-        NEXUS is how I do research: my whole data-science master's captured as
-        linked notes across eight domains, and every project I run alongside it —
-        each with its own architecture, living state and logged decisions. One
-        rule holds it together: total traceability, zero black boxes. That rule
-        is also what lets me hand real execution to AI agents — they write the
-        code and propose changes, but write access to the record is governed and
-        every proposal is signed.
-      </p>
-      <p>
-        It is deliberately slower than not doing it, and that is the trade:
-        productivity spent to buy traceability and understanding. What it buys
-        back is that no handover — new tool, new model, new machine, a
-        supervisor asking why — costs me rebuilding the context by hand.
+        NEXUS is how I do research: my whole master's as linked notes across
+        eight domains, and every project alongside it with its own architecture,
+        living state and logged decisions. One rule holds it together — total
+        traceability, zero black boxes — and it is what lets me hand real
+        execution to AI agents while write access to the record stays governed.
       </p>
     </div>
 
@@ -47,9 +39,8 @@ import { withBase } from "../utils/url";
     </div>
 
     <p class="how__note">
-      This site is itself a NEXUS instance, planned, versioned and built in blocks.
-      The rules behind it are <a href={withBase("/work/mlabs")}>published as their
-      own project</a>; what they govern stays private.
+      This site is itself a NEXUS instance. The rules behind it are{" "}
+      <a href={withBase("/work/mlabs")}>published as their own project</a>.
     </p>
 
     <a class="how__closer" href={withBase("/how")}>

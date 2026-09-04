@@ -1,0 +1,192 @@
+---
+/**
+ * BenchmarkArc — cómo se ganó la precisión, hito a hito.
+ *
+ * ⚠️ NO es un gráfico, y la decisión es del contenido: las seis cifras no
+ * comparten escala — 24 configuraciones, 2 genes, 35/35, 74/75 — así que un
+ * eje común sería el error de doble eje disfrazado. La forma correcta para
+ * cantidades no conmensurables es una progresión de stat tiles.
+ *
+ * Una sola serie (la precisión del propio pipeline a lo largo del tiempo), así
+ * que un único acento: no hay paleta categórica que validar.
+ *
+ * Un solo hero por vista, y es el 98,7% — con su denominador pegado, porque
+ * un porcentaje sin denominador es un número, no una medición.
+ *
+ * ⛔ Sólo cifras de INGENIERÍA. El hallazgo del catálogo es material del
+ * manuscrito con el laboratorio y no entra aquí.
+ */
+const milestones = [
+  { value: "~24", label: "Configurations benchmarked", note: "Cloud and local, over one paper" },
+  { value: "2", label: "Genes carrying the ambiguity", note: "Both on one boundary in the scale" },
+  { value: "17/17", label: "GA oxidase family", note: "Added to the gold set — exact match" },
+  { value: "35/35", label: "TPS family", note: "A large family, first run" },
+  { value: "40/40", label: "After keying by gene and ID", note: "35 symbols, 40 distinct keys" },
+];
+---
+
+<figure class="arc">
+  <ol class="arc__rail">
+    {
+      milestones.map((m) => (
+        <li class="arc__tile">
+          <span class="arc__value">{m.value}</span>
+          <span class="arc__label">{m.label}</span>
+          <span class="arc__note">{m.note}</span>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="arc__hero">
+    <span class="mono-label">Level accuracy, against a gold set curated by hand</span>
+    <p class="arc__hero-value">98.7<span class="arc__hero-unit">%</span></p>
+    <p class="arc__hero-note">
+      74 of 75 genes, across 9 scorable papers of 11 reviewed by hand
+    </p>
+  </div>
+
+  <figcaption class="arc__caption">
+    The one remaining failure was the model disagreeing with itself at a boundary
+    in the scale — not a prompt, gold or code error, confirmed by going back to
+    the papers. <strong>Tuning further would have been chasing noise</strong>, so
+    the prompt was frozen there.
+  </figcaption>
+</figure>
+
+<style>
+  .arc {
+    margin: 0;
+  }
+
+  .arc__rail {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 34rem) {
+    .arc__rail {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 52rem) {
+    .arc__rail {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+
+  /* Conector de secuencia: sin él las cinco fichas se leen como un marcador
+     y no como un arco, que es justo lo que la sección afirma. Cambia de eje
+     con el layout y se apaga en el último de cada fila. */
+  .arc__tile::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--space-sm) * -1);
+    width: 1px;
+    height: var(--space-sm);
+    background: color-mix(in srgb, var(--accent) 45%, var(--line));
+  }
+  .arc__tile:last-child::after {
+    display: none;
+  }
+  @media (min-width: 34rem) and (max-width: 51.999rem) {
+    .arc__tile::after {
+      left: auto;
+      bottom: auto;
+      top: 1.5rem;
+      right: calc(var(--space-sm) * -1);
+      width: var(--space-sm);
+      height: 1px;
+    }
+    .arc__tile:nth-child(2n)::after {
+      display: none;
+    }
+  }
+  @media (min-width: 52rem) {
+    .arc__tile::after {
+      left: auto;
+      bottom: auto;
+      top: 1.5rem;
+      right: calc(var(--space-sm) * -1);
+      width: var(--space-sm);
+      height: 1px;
+    }
+  }
+
+  .arc__tile {
+    position: relative;
+    display: grid;
+    gap: 0.1em;
+    align-content: start;
+    max-width: none;
+    padding: var(--space-sm);
+    border: var(--border);
+    border-top: 3px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  /* El valor va en la sans del cuerpo con cifras proporcionales: `tabular-nums`
+     da a cada dígito el ancho de un 0 y a este tamaño el número se ve suelto.
+     Se reserva para columnas que tienen que alinear. */
+  .arc__value {
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+    color: var(--accent-deep);
+  }
+  .arc__label {
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-snug);
+  }
+  .arc__note {
+    font-size: var(--text-xs);
+    color: var(--muted);
+    line-height: var(--leading-snug);
+  }
+
+  /* Un solo hero por vista. El denominador va pegado y no en una nota al pie:
+     un porcentaje sin él es un número, no una medición. */
+  .arc__hero {
+    margin-top: var(--space-md);
+    padding: var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent-deep) 40%, var(--line));
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--accent-deep) 7%, var(--paper));
+  }
+  .arc__hero-value {
+    margin-top: var(--space-2xs);
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    font-size: clamp(2.6rem, 1.9rem + 3.2vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-tight);
+    color: var(--accent-deep);
+  }
+  .arc__hero-unit {
+    font-size: 0.45em;
+    font-weight: var(--weight-medium);
+    margin-left: 0.1em;
+  }
+  .arc__hero-note {
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .arc__caption {
+    max-width: var(--measure);
+    margin-top: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: var(--leading-snug);
+  }
+  .arc__caption strong {
+    color: var(--ink);
+    font-weight: var(--weight-semibold);
+  }
+</style>
