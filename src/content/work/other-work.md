@@ -4,7 +4,7 @@ kind: "Other work"
 summary: "A Selenium scraper whose dataset is now published on Zenodo with a DOI, plus a working reference of the databases I model with and the tools I visualize data with across the master's."
 thumb: "/work/viz.jpeg"
 thumbAlt: "A Power BI dashboard of Spanish vehicle registrations: headline totals, distribution by province, vehicle origin and type, and registrations per year."
-order: 5
+order: 6
 draft: false
 ---
 

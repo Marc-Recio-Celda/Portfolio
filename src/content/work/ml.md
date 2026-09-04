@@ -4,7 +4,7 @@ kind: "Machine learning"
 summary: "Four notebooks from the master's ML course — data preparation, clustering, supervised methods and ensembles — each running end to end from a single environment and rendered with its outputs on GitHub. Includes a study of PCA vs t-SNE vs UMAP."
 thumb: "/work/umap.png"
 thumbAlt: "UMAP projection of the Digits dataset from 64 dimensions to 2, with the ten digit classes forming separated clusters."
-order: 3
+order: 4
 draft: false
 ---
 

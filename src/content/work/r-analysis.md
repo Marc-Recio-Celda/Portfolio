@@ -2,7 +2,7 @@
 title: "Data analysis & statistics in R"
 kind: "Statistics · R"
 summary: "Four end-to-end analyses from the statistics course — cleaning, hypothesis testing, regression and ANOVA — worked in R with the tidyverse. What I'm proudest of here is the interpretation: reading what the numbers actually mean, and where they stop meaning it."
-order: 4
+order: 5
 draft: false
 ---
 

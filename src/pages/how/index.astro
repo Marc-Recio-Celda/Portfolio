@@ -11,6 +11,13 @@
  * y lo que distingue el perfil. La IA no aparece como amenaza ni como adorno,
  * sino como colaborador con permisos de escritura acotados.
  *
+ * ⚠️ Esta página es el MÉTODO DE MARC Y SU ÉTICA DE TRABAJO, en primera
+ * persona. La metodología como artefacto generalizable se publicó aparte y
+ * tiene su propia ficha de proyecto: aquí se enlaza y no se describe. El
+ * reparto no es cosmético — es lo que evita que esta página envejezca cada vez
+ * que se mueve la constitución (B8.3): lo que versiona es la ficha, y lo que
+ * se cuenta aquí es una práctica, que cambia mucho más despacio.
+ *
  * Figuras: las estructuras se DIBUJAN (GovernanceLoop, PermissionTable,
  * NexusLayers) porque son contenido del sitio y se editan en segundos cuando el
  * método se mueve — Charter §5, las vistas se generan. Solo quedan dos
@@ -61,6 +68,11 @@ const methodFig = {
           all three: a knowledge base, a way of working, and a set of rules that
           decide what a machine is allowed to write.
         </p>
+        <p class="closer__lede">
+          The rules eventually got pulled out and published on their own, which
+          is a separate project. This page is the part that isn't generic — how
+          I actually work, and what I refuse to trade away to go faster.
+        </p>
       </header>
 
       <div class="closer__walk">
@@ -105,6 +117,15 @@ const methodFig = {
             with its reasoning, every step gated before the next, and the source
             of truth in plain markdown I own, with dashboards generated from it
             rather than kept by hand.
+          </p>
+          <p class="closer__phase-intro">
+            What keeps that from becoming a filing habit is a single rule about
+            attention: <strong>one active front at a time</strong>, named in one
+            file, with every other committed piece of work sitting behind it and
+            saying what it waits on. A list of eight parallel priorities never
+            contradicts reality, so it never gets corrected — whereas if what
+            I'm actually doing isn't what the file says, one of the two is
+            wrong, and finding that out is the whole point of reading it first.
           </p>
           <p class="closer__phase-intro">
             Each project's planning layer — definition, architecture, living
@@ -238,6 +259,71 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
           </figure>
         </section>
 
+        <!-- La ética: el precio pagado a conciencia. Va después de la
+             gobernanza porque sólo tiene fuerza cuando ya se ha visto el
+             aparato que la cuesta. -->
+        <section class="closer__phase">
+          <h2 class="closer__phase-title">What this costs, and what I won't trade</h2>
+          <p class="closer__phase-intro">
+            All of the above is slower than not doing it, and I'd rather say so
+            than pretend it's free. The trade is written down as a trade:{" "}
+            <strong>productivity is spent to buy traceability and
+            understanding.</strong> Naming it is what stops the slowness being
+            re-argued every time it bites — and it comes with a date to revisit
+            it, because it's the right trade while I'm still learning the system
+            and may not be afterwards.
+          </p>
+
+          <ul class="closer__creed">
+            <li>
+              <strong>Where speed and understanding conflict, understanding
+              wins.</strong> I hand over transcription and keep judgement. A
+              shortcut I can't restate unaided isn't speed, it's debt — and the
+              interest falls due at the next handover, when the thing that has
+              to change is the thing nobody can explain.
+            </li>
+            <li>
+              <strong>The system exists to prepare me, not to agree with
+              me.</strong> An agent that only ever confirms the plan is
+              expensive autocomplete. The one that's worth having is the one
+              obliged to refuse when the premise doesn't survive contact with
+              the repository.
+            </li>
+            <li>
+              <strong>A claim cites its evidence or it's an opinion.</strong>{" "}
+              From inside, that means a file and a line, or a command and its
+              output. Every line of a log points at something somebody else
+              could go and check.
+            </li>
+            <li>
+              <strong>What was discarded is part of the record.</strong> A
+              rejected approach leaves no trace in a diff, because it was never
+              written down. That gap is exactly where the same argument comes
+              back in six months with nobody able to say it was already
+              answered.
+            </li>
+            <li>
+              <strong>Nothing is deleted; it's located.</strong> A deliberate
+              exclusion names the address where the original still lives, and
+              the search that found no consumer gets pasted <em>before</em> the
+              deletion — because <em>"it's somewhere on disk"</em> is a claim
+              with no check behind it.
+            </li>
+            <li>
+              <strong>The unflattering numbers go inside the measurement, not
+              in an appendix.</strong> What was rejected, withdrawn or never
+              confirmed belongs in the figure itself. A record with no failures
+              in it isn't a strong record, it's an unaudited one — and the first
+              reader who notices stops believing the rest of it.
+            </li>
+          </ul>
+
+          <blockquote class="closer__quote">
+            A metric that can only go up is a scoreboard. The run where it moves
+            the wrong way is the reason it exists.
+          </blockquote>
+        </section>
+
         <!-- Self-consistency -->
         <section class="closer__phase">
           <h2 class="closer__phase-title">One rule bites on this page</h2>
@@ -264,6 +350,20 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
             is no longer whether people will use AI, but whether anyone can
             reconstruct what it did.
           </p>
+          <p class="closer__phase-intro">
+            The rules themselves are now a separate, public repository, with a
+            licence and a version tag — split off precisely so that whether they
+            generalise is a testable claim rather than a flattering one. What
+            stays private is everything they govern.
+          </p>
+          <a class="closer__pointer" href={withBase("/work/mlabs")}>
+            <span class="mono-label">The methodology as its own project</span>
+            <span class="closer__pointer-title">
+              MLabs — three levels of governance, roles that carry their own
+              retirement criterion, and checks proven by planting the fault
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
         </section>
       </div>
 
@@ -388,6 +488,62 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
     font-size: var(--text-xs);
     line-height: var(--leading-snug);
     white-space: pre;
+  }
+
+  /* El credo: una lista donde cada punto es un precio pagado, no una
+     virtud declarada. Numerarla la haría parecer un procedimiento; la marca
+     de acento la mantiene como lo que es, una postura. */
+  .closer__creed {
+    max-width: var(--measure);
+    margin-block: var(--space-md) var(--space-lg);
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: var(--space-md);
+  }
+  .closer__creed li {
+    position: relative;
+    padding-left: var(--space-md);
+    font-size: var(--text-base);
+  }
+  .closer__creed li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: var(--space-xs);
+    height: 2px;
+    background: var(--accent);
+  }
+  .closer__creed strong {
+    font-weight: var(--weight-semibold);
+  }
+
+  /* Puntero a la ficha de MLabs. Bloque, no enlace en línea: la escisión es
+     una pieza de información por sí misma y se busca que se vea. */
+  .closer__pointer {
+    display: grid;
+    gap: var(--space-2xs);
+    max-width: var(--measure);
+    margin-top: var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
+    text-decoration: none;
+    transition: background var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  .closer__pointer:hover {
+    background: color-mix(in srgb, var(--accent) 13%, var(--paper));
+    border-color: var(--accent);
+  }
+  .closer__pointer-title {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    color: var(--accent-deep);
   }
 
   .closer__quote {

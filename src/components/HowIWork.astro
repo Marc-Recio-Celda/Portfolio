@@ -22,6 +22,12 @@ import { withBase } from "../utils/url";
         code and propose changes, but write access to the record is governed and
         every proposal is signed.
       </p>
+      <p>
+        It is deliberately slower than not doing it, and that is the trade:
+        productivity spent to buy traceability and understanding. What it buys
+        back is that no handover — new tool, new model, new machine, a
+        supervisor asking why — costs me rebuilding the context by hand.
+      </p>
     </div>
 
     <div class="how__shots">
@@ -42,6 +48,8 @@ import { withBase } from "../utils/url";
 
     <p class="how__note">
       This site is itself a NEXUS instance, planned, versioned and built in blocks.
+      The rules behind it are <a href={withBase("/work/mlabs")}>published as their
+      own project</a>; what they govern stays private.
     </p>
 
     <a class="how__closer" href={withBase("/how")}>
@@ -57,6 +65,9 @@ import { withBase } from "../utils/url";
   }
   .how__body p {
     font-size: var(--text-md);
+  }
+  .how__body p + p {
+    margin-top: var(--space-sm);
   }
 
   .how__shots {
