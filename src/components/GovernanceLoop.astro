@@ -3,8 +3,10 @@
  * GovernanceLoop — diagrama on-brand del contrato humano↔agente.
  * Esquema propio (no captura, no IA). Dos carriles separados y los artefactos
  * que hacen de interfaz entre ellos: tareas hacia abajo, buzón hacia arriba.
- * La flecha tachada es la pieza que más se lee: el agente nunca escribe el
- * registro directamente.
+ * La válvula es la pieza que más se lee. ⚠️ Y lo que la hace defendible es
+ * que el control es MECÁNICO, no un juicio: si un cambio es sustantivo no lo
+ * decide el agente, así que lo que se controla es objetivo — fichero
+ * protegido, artefacto creado o retirado, regla escrita que cambia.
  * Usa solo tokens del sitio; la rampa viridis queda reservada al scatter (AX-6).
  */
 ---
@@ -15,7 +17,8 @@
       I send defined tasks down to the agent; the agent sends signed proposals
       back up through a mailbox. The agent writes to the record only when the
       change originated with me — anything it originates itself goes through
-      the mailbox first.
+      the mailbox first. What trips the gate is mechanical: a protected file, an
+      artifact created or retired, a written rule changed.
     </desc>
 
     <!-- flows -->
@@ -88,10 +91,10 @@
     <text class="loop__edge" x="174" y="134">a defined task</text>
     <text class="loop__edge" x="378" y="266" text-anchor="end">a signed proposal</text>
     <text class="loop__edge" x="514" y="52">integrate</text>
-    <text class="loop__edge loop__edge--gated" x="578" y="368" text-anchor="middle">only at my request</text>
+    <text class="loop__edge loop__edge--gated" x="578" y="368" text-anchor="middle">only what I originated</text>
   </svg>
   <figcaption class="mono-label">
-    What's gated is the agent's initiative, not its hands
+    The gate is on the agent's initiative, not its hands — and what trips it is mechanical, never a judgement call
   </figcaption>
 </figure>
 

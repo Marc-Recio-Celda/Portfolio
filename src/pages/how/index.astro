@@ -1,56 +1,34 @@
 ---
 /**
- * Página "A closer look" — NEXUS contado desde TRES problemas propios que se
- * resuelven juntos:
- *   (1) no poder recordar todo lo estudiado → lo arregla el vault.
- *   (2) perder tiempo planificando / reestructurar a mitad → lo arregla el
- *       método (axiomas, gates, decision log).
- *   (3) agentes de IA escribiendo dentro del registro → lo arregla la capa de
- *       gobernanza (permisos, buzón, integrador único, derecho de corte).
- * El (3) es el centro de gravedad: es lo que un PI tiene encima de la mesa hoy
- * y lo que distingue el perfil. La IA no aparece como amenaza ni como adorno,
- * sino como colaborador con permisos de escritura acotados.
+ * "A closer look" — cómo trabajo, y qué lo gobierna.
  *
- * ⚠️ Esta página es el MÉTODO DE MARC Y SU ÉTICA DE TRABAJO, en primera
- * persona. La metodología como artefacto generalizable se publicó aparte y
- * tiene su propia ficha de proyecto: aquí se enlaza y no se describe. El
- * reparto no es cosmético — es lo que evita que esta página envejezca cada vez
- * que se mueve la constitución (B8.3): lo que versiona es la ficha, y lo que
- * se cuenta aquí es una práctica, que cambia mucho más despacio.
+ * ⚠️ Esta página es la PRÁCTICA, en primera persona. La metodología como
+ * artefacto generalizable tiene su propia ficha de proyecto: aquí se enlaza y
+ * no se describe. El reparto es lo que evita que esta página envejezca cada
+ * vez que se mueve la constitución — lo que versiona es la ficha; una práctica
+ * cambia mucho más despacio.
  *
- * Figuras: las estructuras se DIBUJAN (GovernanceLoop, PermissionTable,
- * NexusLayers) porque son contenido del sitio y se editan en segundos cuando el
- * método se mueve — Charter §5, las vistas se generan. Solo quedan dos
- * fotografías, las que no se pueden redibujar: el grafo y un decision log real.
+ * ⚠️ AX-9: techo de 800 palabras visibles. La versión anterior tenía 2.187 y
+ * se leía en once minutos, contra un objetivo declarado de que un PI entienda
+ * en uno. Lo que se corta no se pierde: es lo que deja hueco a que pregunten,
+ * que es para lo que existe el sitio.
+ *
+ * Forma: presentación · overview · puerta. Las figuras se DIBUJAN desde los
+ * tokens (AX-8); las dos fotografías que quedaban se retiran con el recorte
+ * salvo el grafo, que no se puede redibujar.
  */
 import Base from "../../layouts/Base.astro";
-import NexusLayers from "../../components/NexusLayers.astro";
+import SessionLoop from "../../components/SessionLoop.astro";
+import ClauseGrid from "../../components/ClauseGrid.astro";
 import GovernanceLoop from "../../components/GovernanceLoop.astro";
 import PermissionTable from "../../components/PermissionTable.astro";
 import { withBase } from "../../utils/url";
-
-const graphFig = {
-  img: "/how/graph.png",
-  alt: "Knowledge graph of the vault: hundreds of notes linked into one connected network.",
-  caption: "Notes linked into one navigable graph",
-};
-
-const logFig = {
-  img: "/how/closer/decision-log.png",
-  alt: "A decision log table: numbered decisions with their justification and date, one of them struck through and marked as replaced by a later decision.",
-  caption: "A superseded decision stays on the record, struck through — never deleted",
-};
-
-const methodFig = {
-  img: "/how/closer/log_method.png",
-  alt: "The method's own decision log: numbered rules, each with a status, a destination and its reasoning, and one shown revised by a later rule rather than overwritten.",
-  caption: "The rules have their own log — numbered, with reasoning, revised in place of overwritten",
-};
+import { LINKS } from "../../consts";
 ---
 
 <Base
   title="A closer look — how I work"
-  description="NEXUS: a knowledge base, a plan-before-you-build method, and the write-permission rules that let AI agents do real work without clouding the record."
+  description="How I run research with AI agents doing the execution: one active front, a plan that records reasoning as it happens, and write rules that decide what a machine may put in the record."
 >
   <article class="closer">
     <div class="container closer__wrap">
@@ -58,319 +36,103 @@ const methodFig = {
 
       <header class="closer__header">
         <span class="mono-label">How I work · a closer look</span>
-        <h1>NEXUS: a research record that AI can write into</h1>
+        <h1>A research record that AI can write into</h1>
         <p class="closer__lede">
-          Three things slowed me down. I couldn't hold everything I studied in
-          my head. I lost time to planning itself — over-thinking it in the
-          abstract, or tearing up half-built work to restructure mid-way. And
-          then AI agents started doing real work inside my projects, writing
-          files I would have to trust months later. NEXUS is what I built for
-          all three: a knowledge base, a way of working, and a set of rules that
-          decide what a machine is allowed to write.
-        </p>
-        <p class="closer__lede">
-          The rules eventually got pulled out and published on their own, which
-          is a separate project. This page is the part that isn't generic — how
-          I actually work, and what I refuse to trade away to go faster.
+          Three things slowed me down: I couldn't hold everything I'd studied,
+          I lost time to planning itself, and then AI agents started writing
+          files inside my projects that I'd have to trust months later. This is
+          what I run daily, across a thesis, a lab platform and this site.
         </p>
       </header>
 
       <div class="closer__walk">
-        <NexusLayers />
-
-        <!-- Problem one — memory -->
+        <!-- 1 · La práctica, en movimiento -->
         <section class="closer__phase">
-          <h2 class="closer__phase-title">A system that remembers for me</h2>
+          <h2 class="closer__phase-title">What a working session looks like</h2>
           <p class="closer__phase-intro">
-            I stopped relying on memory. Everything I learn — my whole
-            data-science master's — lives in NEXUS as linked notes across eight
-            domains: one growing graph I can always return to, instead of facts
-            I have to keep in my head. Theory stays separate from any single
-            project; the vault is knowledge, projects are where it gets applied.
-          </p>
-          <figure class="closer__fig closer__fig--solo">
-            <a
-              href={withBase(graphFig.img)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size: ${graphFig.caption}`}
-            >
-              <img src={withBase(graphFig.img)} alt={graphFig.alt} loading="lazy" decoding="async" />
-            </a>
-            <figcaption class="mono-label">{graphFig.caption}</figcaption>
-          </figure>
-        </section>
-
-        <!-- Problem two — planning -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">A way of working that plans before it builds</h2>
-          <p class="closer__phase-intro">
-            My second problem was planning. I'd either over-plan in the abstract
-            or, worse, tear up half-built work to restructure it mid-way. So
-            every project now gets its own architecture, fixed axioms and a
-            gated plan — shaped to it, not forced through a template. I
-            front-load the thinking once, in a structure I trust, and I don't
-            start building until the shape is clear.
-          </p>
-          <p class="closer__phase-intro">
-            The rules are the ones I'd want in any lab: every decision logged
-            with its reasoning, every step gated before the next, and the source
-            of truth in plain markdown I own, with dashboards generated from it
-            rather than kept by hand.
-          </p>
-          <p class="closer__phase-intro">
-            What keeps that from becoming a filing habit is a single rule about
-            attention: <strong>one active front at a time</strong>, named in one
-            file, with every other committed piece of work sitting behind it and
+            One front is active at a time; everything else waits in order,
             saying what it waits on. A list of eight parallel priorities never
-            contradicts reality, so it never gets corrected — whereas if what
-            I'm actually doing isn't what the file says, one of the two is
-            wrong, and finding that out is the whole point of reading it first.
+            contradicts reality, so it never gets corrected.
           </p>
-          <p class="closer__phase-intro">
-            Each project's planning layer — definition, architecture, living
-            state, decision log — sits in the vault beside the knowledge it
-            draws on, while the code lives in the project's own repository. They
-            are split by <em>owner</em>, not by how fast they change: the code
-            can have collaborators, the record has one author.
-          </p>
-          <figure class="closer__fig closer__fig--solo">
-            <a
-              href={withBase(logFig.img)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size: ${logFig.caption}`}
-            >
-              <img src={withBase(logFig.img)} alt={logFig.alt} loading="lazy" decoding="async" />
-            </a>
-            <figcaption class="mono-label">{logFig.caption}</figcaption>
-          </figure>
+          <SessionLoop />
         </section>
 
-        <!-- Problem three — governance (the centrepiece) -->
+        <!-- 2 · Lo que lo gobierna -->
+        <section class="closer__phase">
+          <h2 class="closer__phase-title">What governs it</h2>
+          <p class="closer__phase-intro">
+            When two rules collide, the clause they serve breaks the tie. It is
+            slower than not doing it, and that's the trade, stated as one:
+            productivity spent to buy traceability and understanding.
+          </p>
+          <ClauseGrid />
+        </section>
+
+        <!-- 3 · El centro de gravedad: quién puede escribir el registro -->
         <section class="closer__phase">
           <h2 class="closer__phase-title">Rules for machines that write</h2>
           <p class="closer__phase-intro">
-            Then the third problem arrived, and it's the one I'd argue matters
-            most now. AI agents don't just answer questions — they execute. They
-            refactor, sweep hundreds of files, and write into the same record I
-            rely on. An agent that tidies up a decision log has quietly
-            destroyed the evidence that log existed to hold, and nothing in the
-            diff will look alarming.
-          </p>
-          <p class="closer__phase-intro">
-            So I stopped treating AI as an assistant and started treating it as
-            a collaborator that needs write permissions. Everything below is a
-            rule I actually run, every day, across my thesis and this site.
+            Agents don't just answer — they execute, and they write into the
+            record I rely on. An agent that tidies a decision log has destroyed
+            the evidence that log existed to hold, and nothing in the diff looks
+            alarming.
           </p>
 
           <GovernanceLoop />
 
-          <h3 class="closer__rule-title">Write access is decided per artifact, not per session</h3>
           <p class="closer__phase-intro">
-            Every kind of file has exactly one owner. The agent is the sole
-            author of code and tooling — that is genuinely its job, and I don't
-            pretend to review every line. What it is never allowed to be is
-            the <em>originator</em> of a change to knowledge or method: when I ask
-            for one it writes it and records it, but it never concludes on its
-            own that one is needed and goes ahead. Between the two sits a class
-            of files that are generated, where nobody edits anything by hand and
-            a script rebuilds them from the source.
+            The agent is the sole author of code. What it may never be is the{" "}
+            <em>originator</em> of a change to the record: what it concludes on
+            its own goes to a mailbox, signed, and I integrate it or I don't.
           </p>
 
           <PermissionTable />
 
-          <h3 class="closer__rule-title">Proposals go to a mailbox, not into the file</h3>
           <p class="closer__phase-intro">
-            When an agent concludes a structural document should change — and it
-            is often right — it doesn't act on that conclusion. It leaves a
-            signed, dated entry in a mailbox, drafted in the target document's
-            own style, with a destination drawn from a closed vocabulary so
-            triage stays scriptable. Then I integrate it, or I don't. Either way
-            the proposal and its author survive in the log.
-          </p>
-          <pre class="closer__sample"><code>### [pending] → charter §5 — Agents commit to a branch, never to the stable one
-· (claude-code, 2026-07-29)
-
-A branch is what makes undoing an entire session cheap. Reverting commit by
-commit is the wrong granularity when a single pass touches ten files.</code></pre>
-
-          <h3 class="closer__rule-title">The agent is required to refuse</h3>
-          <p class="closer__phase-intro">
-            Whoever plans the work is reading a conversation; whoever executes it
-            is reading the actual repository. Only one of them can see the real
-            state. So the executing agent holds a cutoff right, and it isn't a
-            courtesy — it's an obligation: if a task's premise doesn't survive
-            contact with the repo, it has to stop and say so instead of carrying
-            out an instruction it can demonstrate is wrong. The disagreement
-            goes back to the mailbox, with a file and a line.
-          </p>
-          <blockquote class="closer__quote">
-            Executing an instruction you know is incoherent is the failure.
-            Refusing isn't.
-          </blockquote>
-
-          <h3 class="closer__rule-title">What version control can't record</h3>
-          <p class="closer__phase-intro">
-            Git tells me what changed and when. It doesn't tell me why, who
-            originated the change, or — the part with no equivalent anywhere —
-            what was considered and discarded. A rejected approach leaves no
-            trace in a diff, because it was never written down. That gap is what
-            the logs exist to fill, and it's the whole difference between a
-            repository and a record.
-          </p>
-
-          <h3 class="closer__rule-title">And the method improves itself</h3>
-          <p class="closer__phase-intro">
-            None of this would be worth much if the rules were fixed. The same
-            mailbox that catches an agent's proposals also catches every
-            inconsistency it stumbles on and every task it refuses — and all of
-            it gets triaged into numbered method decisions, each carrying its
-            reasoning and what was rejected. Using the system is what produces
-            the next version of it.
-          </p>
-          <p class="closer__phase-intro">
-            That loop isn't a flattering story I tell about my own process; it's
-            visible in the log, which records who originated each decision.
-            Several of the rules now governing the agents were proposed by an
-            agent — including the one that changed how work is handed to me for
-            review, which came from the executor finding the old way expensive
-            and saying so.
-          </p>
-          <p class="closer__phase-intro">
-            And because the method is a single layer sitting above every project
-            rather than a habit inside each one, an improvement found while
-            working on the thesis lands in this site, in the next tool, and in
-            whatever comes after. I fix it once, where the rules live, and it
-            applies everywhere I work. That compounding is the real return: not
-            that any one project runs well, but that each one leaves the method
-            better than it found it.
-          </p>
-          <figure class="closer__fig closer__fig--solo">
-            <a
-              href={withBase(methodFig.img)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size: ${methodFig.caption}`}
-            >
-              <img src={withBase(methodFig.img)} alt={methodFig.alt} loading="lazy" decoding="async" />
-            </a>
-            <figcaption class="mono-label">{methodFig.caption}</figcaption>
-          </figure>
-        </section>
-
-        <!-- La ética: el precio pagado a conciencia. Va después de la
-             gobernanza porque sólo tiene fuerza cuando ya se ha visto el
-             aparato que la cuesta. -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">What this costs, and what I won't trade</h2>
-          <p class="closer__phase-intro">
-            All of the above is slower than not doing it, and I'd rather say so
-            than pretend it's free. The trade is written down as a trade:{" "}
-            <strong>productivity is spent to buy traceability and
-            understanding.</strong> Naming it is what stops the slowness being
-            re-argued every time it bites — and it comes with a date to revisit
-            it, because it's the right trade while I'm still learning the system
-            and may not be afterwards.
-          </p>
-
-          <ul class="closer__creed">
-            <li>
-              <strong>Where speed and understanding conflict, understanding
-              wins.</strong> I hand over transcription and keep judgement. A
-              shortcut I can't restate unaided isn't speed, it's debt — and the
-              interest falls due at the next handover, when the thing that has
-              to change is the thing nobody can explain.
-            </li>
-            <li>
-              <strong>The system exists to prepare me, not to agree with
-              me.</strong> An agent that only ever confirms the plan is
-              expensive autocomplete. The one that's worth having is the one
-              obliged to refuse when the premise doesn't survive contact with
-              the repository.
-            </li>
-            <li>
-              <strong>A claim cites its evidence or it's an opinion.</strong>{" "}
-              From inside, that means a file and a line, or a command and its
-              output. Every line of a log points at something somebody else
-              could go and check.
-            </li>
-            <li>
-              <strong>What was discarded is part of the record.</strong> A
-              rejected approach leaves no trace in a diff, because it was never
-              written down. That gap is exactly where the same argument comes
-              back in six months with nobody able to say it was already
-              answered.
-            </li>
-            <li>
-              <strong>Nothing is deleted; it's located.</strong> A deliberate
-              exclusion names the address where the original still lives, and
-              the search that found no consumer gets pasted <em>before</em> the
-              deletion — because <em>"it's somewhere on disk"</em> is a claim
-              with no check behind it.
-            </li>
-            <li>
-              <strong>The unflattering numbers go inside the measurement, not
-              in an appendix.</strong> What was rejected, withdrawn or never
-              confirmed belongs in the figure itself. A record with no failures
-              in it isn't a strong record, it's an unaudited one — and the first
-              reader who notices stops believing the rest of it.
-            </li>
-          </ul>
-
-          <blockquote class="closer__quote">
-            A metric that can only go up is a scoreboard. The run where it moves
-            the wrong way is the reason it exists.
-          </blockquote>
-        </section>
-
-        <!-- Self-consistency -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">One rule bites on this page</h2>
-          <p class="closer__phase-intro">
-            Views are generated, never hand-maintained — so the diagrams above
-            are drawn from the same design tokens as the rest of the site and
-            take seconds to correct when the method moves. The only photographs
-            left are the two things that can't be redrawn: the knowledge graph,
-            and a real decision log. A screenshot of a living system is a view
-            somebody has to remember to update, and I'd rather not rely on
-            remembering.
+            The other half is an obligation to refuse. Whoever plans is reading
+            a conversation; whoever executes is reading the repository, and only
+            one of them sees the real state. Executing an instruction you can
+            demonstrate is wrong is the failure. Refusing isn't.
           </p>
         </section>
 
-        <!-- Trajectory -->
+        <!-- 4 · Dónde se rompe: el número, y por qué existe la interfaz -->
         <section class="closer__phase">
-          <h2 class="closer__phase-title">Built to scale</h2>
+          <h2 class="closer__phase-title">Where it breaks, and what I'm building next</h2>
           <p class="closer__phase-intro">
-            New domains, new projects, the same three fixes — each project
-            leaving the method sharper for the next, and, in time, a consultable
-            knowledge base over the whole vault. The system that organized a
-            master's is how I'd approach doctoral research. The governance layer
-            is the part I'd expect to matter most in a group, where the question
-            is no longer whether people will use AI, but whether anyone can
-            reconstruct what it did.
+            It names the volume it was built for — ten projects, fifty open
+            items — and which step goes manual first. A design that hasn't
+            stated its breaking point was designed for today.
           </p>
           <p class="closer__phase-intro">
-            The rules themselves are now a separate, public repository, with a
-            licence and a version tag — split off precisely so that whether they
-            generalise is a testable claim rather than a flattering one. What
-            stays private is everything they govern.
+            It also pays a cost I chose: everything live sits in one central
+            set, because you never choose work one project at a time. One long
+            file is harder to read than eleven short ones — <em>until something
+            filters it</em>. I'm building that filter: a visual environment over
+            the live set, for me and for anyone with more projects than a list
+            can hold.
           </p>
-          <a class="closer__pointer" href={withBase("/work/mlabs")}>
-            <span class="mono-label">The methodology as its own project</span>
-            <span class="closer__pointer-title">
-              MLabs — three levels of governance, roles that carry their own
-              retirement criterion, and checks proven by planting the fault
-              <span aria-hidden="true">→</span>
-            </span>
-          </a>
         </section>
       </div>
 
-      <p class="closer__outro">
-        AI accelerates the work. The system that keeps it accountable is the
-        part I built — and the part I'd bring to a lab.
-      </p>
+      <!-- 5 · La puerta -->
+      <section class="closer__doors" aria-labelledby="doors-title">
+        <h2 id="doors-title" class="closer__phase-title">Three ways to go deeper</h2>
+        <ul class="closer__door-list">
+          <li>
+            <a href={withBase("/work/mlabs")}>The methodology as its own project</a>
+            <span>Public and versioned — split off so that whether it generalises is testable rather than flattering.</span>
+          </li>
+          <li>
+            <a href={withBase("/work/tfm/process")}>The thesis, decision by decision</a>
+            <span>Thirteen design calls, each with the alternative it turned down and what choosing cost.</span>
+          </li>
+          <li>
+            <a href={`mailto:${LINKS.email}`}>Ask me about any of it</a>
+            <span>Deliberately short. What's worth asking is what got cut, and which rules turned out to be theatre.</span>
+          </li>
+        </ul>
+      </section>
     </div>
   </article>
 </Base>
@@ -410,9 +172,8 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
     gap: var(--space-2xl);
   }
   /* Los grid items traen min-width:auto y no encogen por debajo de su
-     contenido: en móvil eso empujaba los SVG y la tabla a ~546px y hacía
-     scrollear la página entera en horizontal. Con min-width:0 encogen y el
-     scroll queda donde debe, dentro de .perm__scroll. */
+     contenido: en móvil eso empujaba las figuras y la tabla más allá del
+     viewport y hacía scrollear la página entera en horizontal. */
   .closer__walk > * {
     min-width: 0;
   }
@@ -429,140 +190,66 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
   }
   .closer__phase-intro {
     max-width: var(--measure);
-    margin-bottom: var(--space-md);
-    font-size: var(--text-md);
-  }
-  .closer__phase-intro:last-of-type {
     margin-bottom: var(--space-lg);
-  }
-  .closer__phase-intro code {
-    background: var(--paper-2);
-    padding: 0.05em 0.35em;
-    border-radius: var(--radius);
-  }
-
-  /* Sub-encabezado dentro de la sección de gobernanza: una regla, un bloque. */
-  .closer__rule-title {
-    max-width: var(--measure);
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-sm);
-    font-size: var(--text-lg);
-  }
-
-  .closer__fig {
-    margin: 0;
-  }
-  .closer__fig--solo {
-    max-width: 38rem;
-  }
-  .closer__fig a {
-    display: block;
-    border: var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--paper-2);
-    transition: border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease);
-  }
-  .closer__fig a:hover {
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-    box-shadow: 0 6px 24px rgb(0 0 0 / 0.08);
-  }
-  .closer__fig img {
-    width: 100%;
-    height: auto;
-  }
-  .closer__fig figcaption {
-    margin-top: var(--space-2xs);
-  }
-
-  /* Entrada de buzón real, en el formato en que se escribe. */
-  .closer__sample {
-    max-width: var(--measure);
-    overflow-x: auto;
-    padding: var(--space-md);
-    border: var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--radius);
-    background: var(--paper-2);
-    font-size: var(--text-xs);
-    line-height: var(--leading-snug);
-    white-space: pre;
-  }
-
-  /* El credo: una lista donde cada punto es un precio pagado, no una
-     virtud declarada. Numerarla la haría parecer un procedimiento; la marca
-     de acento la mantiene como lo que es, una postura. */
-  .closer__creed {
-    max-width: var(--measure);
-    margin-block: var(--space-md) var(--space-lg);
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: var(--space-md);
-  }
-  .closer__creed li {
-    position: relative;
-    padding-left: var(--space-md);
-    font-size: var(--text-base);
-  }
-  .closer__creed li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: var(--space-xs);
-    height: 2px;
-    background: var(--accent);
-  }
-  .closer__creed strong {
-    font-weight: var(--weight-semibold);
-  }
-
-  /* Puntero a la ficha de MLabs. Bloque, no enlace en línea: la escisión es
-     una pieza de información por sí misma y se busca que se vea. */
-  .closer__pointer {
-    display: grid;
-    gap: var(--space-2xs);
-    max-width: var(--measure);
-    margin-top: var(--space-lg);
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
-    border-radius: var(--radius);
-    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
-    text-decoration: none;
-    transition: background var(--dur) var(--ease),
-      border-color var(--dur) var(--ease);
-  }
-  .closer__pointer:hover {
-    background: color-mix(in srgb, var(--accent) 13%, var(--paper));
-    border-color: var(--accent);
-  }
-  .closer__pointer-title {
-    font-family: var(--font-display);
-    font-weight: var(--weight-semibold);
-    font-size: var(--text-base);
-    line-height: var(--leading-snug);
-    color: var(--accent-deep);
-  }
-
-  .closer__quote {
-    max-width: var(--measure);
-    margin-block: var(--space-md) var(--space-lg);
-    padding-left: var(--space-md);
-    border-left: 3px solid var(--accent);
-    font-family: var(--font-display);
     font-size: var(--text-md);
-    font-weight: var(--weight-medium);
-    text-wrap: balance;
+  }
+  /* Un párrafo que precede a una figura va más pegado a ella: la figura es
+     su continuación, no un bloque aparte. Y el que la sigue necesita aire,
+     o el pie de figura y el párrafo se leen como el mismo bloque. */
+  .closer__phase-intro + :global(figure) {
+    margin-top: calc(var(--space-lg) * -1 + var(--space-md));
+  }
+  :global(figure) + .closer__phase-intro {
+    margin-top: var(--space-lg);
   }
 
-  .closer__outro {
+  /* La puerta. Va fuera del recorrido y con su propio ritmo: es lo único de
+     la página que pide una acción. */
+  .closer__doors {
     margin-top: var(--space-2xl);
     padding-top: var(--space-lg);
     border-top: var(--border);
+  }
+  .closer__door-list {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 48rem) {
+    .closer__door-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .closer__door-list li {
+    display: grid;
+    gap: var(--space-2xs);
+    max-width: none;
+    align-content: start;
+    padding: var(--space-md);
+    border: var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--paper);
+    transition: border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+  .closer__door-list li:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    border-top-color: var(--accent);
+    box-shadow: 0 4px 20px rgb(0 0 0 / 0.05);
+  }
+  .closer__door-list a {
     font-family: var(--font-display);
-    font-size: var(--text-md);
-    font-weight: var(--weight-medium);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    text-decoration: none;
+  }
+  .closer__door-list span {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: var(--leading-snug);
   }
 </style>
