@@ -17,6 +17,15 @@ const work = defineCollection({
     thumbAlt: z.string().optional(),
     order: z.number().default(0),
     draft: z.boolean().default(false),
+    // Enlace opcional a una página propia del proyecto (p. ej. el proceso del
+    // TFM). Va por el esquema y no en el markdown porque la URL tiene que
+    // pasar por withBase(): un href escrito a mano rompe en producción (AX-2).
+    deeper: z
+      .object({
+        href: z.string(),
+        label: z.string(),
+      })
+      .optional(),
   }),
 });
 

@@ -1,0 +1,451 @@
+---
+/**
+ * "How it was built" — la página de proceso del TFM, colgando de su ficha.
+ *
+ * Por qué existe separada de `work/tfm.md`: la ficha contesta *qué es* el
+ * proyecto; ésta contesta *cómo se decidió*, que es lo que un PI no puede
+ * leer en ningún otro portfolio. El material sale del decision log real del
+ * proyecto, donde cada entrada guarda el razonamiento Y lo descartado.
+ *
+ * ⚠️ Sin cifras de resultado, y es deliberado: la tesis se defiende en enero
+ * y los números son suyos hasta entonces. La página se sostiene sobre las
+ * decisiones, que además es la parte que no caduca.
+ *
+ * Figuras: dibujadas desde los tokens (Charter §5). La única estructura que
+ * se muestra aquí es el flujo de la pipeline, y se dibuja por la misma razón
+ * que las demás — se corrige en segundos cuando el diseño se mueve.
+ */
+import Base from "../../../layouts/Base.astro";
+import PipelineFlow from "../../../components/PipelineFlow.astro";
+import DecisionCard from "../../../components/DecisionCard.astro";
+import { withBase } from "../../../utils/url";
+---
+
+<Base
+  title="How the thesis was built"
+  description="The design decisions behind an LLM-plus-deterministic-code pipeline for grapevine gene curation — each one with what it discarded and what it cost."
+>
+  <article class="proc">
+    <div class="container proc__wrap">
+      <a class="proc__back" href={withBase("/work/tfm")}>← Back to the thesis</a>
+
+      <header class="proc__header">
+        <span class="mono-label">Data-science thesis · how it was built</span>
+        <h1>Decisions, and what they discarded</h1>
+        <p class="proc__lede">
+          The thesis page says what the pipeline does. This one says how it
+          came to be that way — because the interesting part of building a
+          system that mixes language models with code a scientist has to trust
+          is not the architecture you end up with, it's the alternatives you
+          turned down and the reasons that survived contact with the work.
+        </p>
+        <p class="proc__lede">
+          Every decision below is in the project's log, numbered, with its
+          reasoning and what it rejected. I'm not posting results before the
+          defence, so there are no figures on this page. The decisions are the
+          part that doesn't expire anyway.
+        </p>
+      </header>
+
+      <PipelineFlow />
+
+      <section class="proc__phase">
+        <h2 class="proc__phase-title">Where the machine stops and the code starts</h2>
+
+        <DecisionCard
+          n="01"
+          title="The model answers questions; it never assigns the level"
+          discarded="Letting the model read the paper and return the evidence level directly — one call, far less plumbing."
+          cost="Every question has to be written, calibrated and tested on its own, and a wrong boolean is now a bug with a location rather than a bad answer."
+        >
+          <p>
+            The deliverable is an evidence level on a published six-tier scale,
+            and a level is exactly the kind of judgement a reviewer will want to
+            challenge. So the model never produces one. It answers a fixed set
+            of structured yes/no questions about what the paper actually
+            reports, and tested code turns those booleans into the level.
+          </p>
+          <p>
+            The difference is not stylistic. A level that came out of a model is
+            an opinion you can only re-obtain by asking again; a level derived
+            by a function is a claim you can re-derive from stored booleans,
+            audit line by line, and correct at the rule rather than at the
+            output. It also means the mapping can be unit-tested, which an
+            opinion cannot.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="02"
+          title="Several signals, one deterministic rule — and it happened twice"
+          discarded="A single call per gene, trusted as-is; and for the reference, the first identifier any one source returned."
+          cost="More calls per gene and more code holding the votes, for an answer that is the same answer most of the time."
+        >
+          <p>
+            The classifier runs the same keyed prompt several times and takes a
+            majority per flag. Separately, the paper's identifier is resolved by
+            agreement across independent sources rather than by trusting one.
+            Those were designed months apart for unrelated problems, and they
+            are the same pattern: <em>collect several signals, then let a
+            deterministic rule decide</em> — never let the signal decide.
+          </p>
+          <p>
+            The part I'd defend hardest is the tie-break. When the rule cannot
+            decide, the system does not pick the more likely branch: it asks for
+            the concrete fact. A pipeline that resolves its own ambiguity
+            quietly is a pipeline whose error rate you cannot measure, because
+            the cases it got wrong look exactly like the cases it got right.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="03"
+          title="Keep the model's share small enough to name"
+          discarded="An end-to-end model pass producing the whole row, which was the obvious first design and reads far better in a diagram."
+          cost="The pipeline is a lot more code than a prompt, and every deterministic step is a step somebody has to maintain."
+        >
+          <p>
+            Of the columns in an output row, only a small and enumerable set is
+            model-generated: the booleans, and the few descriptive fields that
+            genuinely need language understanding and cannot be derived by rule.
+            Everything else — normalisation, resolution, metadata, the level
+            itself — is code.
+          </p>
+          <p>
+            That ratio is the honest answer to <em>how much of this is AI?</em>,
+            and it is a design target rather than an accident. A model call
+            cannot be replayed, so it cannot be tested; every one you remove is
+            a part of the system that moves from unrepeatable to verifiable.
+          </p>
+        </DecisionCard>
+      </section>
+
+      <section class="proc__phase">
+        <h2 class="proc__phase-title">Making it auditable by someone who wasn't there</h2>
+
+        <DecisionCard
+          n="04"
+          title="The symbol is the identity; the identifier is the link"
+          discarded="Renaming duplicated gene symbols to make them unique, which is what a database schema wants."
+          cost="Every downstream step has to carry a compound key, and nothing can assume a symbol appears once."
+        >
+          <p>
+            Gene families where several members share a symbol are not an edge
+            case in this literature, they're routine. Renaming them would have
+            made the tables tidy and the output wrong: the name in the paper is
+            what a curator will search for, and a renamed one matches nothing.
+          </p>
+          <p>
+            So the unit is the pair — symbol and identifier together — end to
+            end, and family members stay separate rows under the name their
+            paper gave them. Tidiness lost to fidelity, which is the right way
+            round when a human has to recognise the output.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="05"
+          title="Store the attempts, not just the answer"
+          discarded="Storing the final row only — smaller, faster, and enough for the deliverable."
+          cost="A log that grows much faster than the result it explains, and a schema that has to version what produced each attempt."
+        >
+          <p>
+            Each attempt is recorded with the booleans it produced and the model
+            and prompt that produced them, and a curator's corrections are
+            recorded field by field rather than as a replacement row.
+          </p>
+          <p>
+            The payoff arrives the first time a rule changes. Because the
+            booleans are stored, a re-derivation is a function call over
+            existing data — not a re-run against a model that may not answer the
+            same way twice, and may not even be the same model by then. And
+            because the human edits are separate from the machine's output, it
+            is always possible to ask how often the two disagreed.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="06"
+          title="One rule, one home — enforced by a test, not by discipline"
+          discarded="Keeping a copy of the level-derivation logic next to each caller, which is faster to write and reads fine in review."
+          cost="An import boundary to respect, and a test that fails for reasons that look pedantic until the day it doesn't."
+        >
+          <p>
+            The function that turns booleans into a level had been copied, and
+            the copies drifted. Nothing failed loudly: two paths through the
+            system simply started producing different levels from the same
+            evidence, which is the worst failure mode available — silent, and
+            invisible in review.
+          </p>
+          <p>
+            The fix was not a note in the contributing guide. The rule now has
+            exactly one home and a test that pins it there, because a
+            convention nobody can run is a convention that lasts until the next
+            deadline.
+          </p>
+        </DecisionCard>
+      </section>
+
+      <section class="proc__phase">
+        <h2 class="proc__phase-title">Where the human sits</h2>
+
+        <DecisionCard
+          n="07"
+          title="Two gates, placed where being wrong is cheapest"
+          discarded="A single review at the end, over the finished rows — the natural place to put a human, and the wrong one."
+          cost="The expert's time is spent up front, on a screen full of identifiers, before there is anything satisfying to look at."
+        >
+          <p>
+            The first gate sits immediately after detection: the author or a
+            curator confirms the genes and their identifiers before anything is
+            built on them. The second only fires when the earlier voting was
+            unstable — a human is asked precisely when the machine has evidence
+            it is unsure, and not otherwise.
+          </p>
+          <p>
+            Everything downstream inherits the first gate's answer, so an error
+            that survives it is an error propagated into every field that
+            follows. Reviewing at the end would have caught the same mistakes
+            after paying for all the work in between. Human review guards
+            accuracy; the automation just does the lifting.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="08"
+          title="A fixer nobody sees teaches nobody anything"
+          discarded="Leaving silent normalisation in place — it worked, and it made the failure rate look better than it was."
+          cost="A noisier gate. The expert now sees warnings about input that the system could have quietly repaired."
+        >
+          <p>
+            The identifier is the primary deliverable and it arrives as
+            unverified free text: a single paper can carry several incompatible
+            spellings of the same reference. The normaliser repaired them
+            silently, so the author never learned that their paper was
+            ambiguous, and the system never learned how often it was guessing.
+          </p>
+          <p>
+            The order of the fix is the point of it: <strong>flag first</strong>,
+            then show confidence, then warn before bulk actions. Fixing first
+            and reporting later would have preserved exactly the blind spot that
+            made the problem invisible in the first place.
+          </p>
+        </DecisionCard>
+      </section>
+
+      <section class="proc__phase">
+        <h2 class="proc__phase-title">Building it so another lab could run it</h2>
+
+        <DecisionCard
+          n="09"
+          title="The pipeline produces files; it does not write to a database"
+          discarded="Writing results straight into the catalogue from inside the request — one fewer moving part and an obviously nicer demo."
+          cost="A handover step that has to be run deliberately, and a format that now has to be treated as an interface."
+        >
+          <p>
+            The pipeline emits a table and a log, and stops. The component that
+            loads them into the catalogue lives in the catalogue's own
+            repository, not here — because a laboratory in another country
+            running this tool does not want one lab's database schema inside it,
+            and the moment that loader lives in the pipeline, every schema
+            change in a repository we don't own becomes a change to the service.
+          </p>
+          <p>
+            There was a second, harder reason, and it only appeared after
+            reading the consumer's code: the database served to users is a copy,
+            republished on a schedule. A row written directly into it is erased
+            by the next sync, with no error anywhere. The boundary was already
+            right on design grounds; that made it mechanical.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="10"
+          title="If the format is the interface, version it so it can be refused"
+          discarded="Freezing the format and documenting it — a promise, which is what most projects ship."
+          cost="A version field to maintain and a reader that has to decide what it accepts."
+        >
+          <p>
+            Once the loader lives elsewhere, the table-and-log format is the
+            entire contract between two repositories. Freezing it is a promise;
+            what makes it enforceable is a version carried in the log, so the
+            reader can <strong>refuse</strong> a file it does not understand
+            instead of half-loading it and leaving a partial state nobody
+            notices.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="11"
+          title="Scale by distributing the work, not by making this machine faster"
+          discarded="Optimising throughput here — batching, a bigger card, more parallelism."
+          cost="Portability becomes a requirement rather than a nice-to-have: providers behind one interface, models swappable, no assumption about the hardware."
+        >
+          <p>
+            The step that would never have survived ten times the volume is the
+            human gate, and no amount of GPU fixes that. So the answer to scale
+            is architectural: each laboratory runs its own pass with its own
+            compute and its own expert, and this installation's hardware stops
+            being a ceiling and becomes a local condition.
+          </p>
+          <p>
+            That reframing is what turned a hardware constraint from a blocker
+            into a note. A better card improves <em>this</em> machine; someone
+            else's machine was never this machine's problem.
+          </p>
+        </DecisionCard>
+      </section>
+
+      <section class="proc__phase">
+        <h2 class="proc__phase-title">Two habits I'd keep on any project</h2>
+
+        <DecisionCard
+          n="12"
+          title="A fallback with a date on it"
+          discarded="'We'll rebuild it if it isn't working' — a fallback with no trigger, which is a hope."
+          cost="Having to name a date before you know whether you'll need it, and then honour it."
+        >
+          <p>
+            The browser gate had a written plan B and a deadline attached: if by
+            a named month it was not working, it would be rebuilt on a simpler
+            stack over the same API. The API contract was frozen early and kept
+            in the record precisely so that fallback stayed cheap.
+          </p>
+          <p>
+            A contingency without a trigger never fires — the date is what makes
+            it a decision instead of a comfort.
+          </p>
+        </DecisionCard>
+
+        <DecisionCard
+          n="13"
+          title="Open risks stay written down as open"
+          discarded="Quietly carrying the two infrastructure risks until they were fixed, which is what the tidy version of a project looks like."
+          cost="A state document that says, in writing, that something important is unmitigated."
+        >
+          <p>
+            Two of this project's live risks are environmental rather than
+            scientific — a network mount that can truncate files, and a virtual
+            environment that turned out to share its interpreter with a shared
+            machine's base install, so it isolates nothing. One has a written
+            workaround. The other, honestly, has none yet, and the record says
+            so in those words.
+          </p>
+          <p>
+            I'd rather hand a supervisor a risk register with an unmitigated row
+            in it than one that looks clean. A register with no bad rows is not
+            a strong project; it's an unexamined one.
+          </p>
+        </DecisionCard>
+      </section>
+
+      <section class="proc__phase">
+        <h2 class="proc__phase-title">The record this leaves behind</h2>
+        <p class="proc__body">
+          Every decision on this page exists as a numbered entry with its date,
+          its reasoning, and — the field with no equivalent anywhere else — what
+          it discarded. Version control tells me what changed and when. It does
+          not tell me why, who originated the change, or what was considered and
+          rejected, because a rejected approach never gets written down at all.
+        </p>
+        <p class="proc__body">
+          Blocks of work in that record fold into each other when the shape of
+          the problem changes, and the numbering keeps the gap rather than
+          closing it, so a jump in the sequence is information instead of a
+          mistake. It is the same instinct as everything above: preserve the
+          evidence that a choice was made, because the choice is recoverable and
+          the reasoning is not.
+        </p>
+        <a class="proc__link" href={withBase("/how")}>
+          The method behind this, applied to everything else I build
+          <span aria-hidden="true">→</span>
+        </a>
+      </section>
+
+      <p class="proc__outro">
+        None of this makes the model right. It makes the model's output
+        something a scientist can check, correct, and reproduce — which is the
+        only version of this work that belongs in a catalogue.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .proc {
+    padding-block: var(--space-xl) var(--space-2xl);
+  }
+  .proc__wrap {
+    max-width: 54rem;
+  }
+  .proc__back {
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    text-decoration: none;
+  }
+
+  .proc__header {
+    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
+    border-bottom: var(--border);
+  }
+  .proc__header h1 {
+    margin-top: var(--space-sm);
+    font-size: var(--text-2xl);
+  }
+  .proc__lede {
+    margin-top: var(--space-md);
+    font-size: var(--text-md);
+    color: var(--muted);
+  }
+
+  /* Cada fase agrupa decisiones que contestan a la misma pregunta de diseño:
+     leerlas juntas es lo que enseña el criterio, no la decisión suelta. */
+  .proc__phase {
+    margin-top: var(--space-2xl);
+  }
+  .proc__phase-title {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+  .proc__body {
+    max-width: var(--measure);
+    margin-bottom: var(--space-md);
+    font-size: var(--text-md);
+  }
+
+  .proc__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-sm);
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-md);
+    text-decoration: none;
+    color: var(--accent-deep);
+    transition: gap var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .proc__link:hover {
+    color: var(--accent);
+    gap: var(--space-sm);
+  }
+
+  .proc__outro {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: var(--border);
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
+  }
+</style>

@@ -5,6 +5,9 @@ summary: "My data-science master's thesis, with the TomsBioLab research group: a
 status: "In progress"
 order: 1
 draft: false
+deeper:
+  href: "/work/tfm/process"
+  label: "How it was built — the decisions, and what they discarded"
 ---
 
 The anchor of my data-science master's (UOC), developed with the **TomsBioLab**
@@ -64,4 +67,6 @@ the extended catalogue and the classifier are intended to be published as part o
 **PlantaeViz** platform — including a web app where a researcher uploads a paper and
 gets evidence-graded classifications back, ready to review and correct.
 
-Happy to discuss the work before then — [email me](mailto:marcreciocel@gmail.com).
+What I can show in full is **how it was built** — the design decisions, the
+alternatives they discarded, and what each one cost. Happy to discuss the rest
+before the defence: [email me](mailto:marcreciocel@gmail.com).
