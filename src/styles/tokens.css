@@ -66,6 +66,13 @@
   --radius-lg: 12px;
   --border: 1px solid var(--line);
 
+  /* ---- Sombra --------------------------------------------------
+     Nombradas por ROL, no por tamaño: --shadow-lift es «una tarjeta
+     que se levanta al pasar por encima», y por eso Cover y DecisionCard
+     comparten la misma y no dos casi iguales. */
+  --shadow-sm: 0 4px 16px rgb(0 0 0 / 0.08);    /* apoyo fijo (retrato) */
+  --shadow-lift: 0 6px 26px rgb(0 0 0 / 0.06);  /* elevación en hover */
+
   /* ---- Movimiento -------------------------------------------- */
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
   --dur: 240ms;
