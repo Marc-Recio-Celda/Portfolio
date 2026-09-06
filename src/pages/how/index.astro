@@ -1,133 +1,138 @@
 ---
 /**
- * "A closer look" — cómo trabajo, y qué lo gobierna.
+ * "How I work" — cómo un repositorio de apuntes acabó siendo MLabs.
  *
- * ⚠️ Esta página es la PRÁCTICA, en primera persona. La metodología como
- * artefacto generalizable tiene su propia ficha de proyecto: aquí se enlaza y
- * no se describe. El reparto es lo que evita que esta página envejezca cada
- * vez que se mueve la constitución — lo que versiona es la ficha; una práctica
- * cambia mucho más despacio.
+ * ⚠️ Reescrita como HISTORIA, 2026-09-04. La versión anterior eran cuatro
+ * secciones temáticas y abría con una lista ("tres cosas me frenaban"); una
+ * lista no se sigue como una historia y no se dibuja.
  *
- * ⚠️ AX-9: techo de 800 palabras visibles. La versión anterior tenía 2.187 y
- * se leía en once minutos, contra un objetivo declarado de que un PI entienda
- * en uno. Lo que se corta no se pierde: es lo que deja hueco a que pregunten,
- * que es para lo que existe el sitio.
+ * La forma: cada escena resuelve algo Y plantea el problema que su propio
+ * éxito creó. Eso es lo que la separa de una cronología, y es lo que hace que
+ * el enlace a MLabs al final esté GANADO en vez de anunciado.
  *
- * Forma: presentación · overview · puerta. Las figuras se DIBUJAN desde los
- * tokens (AX-8); las dos fotografías que quedaban se retiran con el recorte
- * salvo el grafo, que no se puede redibujar.
+ * Reparto con la ficha de MLabs (AX-20, el mismo hecho no vive en dos sitios):
+ * aquí el RECORRIDO y los ficheros de proyecto; allí los tres bloques, el
+ * bucle de sesión y las cláusulas de filosofía.
+ *
+ * Presupuesto AX-9: 3 figuras = 36 s, quedan ~204 s de texto.
  */
 import Base from "../../layouts/Base.astro";
-import SessionLoop from "../../components/SessionLoop.astro";
-import ClauseGrid from "../../components/ClauseGrid.astro";
+import StoryArc from "../../components/StoryArc.astro";
+import ProjectCartridge from "../../components/ProjectCartridge.astro";
 import PermissionTable from "../../components/PermissionTable.astro";
 import { withBase } from "../../utils/url";
 import { LINKS } from "../../consts";
 ---
 
 <Base
-  title="A closer look — how I work"
-  description="How I run research with AI agents doing the execution: one active front, a plan that records reasoning as it happens, and write rules that decide what a machine may put in the record."
+  title="How I work"
+  description="How a folder of study notes turned into a knowledge base, then a way of running projects, and finally a published methodology with its own rules."
 >
   <article class="closer">
     <div class="container closer__wrap">
       <a class="closer__back" href={withBase("/#how-title")}>← Back to how I work</a>
 
       <header class="closer__header">
-        <span class="mono-label">How I work · a closer look</span>
-        <h1>A research record that AI can write into</h1>
+        <span class="mono-label">How I work · how it got built</span>
+        <h1>It started as a folder of notes</h1>
         <p class="closer__lede">
-          Three things slowed me down: I couldn't hold everything I'd studied,
-          I lost time to planning, and then AI agents began writing files inside
-          my projects that I'd have to trust months later. This is what I run
-          daily, across a thesis, a lab platform and this site.
+          None of it was designed up front: each piece exists because the
+          previous one worked well enough to create a new problem.
         </p>
       </header>
 
+      <StoryArc />
+
       <div class="closer__walk">
-        <!-- 1 · La práctica, en movimiento -->
+        <!-- Escena 1 -->
         <section class="closer__phase">
-          <h2 class="closer__phase-title">What a working session looks like</h2>
+          <h2 class="closer__phase-title">A system that remembers for me</h2>
           <p class="closer__phase-intro">
-            One front is active at a time; everything else waits in order. A
-            list of eight parallel priorities never contradicts reality, so it
-            never gets corrected.
+            I began saving summaries and notes from what I studied into a
+            repository, so I wouldn't lose them. It grew into my whole master's
+            as linked notes across eight domains.
           </p>
-          <SessionLoop />
+          <p class="closer__phase-intro">
+            <strong>And then it stopped being enough.</strong> A knowledge base
+            answers <em>what do I know about this?</em> — never <em>what do I do
+            on Monday?</em>
+          </p>
         </section>
 
-        <!-- 2 · Lo que lo gobierna -->
+        <!-- Escena 2 -->
         <section class="closer__phase">
-          <h2 class="closer__phase-title">What governs it</h2>
+          <h2 class="closer__phase-title">Then the projects moved in</h2>
           <p class="closer__phase-intro">
-            When two rules collide, the clause they serve breaks the tie. It is
-            slower than not doing it, and that's the trade: productivity spent to
-            buy traceability and understanding.
+            So the projects came to live beside the knowledge they draw on, and
+            each new one starts from what is there rather than nothing.
           </p>
-          <ClauseGrid />
+          <p class="closer__phase-intro">
+            <strong>Which created the next problem.</strong> Several running at
+            once, and no way to tell where any stood without rebuilding it from
+            memory every time I came back.
+          </p>
         </section>
 
-        <!-- 3 · El centro de gravedad: quién puede escribir el registro -->
+        <!-- Escena 3 · la que más vende -->
         <section class="closer__phase">
-          <h2 class="closer__phase-title">Rules for machines that write</h2>
+          <h2 class="closer__phase-title">A record someone else could pick up</h2>
           <p class="closer__phase-intro">
-            Agents don't just answer — they execute, and they write into the
-            record I rely on. An agent that tidies a decision log has destroyed
-            the evidence it existed to hold, and nothing in the diff looks
-            alarming.
+            Every project keeps a small set of files, and each answers a
+            question the others don't — and that version control can't. Git
+            records what changed and when, never why, who decided it, or what
+            was rejected: a rejected approach is never written down at all.
           </p>
 
+          <ProjectCartridge />
+
           <p class="closer__phase-intro">
-            The agent is the sole author of code. What it may never be is the{" "}
-            <em>originator</em> of a change to the record: what it concludes on
-            its own goes to a mailbox, and I integrate it or I don't.
+            That is what turned AI from an assistant into something doing real
+            work here. An agent opens the project, reads what is true today and
+            what was already decided, and starts — without me rebuilding the
+            context in a prompt.
+          </p>
+          <p class="closer__phase-intro">
+            Which only works if it is safe. Write access is decided per artifact,
+            and the gate is on the agent's <em>initiative</em>, not its hands:
+            what it concludes on its own goes to a mailbox, and I integrate it or
+            I don't.
           </p>
 
           <PermissionTable />
-
-          <p class="closer__phase-intro">
-            The other half is an obligation to refuse. Whoever plans is reading
-            a conversation; whoever executes is reading the repository, and only
-            one of them sees the real state. Executing an instruction you can
-            prove wrong is the failure. Refusing isn't.
-          </p>
         </section>
 
-        <!-- 4 · Dónde se rompe: el número, y por qué existe la interfaz -->
+        <!-- Escena 4 · el traspaso a MLabs -->
         <section class="closer__phase">
-          <h2 class="closer__phase-title">Where it breaks, and what I'm building next</h2>
+          <h2 class="closer__phase-title">So the method got rules of its own</h2>
           <p class="closer__phase-intro">
-            It names the volume it was built for — ten projects, fifty open items
-            — and which step goes manual first. A design that hasn't stated its
-            breaking point was designed for today.
+            By then the way of working was a thing in its own right, and it kept
+            growing. Anything that grows without rules collapses under itself, so
+            I wrapped it in some: roles that answer for what they do, checks
+            proven to fire, and a philosophy that decides when two rules
+            disagree.
           </p>
           <p class="closer__phase-intro">
-            It also pays a cost I chose: everything live sits in one central set,
-            because you never choose work one project at a time. One long file is
-            harder to read than eleven short ones — <em>until something filters
-            it</em>. I'm building that filter now.
+            It is a separate project now, published so that whether it works for
+            anyone but me is a question somebody can answer rather than a claim I
+            get to make.
           </p>
+
+          <a class="closer__pointer" href={withBase("/work/mlabs")}>
+            <span class="mono-label">Where it ends up</span>
+            <span class="closer__pointer-title">
+              MLabs — the store, the method, and the philosophy that keeps it
+              from breaking
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
         </section>
       </div>
 
-      <!-- 5 · La puerta -->
-      <section class="closer__doors" aria-labelledby="doors-title">
-        <h2 id="doors-title" class="closer__phase-title">Three ways to go deeper</h2>
-        <ul class="closer__door-list">
-          <li>
-            <a href={withBase("/work/mlabs")}>The methodology as its own project</a>
-            <span>Public and versioned, split off so that whether it generalises is testable.</span>
-          </li>
-          <li>
-            <a href={withBase("/work/tfm/process")}>The thesis, decision by decision</a>
-            <span>The flow, how its accuracy was won, and the two decisions behind it.</span>
-          </li>
-          <li>
-            <a href={`mailto:${LINKS.email}`}>Ask me about any of it</a>
-            <span>What's worth asking is what got cut, and which rules turned out to be theatre.</span>
-          </li>
-        </ul>
-      </section>
+      <p class="closer__outro">
+        Still under construction, and always will be: a system that stops
+        changing has stopped being used.{" "}
+        <a href={`mailto:${LINKS.email}`}>Ask me about any of it</a>.
+      </p>
     </div>
   </article>
 </Base>
@@ -162,13 +167,13 @@ import { LINKS } from "../../consts";
     color: var(--muted);
   }
 
+  /* El arco va antes del recorrido y con aire propio: es el índice visual de
+     lo que viene, no la primera sección. */
   .closer__walk {
     display: grid;
     gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
   }
-  /* Los grid items traen min-width:auto y no encogen por debajo de su
-     contenido: en móvil eso empujaba las figuras y la tabla más allá del
-     viewport y hacía scrollear la página entera en horizontal. */
   .closer__walk > * {
     min-width: 0;
   }
@@ -188,63 +193,55 @@ import { LINKS } from "../../consts";
     margin-bottom: var(--space-lg);
     font-size: var(--text-md);
   }
-  /* Un párrafo que precede a una figura va más pegado a ella: la figura es
-     su continuación, no un bloque aparte. Y el que la sigue necesita aire,
-     o el pie de figura y el párrafo se leen como el mismo bloque. */
   .closer__phase-intro + :global(figure) {
     margin-top: calc(var(--space-lg) * -1 + var(--space-md));
   }
   :global(figure) + .closer__phase-intro {
     margin-top: var(--space-lg);
   }
+  .closer__phase-intro strong {
+    font-weight: var(--weight-semibold);
+  }
 
-  /* La puerta. Va fuera del recorrido y con su propio ritmo: es lo único de
-     la página que pide una acción. */
-  .closer__doors {
-    margin-top: var(--space-2xl);
-    padding-top: var(--space-lg);
-    border-top: var(--border);
-  }
-  .closer__door-list {
-    display: grid;
-    gap: var(--space-md);
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  @media (min-width: 48rem) {
-    .closer__door-list {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-  .closer__door-list li {
+  .closer__pointer {
     display: grid;
     gap: var(--space-2xs);
-    max-width: none;
-    align-content: start;
-    padding: var(--space-md);
-    border: var(--border);
-    border-top: 3px solid var(--accent);
+    max-width: var(--measure);
+    margin-top: var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
     border-radius: var(--radius);
-    background: var(--paper);
-    transition: border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease);
+    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
+    text-decoration: none;
+    transition: background var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
   }
-  .closer__door-list li:hover {
-    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
-    border-top-color: var(--accent);
-    box-shadow: 0 4px 20px rgb(0 0 0 / 0.05);
+  .closer__pointer:hover {
+    background: color-mix(in srgb, var(--accent) 13%, var(--paper));
+    border-color: var(--accent);
   }
-  .closer__door-list a {
+  .closer__pointer-title {
     font-family: var(--font-display);
     font-weight: var(--weight-semibold);
     font-size: var(--text-base);
     line-height: var(--leading-snug);
-    text-decoration: none;
+    color: var(--accent-deep);
   }
-  .closer__door-list span {
-    font-size: var(--text-sm);
-    color: var(--muted);
-    line-height: var(--leading-snug);
+  /* La flecha va en su propio span y Astro se come el salto de línea que la
+     precede. Se resuelve en CSS y no con un espacio explícito porque aquí el
+     contenedor no es flex — un margen sobrevive a la siguiente reescritura del
+     texto, y un {" "} no. */
+  .closer__pointer-title span {
+    margin-left: 0.35em;
+  }
+
+  .closer__outro {
+    max-width: var(--measure);
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: var(--border);
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    font-weight: var(--weight-medium);
   }
 </style>

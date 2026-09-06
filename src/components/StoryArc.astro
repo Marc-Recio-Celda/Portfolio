@@ -1,0 +1,169 @@
+---
+/**
+ * StoryArc — las cuatro escenas del recorrido, como espina visual.
+ *
+ * Por qué existe: la página es una historia y una historia necesita que se vea
+ * su forma antes de leerla. En diez segundos un lector tiene que poder decir
+ * "ah, empezó guardando apuntes y acabó con un sistema de reglas" sin haber
+ * leído un párrafo.
+ *
+ * ⚠️ Cada escena lleva DOS campos y esa es la idea entera: lo que resolvió, y
+ * el problema que su propio éxito creó. Sin la segunda mitad esto es una
+ * cronología ("y luego, y luego") en vez de una historia con causas.
+ *
+ * HTML+CSS y no SVG, por lo mismo que las otras: el argumento está en las
+ * etiquetas y un SVG las encoge hasta lo ilegible en móvil.
+ */
+const scenes = [
+  {
+    n: "01",
+    title: "Notes I could get back",
+    solved: "What I studied, linked instead of remembered.",
+    created: "Knowing things doesn't say what to do.",
+  },
+  {
+    n: "02",
+    title: "The projects move in",
+    solved: "Work sits beside the knowledge it draws on.",
+    created: "No way to see where each one stands.",
+  },
+  {
+    n: "03",
+    title: "A record someone else could pick up",
+    solved: "Files that hold what code cannot.",
+    created: "The method itself started growing.",
+  },
+  {
+    n: "04",
+    title: "Rules, so growth doesn't break it",
+    solved: "Roles, checks, and a philosophy above them.",
+    created: null,
+  },
+];
+---
+
+<figure class="arcs">
+  <ol class="arcs__track">
+    {
+      scenes.map((s) => (
+        <li class="arcs__scene">
+          <span class="arcs__n mono-label">{s.n}</span>
+          <p class="arcs__title">{s.title}</p>
+          <p class="arcs__solved">{s.solved}</p>
+          {s.created && (
+            <p class="arcs__created">
+              <span class="mono-label">and that created</span>
+              {s.created}
+            </p>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="mono-label">
+Each solution created the next problem
+  </figcaption>
+</figure>
+
+<style>
+  .arcs {
+    margin: 0;
+  }
+
+  .arcs__track {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 54rem) {
+    .arcs__track {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-sm);
+      align-items: stretch;
+    }
+  }
+
+  .arcs__scene {
+    position: relative;
+    display: grid;
+    gap: var(--space-2xs);
+    align-content: start;
+    max-width: none;
+    padding: var(--space-sm) var(--space-md) var(--space-md);
+    border: var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  /* La última escena es el destino: se marca con el acento profundo para que
+     la línea de tiempo tenga un final visible y no se lea como una más. */
+  .arcs__scene:last-child {
+    border-top-color: var(--accent-deep);
+    border-color: color-mix(in srgb, var(--accent-deep) 32%, var(--line));
+    background: color-mix(in srgb, var(--accent-deep) 6%, var(--paper));
+  }
+
+  .arcs__scene::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--space-md) * -1);
+    width: 1px;
+    height: var(--space-md);
+    background: color-mix(in srgb, var(--accent) 45%, var(--line));
+  }
+  .arcs__scene:last-child::after {
+    display: none;
+  }
+  @media (min-width: 54rem) {
+    .arcs__scene::after {
+      left: auto;
+      bottom: auto;
+      top: 1.5rem;
+      right: calc(var(--space-sm) * -1);
+      width: var(--space-sm);
+      height: 1px;
+    }
+  }
+
+  .arcs__n {
+    color: var(--accent);
+  }
+  .arcs__scene:last-child .arcs__n {
+    color: var(--accent-deep);
+  }
+  .arcs__title {
+    max-width: none;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    line-height: var(--leading-tight);
+  }
+  .arcs__solved {
+    max-width: none;
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+  /* El problema que la escena creó va tipográficamente por debajo: es la
+     bisagra hacia la siguiente, no una conclusión. */
+  .arcs__created {
+    max-width: none;
+    margin-top: var(--space-2xs);
+    padding-top: var(--space-2xs);
+    border-top: 1px dashed color-mix(in srgb, var(--accent) 35%, var(--line));
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--muted);
+  }
+  .arcs__created .mono-label {
+    display: block;
+    margin-bottom: 0.15em;
+    color: var(--accent);
+  }
+
+  .arcs figcaption {
+    margin-top: var(--space-sm);
+  }
+</style>

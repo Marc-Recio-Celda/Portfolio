@@ -1,0 +1,131 @@
+---
+/**
+ * ThreeBlocks — la empresa de una persona, en sus tres bloques.
+ *
+ * Es la estructura de MLabs y por tanto la primera figura de su ficha. El
+ * orden es de dependencia y no de importancia: sin almacén la metodología no
+ * gobierna nada, y sin filosofía la metodología no sabe qué hacer cuando dos
+ * reglas chocan.
+ *
+ * ⚠️ Cada bloque lleva el fallo que evita, no sólo lo que hace. Un bloque
+ * descrito sólo por su función suena a organigrama; descrito por lo que pasa
+ * sin él, suena a diseño.
+ */
+const blocks = [
+  {
+    n: "01",
+    name: "The store",
+    what: "Knowledge and projects in one place — everything I do and learn goes in.",
+    without: "Without it there is nothing to govern — every project begins from zero.",
+  },
+  {
+    n: "02",
+    name: "The method",
+    what: "How work moves on top: one active front, a plan that records reasoning as it happens, a close that routes what is left open.",
+    without: "Without it the store becomes an archive nobody consults.",
+  },
+  {
+    n: "03",
+    name: "Philosophy and axioms",
+    what: "An objective, the clauses that protect it, and the rules implementing them — coverage counted, not assumed.",
+    without: "Without it nothing decides which rule wins, and growth breaks it.",
+  },
+];
+---
+
+<figure class="blocks">
+  <ol class="blocks__grid">
+    {
+      blocks.map((b) => (
+        <li class="blocks__item">
+          <span class="blocks__n mono-label">{b.n}</span>
+          <p class="blocks__name">{b.name}</p>
+          <p class="blocks__what">{b.what}</p>
+          <p class="blocks__without">{b.without}</p>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="mono-label">
+    Ordered by dependence, not importance — each one needs the one before it
+  </figcaption>
+</figure>
+
+<style>
+  .blocks {
+    margin: 0;
+  }
+
+  .blocks__grid {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 50rem) {
+    .blocks__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-sm);
+    }
+  }
+
+  .blocks__item {
+    position: relative;
+    display: grid;
+    gap: var(--space-2xs);
+    align-content: start;
+    max-width: none;
+    padding: var(--space-md);
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+  }
+  /* La intensidad crece con el bloque: el almacén es la materia prima y la
+     filosofía es lo que decide. El degradado hace legible la dependencia sin
+     una sola palabra. */
+  .blocks__item:nth-child(1) {
+    background: color-mix(in srgb, var(--accent) 5%, var(--paper));
+    border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
+  }
+  .blocks__item:nth-child(2) {
+    background: color-mix(in srgb, var(--accent) 11%, var(--paper));
+    border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+  }
+  .blocks__item:nth-child(3) {
+    background: color-mix(in srgb, var(--accent-deep) 9%, var(--paper));
+    border-color: color-mix(in srgb, var(--accent-deep) 34%, var(--line));
+  }
+
+  .blocks__n {
+    color: var(--accent);
+  }
+  .blocks__item:nth-child(3) .blocks__n {
+    color: var(--accent-deep);
+  }
+  .blocks__name {
+    max-width: none;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-lg);
+    line-height: var(--leading-tight);
+  }
+  .blocks__what {
+    max-width: none;
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+  }
+  .blocks__without {
+    max-width: none;
+    margin-top: var(--space-2xs);
+    padding-top: var(--space-2xs);
+    border-top: 1px dashed color-mix(in srgb, var(--accent) 35%, var(--line));
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--muted);
+  }
+
+  .blocks figcaption {
+    margin-top: var(--space-sm);
+  }
+</style>

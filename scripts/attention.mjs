@@ -87,7 +87,10 @@ console.log(
 for (const r of rows) {
   const flag = r.seconds > BUDGET_SECONDS ? "OVER " : "  ok ";
   console.log(
-    `${flag} ${r.route.padEnd(pad)}  ${String(Math.round(r.seconds)).padStart(4)} s   ` +
+    // Se redondea HACIA ARRIBA, no al más cercano: en un techo, mostrar 240
+    // junto a un OVER es irreconciliable para quien lo lee. El número que se
+    // enseña nunca puede parecer más cumplidor que el que se compara.
+    `${flag} ${r.route.padEnd(pad)}  ${String(Math.ceil(r.seconds)).padStart(4)} s   ` +
       `${String(r.words).padStart(4)} palabras + ${r.figures} fig`,
   );
 }

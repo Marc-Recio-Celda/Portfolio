@@ -1,0 +1,113 @@
+---
+/**
+ * ProjectCartridge — los ficheros que acompañan a cada proyecto.
+ *
+ * Es la figura de la escena 3 y la pieza que más vende de la página: cada
+ * fichero contesta UNA pregunta distinta, y por eso un agente que llega en
+ * frío tiene el contexto entero sin que se lo cuenten.
+ *
+ * ⚠️ La columna que hace el trabajo es "the question it answers". Listar los
+ * ficheros sin ella sería un organigrama de carpetas — lo interesante no es
+ * que existan, es que cada uno responde algo que ningún otro responde y que
+ * el código no dice.
+ */
+const files = [
+  {
+    name: "What it is",
+    question: "And, explicitly, what it is not — so scope never arrives unannounced",
+  },
+  {
+    name: "What is true today",
+    question: "Its own test: would this still hold if the work stopped right now?",
+  },
+  {
+    name: "Every decision",
+    question: "With its reasoning and what it discarded — the half that leaves no trace anywhere else",
+  },
+  {
+    name: "What each agent did",
+    question: "And who originated it, which version control cannot record",
+  },
+];
+---
+
+<figure class="cart">
+  <ul class="cart__list">
+    {
+      files.map((f) => (
+        <li class="cart__row">
+          <span class="cart__name">{f.name}</span>
+          <span class="cart__q">{f.question}</span>
+        </li>
+      ))
+    }
+  </ul>
+  <figcaption class="cart__caption">
+    Four files, four questions nothing else answers — <strong>and together,
+    why an agent can arrive cold and still know where the work stands.</strong>
+  </figcaption>
+</figure>
+
+<style>
+  .cart {
+    margin: 0;
+  }
+
+  .cart__list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--paper);
+  }
+
+  .cart__row {
+    display: grid;
+    gap: var(--space-2xs);
+    max-width: none;
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: var(--border);
+  }
+  .cart__row:last-child {
+    border-bottom: 0;
+  }
+  /* Dos columnas en cuanto hay sitio: el nombre a la izquierda como una
+     etiqueta fija, la pregunta a la derecha. Alineadas, se leen como una
+     tabla de correspondencias, que es lo que son. */
+  @media (min-width: 40rem) {
+    .cart__row {
+      grid-template-columns: 13rem 1fr;
+      gap: var(--space-md);
+      align-items: baseline;
+    }
+  }
+
+  .cart__name {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    color: var(--accent-deep);
+  }
+  .cart__q {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--muted);
+  }
+
+  .cart__caption {
+    max-width: var(--measure);
+    margin-top: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: var(--leading-snug);
+  }
+  .cart__caption strong {
+    color: var(--ink);
+    font-weight: var(--weight-semibold);
+  }
+</style>
