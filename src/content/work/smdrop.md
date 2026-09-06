@@ -6,6 +6,7 @@ thumb: "/work/smdrop.jpg"
 thumbAlt: "Infographic of the SMDrop pipeline: sensor data collected on a Raspberry Pi hub, cleaned and stored in a database, and AI-driven decisions feeding a smart sprinkler, with a weather API in the loop."
 status: "Frozen"
 order: 7
+theme: "lab"
 draft: false
 ---
 

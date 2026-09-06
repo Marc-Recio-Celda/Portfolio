@@ -9,6 +9,12 @@
  * Lee `dist/` y no `src/`: los componentes dibujados aportan texto que en la
  * fuente no parece copia y en la página lo es.
  *
+ * También comprueba la mitad mecanizable de AX-11: su tercera pregunta —
+ * ¿podría profundizar sin esfuerzo en lo que me interese? — es falsa si una
+ * página no ofrece salida. Toda página lleva al menos un enlace hacia dentro
+ * del sitio o una puerta de contacto. Las otras cuatro preguntas son juicio y
+ * se declaran como tal: no se fingen comprobadas.
+ *
  * ⚠️ Dos números y no se parecen en nada:
  *   · 200 ppm es MEDIDO — Brysbaert (2019), Journal of Memory and Language 109,
  *     metaanálisis de 190 estudios: no-ficción en inglés ≈238 ppm. Se baja a
@@ -61,9 +67,17 @@ export function measure(html) {
   // se lee, y contarlo mide puntuación en vez de tiempo.
   const words = text.split(/\s+/).filter((t) => /[\p{L}\p{N}]/u.test(t)).length;
 
+  // AX-11 · una salida hacia dentro o una puerta de contacto.
+  // La navegación y el pie viven fuera de <main>, así que no cuentan: lo que
+  // se mide es si la PÁGINA ofrece continuar, no si el chrome lo hace.
+  const doors =
+    (body.match(/href="[^"]*\/(work|how)\b/g) || []).length +
+    (body.match(/href="mailto:/g) || []).length;
+
   return {
     words,
     figures,
+    doors,
     seconds: (words / WPM) * 60 + figures * SECONDS_PER_FIGURE,
   };
 }
@@ -78,6 +92,7 @@ for (const file of walk(DIST)) {
 rows.sort((a, b) => b.seconds - a.seconds);
 
 const over = rows.filter((r) => r.seconds > BUDGET_SECONDS);
+const doorless = rows.filter((r) => r.doors === 0);
 const pad = Math.max(...rows.map((r) => r.route.length));
 
 console.log(
@@ -91,12 +106,18 @@ for (const r of rows) {
     // junto a un OVER es irreconciliable para quien lo lee. El número que se
     // enseña nunca puede parecer más cumplidor que el que se compara.
     `${flag} ${r.route.padEnd(pad)}  ${String(Math.ceil(r.seconds)).padStart(4)} s   ` +
-      `${String(r.words).padStart(4)} palabras + ${r.figures} fig`,
+      `${String(r.words).padStart(4)} palabras + ${r.figures} fig + ${r.doors} puerta${r.doors === 1 ? "" : "s"}`,
   );
 }
 
+let failed = false;
 if (over.length) {
-  console.log(`\n${over.length} de ${rows.length} páginas se pasan: ${over.map((r) => r.route).join(", ")}`);
-  process.exit(1);
+  console.log(`\n${over.length} de ${rows.length} páginas se pasan del presupuesto: ${over.map((r) => r.route).join(", ")}`);
+  failed = true;
 }
-console.log(`\n${rows.length} páginas, todas dentro del presupuesto.`);
+if (doorless.length) {
+  console.log(`\nAX-11 · ${doorless.length} página(s) sin salida ni puerta: ${doorless.map((r) => r.route).join(", ")}`);
+  failed = true;
+}
+if (failed) process.exit(1);
+console.log(`\n${rows.length} páginas: dentro del presupuesto, y todas con salida.`);

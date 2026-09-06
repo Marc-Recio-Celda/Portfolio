@@ -4,6 +4,7 @@ kind: "Master's thesis"
 summary: "A pipeline that turns grapevine-genomics papers into an evidence-graded gene catalogue: language models to read, deterministic code for every call that must be reproducible."
 status: "In progress"
 order: 1
+theme: "lab"
 draft: false
 deeper:
   href: "/work/tfm/process"

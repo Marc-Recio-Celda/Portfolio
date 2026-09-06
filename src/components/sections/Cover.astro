@@ -1,0 +1,136 @@
+---
+/**
+ * Cover — la carátula. Tráiler y enrutador a la vez.
+ *
+ * Existe por el diagnóstico de un amigo tirando currículums: el sitio
+ * estaba "demasiado completo" — no sobraba nada, faltaba un orden. Primero
+ * lo importante, la profundidad debajo.
+ *
+ * ⚠️ NO va envuelta en <figure>, y no es contabilidad para esquivar los 12 s
+ * que AX-9 cobra por figura: es que nadie ESTUDIA una carátula, la ojea.
+ * Tratarla como figura sería mentirle al presupuesto.
+ *
+ * Cada tarjeta afirma algo y lleva a donde se demuestra — AX-11, tercera
+ * pregunta: quien se interese tiene que poder profundizar sin esfuerzo.
+ */
+import { withBase } from "../../utils/url";
+
+const doors = [
+  {
+    kicker: "What I build",
+    line: "A production pipeline in a working lab: language models read the papers, tested code makes every call that has to be reproducible.",
+    href: "/work/tfm",
+    cta: "The thesis",
+  },
+  {
+    kicker: "How I work",
+    line: "A method I run daily and published on its own, so whether it works for anyone but me is testable rather than asserted.",
+    href: "/how",
+    cta: "The method",
+  },
+  {
+    kicker: "Where I come from",
+    line: "Plant breeding and molecular biology before data science — I read biological data from the inside, not just as numbers.",
+    href: "/work/tfm-plant-breeding",
+    cta: "The background",
+  },
+];
+---
+
+<section class="cover" aria-labelledby="cover-title">
+  <div class="container">
+    <h2 id="cover-title" class="visually-hidden">In short</h2>
+    <ul class="cover__grid reveal-stagger">
+      {
+        doors.map((d) => (
+          <li class="cover__card">
+            <span class="cover__kicker mono-label">{d.kicker}</span>
+            <p class="cover__line">{d.line}</p>
+            <a class="cover__cta" href={withBase(d.href)}>
+              {d.cta}
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .cover {
+    padding-block: var(--space-xl);
+    background: var(--ground-tint);
+    border-bottom: var(--border);
+  }
+
+  .cover__grid {
+    display: grid;
+    gap: var(--space-md);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 48rem) {
+    .cover__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .cover__card {
+    display: grid;
+    gap: var(--space-xs);
+    align-content: start;
+    max-width: none;
+    padding: var(--space-md);
+    border: var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    transition: border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease), translate var(--dur) var(--ease);
+  }
+  .cover__card:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    border-top-color: var(--accent);
+    box-shadow: 0 6px 26px rgb(0 0 0 / 0.06);
+    translate: 0 -2px;
+  }
+
+  .cover__kicker {
+    color: var(--accent);
+  }
+  .cover__line {
+    max-width: none;
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+  }
+
+  .cover__cta {
+    justify-self: start;
+    margin-top: var(--space-2xs);
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    color: var(--accent-deep);
+  }
+  .cover__cta span {
+    margin-left: 0.3em;
+    transition: margin-left var(--dur) var(--ease);
+  }
+  .cover__card:hover .cover__cta span {
+    margin-left: 0.55em;
+  }
+
+  /* Toda la tarjeta es el objetivo de clic, no sólo el enlace: un objetivo
+     grande es lo que separa una tarjeta usable de una decorativa. */
+  .cover__cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  .cover__card {
+    position: relative;
+  }
+</style>

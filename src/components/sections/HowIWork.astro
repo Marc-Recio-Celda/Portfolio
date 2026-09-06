@@ -5,11 +5,11 @@
  * sino "el registro está gobernado" (que describe un sistema). Un único
  * bloque, tono sobrio.
  */
-import SectionHeader from "./SectionHeader.astro";
-import { withBase } from "../utils/url";
+import SectionHeader from "../ui/SectionHeader.astro";
+import { withBase } from "../../utils/url";
 ---
 
-<section class="section how section--alt" aria-labelledby="how-title">
+<section class="reveal section how section--alt" aria-labelledby="how-title">
   <div class="container">
     <SectionHeader kicker="How I work" title="Structured, versioned, reproducible" id="how-title" />
     <div class="how__body">

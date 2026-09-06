@@ -4,7 +4,7 @@
  * curso (aquí consta el curso preparatorio de acceso, UOC); los dos títulos UPV
  * están finalizados. Sin descargas: es una web personal, no un dossier.
  */
-import SectionHeader from "./SectionHeader.astro";
+import SectionHeader from "../ui/SectionHeader.astro";
 
 const degrees = [
   {
@@ -48,7 +48,7 @@ const certificates = [
 ];
 ---
 
-<section class="section" aria-labelledby="studies-title">
+<section class="reveal section" aria-labelledby="studies-title">
   <div class="container">
     <SectionHeader
       kicker="Background · credentials"

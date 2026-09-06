@@ -1,0 +1,104 @@
+---
+/**
+ * Skills — qué aporto, en fichas.
+ *
+ * ⚠️ Eran cinco tarjetas con párrafo. El diagnóstico de "demasiado completo"
+ * apunta justo aquí: una lista de capacidades se ESCANEA, no se lee, y el
+ * cuerpo repetía lo que ya dicen la carátula y las fichas de proyecto.
+ *
+ * Título y nota, y la nota carga la prueba cuando la hay. Lo que se libera
+ * es lo que paga la carátula, sin eliminar la sección.
+ */
+import SectionHeader from "../ui/SectionHeader.astro";
+
+const groups = [
+  {
+    label: "Core strengths",
+    items: [
+      { title: "Classical machine learning", note: "Top grade — matrícula de honor" },
+      { title: "Databases & data engineering", note: "SQL · NoSQL · schema design" },
+      { title: "Data collection, prep & visualization", note: "Scraping · APIs · end to end" },
+    ],
+  },
+  {
+    label: "In progress",
+    items: [{ title: "Deep learning & reinforcement learning", note: "On a settled mathematical base" }],
+  },
+  {
+    label: "Domain",
+    items: [{ title: "Plant genomics & breeding", note: "In vitro · PCR · sequencing · transgenics" }],
+  },
+];
+---
+
+<section class="section skills" aria-labelledby="skills-title">
+  <div class="container">
+    <SectionHeader
+      kicker="Formation · what I bring"
+      title="A multidisciplinary data scientist"
+      id="skills-title"
+    />
+    <div class="skills__groups reveal">
+      {
+        groups.map((g) => (
+          <div class="skills__group">
+            <p class="skills__label mono-label">{g.label}</p>
+            <ul class="skills__chips">
+              {g.items.map((it) => (
+                <li class="skills__chip">
+                  <span class="skills__name">{it.title}</span>
+                  <span class="skills__note">{it.note}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills__groups {
+    display: grid;
+    gap: var(--space-lg);
+  }
+  .skills__label {
+    margin-bottom: var(--space-xs);
+    color: var(--accent);
+  }
+  .skills__chips {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 40rem) {
+    .skills__chips {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    }
+  }
+  /* Ficha, no tarjeta: el borde izquierdo da la textura de lista sin el
+     peso de una caja completa, que a cinco elementos satura. */
+  .skills__chip {
+    display: grid;
+    gap: 0.1em;
+    max-width: none;
+    padding: var(--space-xs) var(--space-sm);
+    border-left: 2px solid var(--ground-rule);
+    background: var(--ground-2);
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+  .skills__name {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+  }
+  .skills__note {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--muted);
+  }
+</style>

@@ -17,9 +17,9 @@
  * Presupuesto AX-9: 3 figuras = 36 s, quedan ~204 s de texto.
  */
 import Base from "../../layouts/Base.astro";
-import StoryArc from "../../components/StoryArc.astro";
-import ProjectCartridge from "../../components/ProjectCartridge.astro";
-import PermissionTable from "../../components/PermissionTable.astro";
+import StoryArc from "../../components/figures/StoryArc.astro";
+import ProjectCartridge from "../../components/figures/ProjectCartridge.astro";
+import PermissionTable from "../../components/figures/PermissionTable.astro";
 import { withBase } from "../../utils/url";
 import { LINKS } from "../../consts";
 ---
@@ -45,7 +45,7 @@ import { LINKS } from "../../consts";
 
       <div class="closer__walk">
         <!-- Escena 1 -->
-        <section class="closer__phase">
+        <section class="closer__phase reveal">
           <h2 class="closer__phase-title">A system that remembers for me</h2>
           <p class="closer__phase-intro">
             I began saving summaries and notes from what I studied into a
@@ -60,7 +60,7 @@ import { LINKS } from "../../consts";
         </section>
 
         <!-- Escena 2 -->
-        <section class="closer__phase">
+        <section class="closer__phase reveal">
           <h2 class="closer__phase-title">Then the projects moved in</h2>
           <p class="closer__phase-intro">
             So the projects came to live beside the knowledge they draw on, and
@@ -74,7 +74,7 @@ import { LINKS } from "../../consts";
         </section>
 
         <!-- Escena 3 · la que más vende -->
-        <section class="closer__phase">
+        <section class="closer__phase reveal">
           <h2 class="closer__phase-title">A record someone else could pick up</h2>
           <p class="closer__phase-intro">
             Every project keeps a small set of files, and each answers a
@@ -102,7 +102,7 @@ import { LINKS } from "../../consts";
         </section>
 
         <!-- Escena 4 · el traspaso a MLabs -->
-        <section class="closer__phase">
+        <section class="closer__phase reveal">
           <h2 class="closer__phase-title">So the method got rules of its own</h2>
           <p class="closer__phase-intro">
             By then the way of working was a thing in its own right, and it kept
@@ -140,6 +140,10 @@ import { LINKS } from "../../consts";
 <style>
   .closer {
     padding-block: var(--space-xl) var(--space-2xl);
+    /* AX-12 · atmósfera de capítulo en el suelo; el acento no se toca. */
+    --ground-2: color-mix(in srgb, var(--accent-deep) 6%, var(--paper));
+    --ground-tint: color-mix(in srgb, var(--accent-deep) 9%, var(--paper));
+    --ground-rule: color-mix(in srgb, var(--accent-deep) 32%, var(--line));
   }
   .closer__wrap {
     max-width: 54rem;

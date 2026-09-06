@@ -6,6 +6,7 @@ thumb: "/work/plant-breeding.jpg"
 thumbAlt: "Four microscopy panels of rapeseed pollen germination: heat-stressed controls versus candidate compounds, with germinated grains circled for counting."
 status: "Graded 10/10"
 order: 2
+theme: "lab"
 draft: false
 ---
 

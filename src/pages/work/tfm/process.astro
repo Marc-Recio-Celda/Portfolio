@@ -18,9 +18,9 @@
  * Figuras dibujadas desde los tokens (AX-8). Presupuesto AX-9: 240 s.
  */
 import Base from "../../../layouts/Base.astro";
-import PipelineFlow from "../../../components/PipelineFlow.astro";
-import BenchmarkArc from "../../../components/BenchmarkArc.astro";
-import DecisionCard from "../../../components/DecisionCard.astro";
+import PipelineFlow from "../../../components/figures/PipelineFlow.astro";
+import BenchmarkArc from "../../../components/figures/BenchmarkArc.astro";
+import DecisionCard from "../../../components/ui/DecisionCard.astro";
 import { withBase } from "../../../utils/url";
 import { LINKS } from "../../../consts";
 ---
@@ -44,7 +44,7 @@ import { LINKS } from "../../../consts";
       </header>
 
       <!-- 1 · El trabajo primero -->
-      <section class="proc__phase">
+      <section class="proc__phase reveal">
         <h2 class="proc__phase-title">The flow I built</h2>
         <p class="proc__body">
           A paper goes in; an evidence-graded row comes out. The model appears
@@ -55,7 +55,7 @@ import { LINKS } from "../../../consts";
       </section>
 
       <!-- 2 · Cómo se ganó la precisión -->
-      <section class="proc__phase">
+      <section class="proc__phase reveal">
         <h2 class="proc__phase-title">How the accuracy was won</h2>
         <p class="proc__body">
           None of it was right first time. I benchmarked broadly, found the
@@ -66,7 +66,7 @@ import { LINKS } from "../../../consts";
       </section>
 
       <!-- 3 · Las decisiones, como la parte explicada -->
-      <section class="proc__phase">
+      <section class="proc__phase reveal">
         <h2 class="proc__phase-title">The two decisions behind it</h2>
 
         <DecisionCard
@@ -137,6 +137,10 @@ import { LINKS } from "../../../consts";
 <style>
   .proc {
     padding-block: var(--space-xl) var(--space-2xl);
+    /* AX-12 · atmósfera de capítulo en el suelo; el acento no se toca. */
+    --ground-2: color-mix(in srgb, var(--accent) 7%, var(--paper));
+    --ground-tint: color-mix(in srgb, var(--accent) 11%, var(--paper));
+    --ground-rule: color-mix(in srgb, var(--accent) 38%, var(--line));
   }
   .proc__wrap {
     max-width: 54rem;
