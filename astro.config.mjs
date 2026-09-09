@@ -10,4 +10,9 @@ export default defineConfig({
 
   base: '/Portfolio',
   integrations: [mdx()],
+
+  // Smartypants sólo se aplica a .md, no a .astro ni .mdx, así que convertía
+  // los apóstrofos de unas páginas y no de otras. Apagado, todo el sitio
+  // compone el recto — el mismo que está escrito en la fuente.
+  markdown: { smartypants: false },
 });

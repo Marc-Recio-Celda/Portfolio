@@ -9,7 +9,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "check": "astro build && node scripts/palette.mjs && node scripts/typography.mjs && node scripts/attention.mjs && node scripts/contrast.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.0",

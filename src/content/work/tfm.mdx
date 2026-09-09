@@ -11,6 +11,8 @@ deeper:
   label: "How it was built — the decisions, and what they discarded"
 ---
 
+import EvidenceLadder from "../../components/figures/EvidenceLadder.astro";
+
 The anchor of my data-science master's (UOC), developed with the **TomsBioLab**
 research group: a computational-genomics project where the machine-learning and
 data-engineering methods I've been building meet a real curation problem in plant
@@ -25,6 +27,8 @@ around 3,000 genes on a published **6-level evidence scale** (Navarro-Payá et a
 three-quarters of those genes sit at the lower, *putative* tiers, and only about 8 %
 carry a written description of function. Raising that evidence and filling those gaps
 means reading the literature by hand — which doesn't scale.
+
+<EvidenceLadder />
 
 ## The approach
 
