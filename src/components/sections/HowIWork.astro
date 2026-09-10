@@ -1,0 +1,109 @@
+---
+/**
+ * HowIWork — bloque NEXUS discreto. Result-first, sin lenguaje defensivo
+ * sobre IA: no "la dirijo, no dependo de ella" (que contesta a una acusación),
+ * sino "el registro está gobernado" (que describe un sistema). Un único
+ * bloque, tono sobrio.
+ */
+import SectionHeader from "../ui/SectionHeader.astro";
+import { withBase } from "../../utils/url";
+---
+
+<section class="reveal section how section--alt" aria-labelledby="how-title">
+  <div class="container">
+    <SectionHeader kicker="How I work" title="Structured, versioned, reproducible" id="how-title" />
+    <div class="how__body">
+      <p>
+        NEXUS is how I do research: my whole master's as linked notes across
+        eight domains, and every project alongside it with its own architecture,
+        living state and logged decisions. One rule holds it together — total
+        traceability, zero black boxes — and it is what lets me hand real
+        execution to AI agents while write access to the record stays governed.
+      </p>
+    </div>
+
+    <div class="how__shots">
+      <figure class="how__shot">
+        <img
+          src={withBase("/how/graph.png")}
+          alt="Knowledge graph of the vault: hundreds of notes linked into one connected network."
+          width="1023"
+          height="910"
+          loading="lazy"
+          decoding="async"
+        />
+        <figcaption class="mono-label">
+          Notes linked into one navigable knowledge graph
+        </figcaption>
+      </figure>
+    </div>
+
+    <p class="how__note">
+      This site is itself a NEXUS instance. The rules behind it are{" "}
+      <a href={withBase("/work/mlabs")}>published as their own project</a>.
+    </p>
+
+    <a class="how__closer" href={withBase("/how")}>
+      Take a closer look inside NEXUS
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .how__body {
+    max-width: var(--measure);
+  }
+  .how__body p {
+    font-size: var(--text-md);
+  }
+  .how__body p + p {
+    margin-top: var(--space-sm);
+  }
+
+  .how__shots {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-lg);
+  }
+
+  .how__shot {
+    margin: 0;
+    max-width: 34rem;
+  }
+  .how__shot img {
+    width: 100%;
+    height: auto;
+    border: var(--border);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+  .how__shot figcaption {
+    margin-top: var(--space-2xs);
+  }
+
+  .how__note {
+    margin-top: var(--space-lg);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ---- Enlace a la página "closer look" ----------------------- */
+  .how__closer {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-lg);
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-md);
+    text-decoration: none;
+    color: var(--accent-deep);
+    transition: gap var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .how__closer:hover {
+    color: var(--accent);
+    gap: var(--space-sm);
+  }
+</style>

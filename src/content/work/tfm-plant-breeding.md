@@ -1,11 +1,12 @@
 ---
 title: "Plant-breeding thesis"
 kind: "Master's thesis"
-summary: "My completed master's thesis in plant breeding: a high-throughput screen for chemical compounds that protect rapeseed pollen from heat stress."
+summary: "A high-throughput screen for compounds that protect rapeseed pollen from heat stress. Graded 10/10."
 thumb: "/work/plant-breeding.jpg"
 thumbAlt: "Four microscopy panels of rapeseed pollen germination: heat-stressed controls versus candidate compounds, with germinated grains circled for counting."
 status: "Graded 10/10"
 order: 2
+theme: "lab"
 draft: false
 ---
 
@@ -19,7 +20,7 @@ systematic, data-driven screen.
 Rising temperatures hit plant sexual reproduction hard, and pollen is one of the
 most heat-sensitive stages, which makes it a direct threat to crop yield. In
 rapeseed (*Brassica napus* DH4079), a short heat shock (38 °C for two hours)
-collapses pollen germination from ~61% down to below 2%. The question: can small
+collapses pollen germination from ≈61% down to below 2%. The question: can small
 molecules buffer that damage?
 
 ## What I did

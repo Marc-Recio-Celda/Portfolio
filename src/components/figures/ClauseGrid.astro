@@ -1,0 +1,126 @@
+---
+/**
+ * ClauseGrid — las cláusulas que gobiernan el sistema, título y eslogan.
+ *
+ * Sustituye a seis párrafos de ética. La filosofía se explica sola si se
+ * enseña su forma: un objetivo, y seis maneras concretas de perderlo. Contar
+ * cada cláusula en prosa era repetir en 400 palabras lo que su propio eslogan
+ * dice en doce.
+ *
+ * PH-0 va aparte y arriba porque no es una más: es el objetivo, y las otras
+ * seis existen para protegerlo. Aplanarlas en una rejilla de siete perdería
+ * exactamente la jerarquía que la página está defendiendo.
+ */
+const objective = {
+  id: "Permanence",
+  slogan: "A system still worth having in twenty years — and worth more then than it is now",
+};
+
+const clauses = [
+  { id: "Scalability", slogan: "It grows by adding pieces, never by reopening the whole" },
+  { id: "Sustainability", slogan: "My own capacity is the one constraint that never scales" },
+  { id: "Data governance", slogan: "An analysis can be redone; a datum lost cannot" },
+  { id: "Traceability", slogan: "Everything carries where it came from" },
+  { id: "Attention", slogan: "The context window is where it gets spent" },
+  { id: "Measurement", slogan: "What isn't measured can't be improved — or proved" },
+];
+---
+
+<figure class="clauses">
+  <div class="clauses__objective">
+    <span class="mono-label">The objective</span>
+    <p class="clauses__name">{objective.id}</p>
+    <p class="clauses__slogan">{objective.slogan}</p>
+  </div>
+
+  <p class="clauses__hinge">
+    and six ways of losing it, each closed
+  </p>
+
+  <ul class="clauses__grid">
+    {
+      clauses.map((c) => (
+        <li class="clauses__item">
+          <p class="clauses__name">{c.id}</p>
+          <p class="clauses__slogan">{c.slogan}</p>
+        </li>
+      ))
+    }
+  </ul>
+</figure>
+
+<style>
+  .clauses {
+    margin: 0;
+  }
+
+  .clauses__objective {
+    padding: var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent-deep) 40%, var(--line));
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--accent-deep) 7%, var(--paper));
+  }
+  .clauses__objective .clauses__name {
+    margin-top: var(--space-2xs);
+    font-size: var(--text-lg);
+  }
+  .clauses__objective .clauses__slogan {
+    font-size: var(--text-base);
+    color: var(--ink);
+  }
+
+  /* La bisagra dice la relación entre el objetivo y las seis. Sin ella la
+     rejilla parece una lista de valores, que es justo lo que no es. */
+  .clauses__hinge {
+    margin-block: var(--space-sm);
+    padding-left: var(--space-md);
+    border-left: 2px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .clauses__grid {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 34rem) {
+    .clauses__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 58rem) {
+    .clauses__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .clauses__item {
+    max-width: none;
+    padding: var(--space-sm) var(--space-md);
+    border: var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+
+  .clauses__name {
+    max-width: none;
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    font-size: var(--text-base);
+    line-height: var(--leading-tight);
+  }
+  .clauses__slogan {
+    max-width: none;
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--muted);
+  }
+</style>

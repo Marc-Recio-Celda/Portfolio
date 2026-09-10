@@ -1,0 +1,165 @@
+---
+/**
+ * PermissionTable — quién autoriza cada escritura.
+ *
+ * ⚠️ Reescrita contra el método vivo. La versión anterior tenía TRES estados
+ * y vocabulario muerto ("charter", "operating prompts", que hoy no existen).
+ * Son CUATRO, y el cuarto — trabajo que no es mío — es el que faltaba y el
+ * que más dice: no se toca aunque parezca abandonado.
+ *
+ * Lo que hace la tabla completa no es la lista de filas, es el DEFAULT: lo
+ * que no está nombrado cae en "apply, don't commit". Una tabla sin default
+ * deja un hueco donde cada agente decide por su cuenta, y ese hueco es el
+ * fallo que la tabla existía para cerrar.
+ */
+type Level = "ask" | "diff" | "mine" | "theirs";
+
+const LEVEL_LABEL: Record<Level, string> = {
+  ask: "Ask first",
+  diff: "Leave the diff",
+  mine: "Agent's",
+  theirs: "Not ours",
+};
+
+const rows: { level: Level; what: string; who: string }[] = [
+  {
+    level: "ask",
+    what: "The rules, the knowledge notes, every project's record",
+    who: "Go-ahead, per change",
+  },
+  {
+    level: "diff",
+    what: "What is being worked right now — the front, the live plan",
+    who: "Agent applies, I commit",
+  },
+  {
+    level: "mine",
+    what: "Code and tooling, the mailbox, its own log, generated views",
+    who: "The agent, reporting at the close",
+  },
+  {
+    level: "theirs",
+    what: "Anything inside a repository I don't own",
+    who: "Nobody here — it goes to its owners",
+  },
+];
+---
+
+<figure class="perm">
+  <div class="perm__scroll">
+    <table class="perm__table">
+      <caption class="visually-hidden">
+        Write permissions by artifact: what needs my go-ahead, what an agent
+        applies but never commits, what it owns outright, and what belongs to
+        someone else.
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Who authorises</th>
+          <th scope="col">What</th>
+          <th scope="col">How it works</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((r) => (
+            <tr>
+              <td>
+                <span class={`perm__state perm__state--${r.level}`}>{LEVEL_LABEL[r.level]}</span>
+              </td>
+              <td>{r.what}</td>
+              <td class="perm__who">{r.who}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <p class="perm__default">
+    <strong>Anything not named lands in the second row</strong> — complete by
+    having a default, not by listing everything.
+  </p>
+</figure>
+
+<style>
+  .perm {
+    margin: 0;
+  }
+  .perm__scroll {
+    overflow-x: auto;
+    border: var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+  }
+  .perm__table {
+    width: 100%;
+    min-width: 34rem;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+  }
+  .perm__table th,
+  .perm__table td {
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    vertical-align: top;
+    border-bottom: var(--border);
+  }
+  .perm__table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+  .perm__table th {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--paper-2);
+  }
+  .perm__who {
+    color: var(--muted);
+  }
+
+  /* Cuatro estados sin rojo/ámbar/verde literales: la paleta es teal+índigo
+     y la rampa viridis queda reservada al scatter (AX-6). La intensidad del
+     borde hace de semáforo. */
+  .perm__state {
+    display: inline-block;
+    white-space: nowrap;
+    padding: 0.1em 0.7em;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+  }
+  .perm__state--ask {
+    border: 1.5px solid var(--accent-deep);
+    background: color-mix(in srgb, var(--accent-deep) 12%, var(--paper));
+    color: var(--accent-deep);
+    font-weight: var(--weight-medium);
+  }
+  .perm__state--diff {
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, var(--line));
+    background: color-mix(in srgb, var(--accent) 10%, var(--paper));
+    color: var(--accent);
+  }
+  .perm__state--mine {
+    border: 1px dashed color-mix(in srgb, var(--accent) 45%, var(--line));
+    color: var(--muted);
+  }
+  .perm__state--theirs {
+    border: 1px solid var(--line);
+    background: var(--paper-2);
+    color: var(--muted);
+  }
+
+  .perm__default {
+    margin-top: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+  .perm__default strong {
+    color: var(--ink);
+    font-weight: var(--weight-semibold);
+  }
+</style>

@@ -31,14 +31,19 @@ report the state.
 anything:
 
 ```
-../NEXUS/98_PROJECTS/Portfolio/nexus/
+../NEXUS/98_PROJECTS/MProjects/Portfolio/nexus/
 ```
 
-- `state.md` — definition, block status, **the Decision Log (`Dn`)**, active risks, resume
-  point. ⚠️ This project keeps its decision log **inside** `state.md`: there is no separate
-  `Decision_Log.md`, no `workflow.md`, no `definition.md`. Don't go looking for the
-  template's other files and don't create them — they were never made here.
+- `state.md` — the present-tense snapshot: block status, active risks, the resume point.
+- `definition.md` — what the site is for, its success criteria and what is out of scope.
+- `Decision_Log.md` — the `Dn` decisions with their **why** and, above all, what was
+  **discarded**. ⚠️ It is a separate file: it used to live inside `state.md` and was split
+  out when the planning layer was completed to the full project standard.
+- `LOG_AGENTS.md` — what was done and **who originated it**, which git cannot record.
 - `architecture.md` — the `AX-n` axioms. **This is the one that constrains your code** (§3).
+
+⚠️ **There is no `workflow.md`** — it was deleted, and `00_ROUTER.md` and `traceability.md`
+were deliberately never created. Don't go looking for them and don't add them.
 
 **NEXUS has its own `AGENTS.md` at its root, and it governs you while you're inside that
 repo.** Read it before writing anything there: it carries the permission table — almost
@@ -92,10 +97,9 @@ and nobody else writes `state.md`. Owners don't change when the workflow does; r
 should change in one of them, don't change it: deposit it, signed, in the mailbox. Marc
 integrates it.
 
-⚠️ **This project has no mailbox of its own** — its `nexus/` holds only the two files in §2.
-Until it has one, entries go to the vault's `99_SYSTEM/MAILBOX_agents.md` with the
-destination `→ Portfolio/state.md`. **Don't create the file here to close the gap**: say so
-and let Marc decide.
+⚠️ **This project has no mailbox of its own.** Entries go to the vault's
+`99_SYSTEM/MAILBOX.md` with the destination `→ Portfolio/state.md`. **Don't create a mailbox
+here to close the gap**: say so and let Marc decide.
 
 **Exception — the change's origin.** The block protects against your *initiative*, not your
 hands. A change originated by Marc in the conversation you execute and record without asking
@@ -113,9 +117,10 @@ rules: **only what you cross** · **one line, no investigating** · **never fix 
 
 - **Neighbour rule:** NEXUS and this repo are cloned at the same level, which is what makes
   §2's `../NEXUS` path resolve.
-- Git: stable branch **`master`**, working branch **`portfolio`**; commit there freely. Same
-  shape as NEXUS, autocatalogue and aynimd — the repo was renamed off `main` (D10) precisely
-  so there is no per-repo exception to remember.
+- Git: stable branch **`master`**, working branch **`marc`**; commit there freely. Same shape
+  as NEXUS, autocatalogue and aynimd — the repo was renamed off `main` (D10) and the working
+  branch off `portfolio` (`NEXUS:AX-17`, a literal value in every repository) precisely so
+  there is no per-repo exception to remember.
 - ⚠️ **`master` is the published branch: a push to it deploys to the world**
   (`.github/workflows/deploy.yml`, AX-7). Committing on `master` here isn't untidy, it's
   publishing. **Never commit on `master`, and never push** — Marc merges and pushes.

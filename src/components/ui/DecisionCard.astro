@@ -1,0 +1,130 @@
+---
+/**
+ * DecisionCard — la unidad visual de la página de proceso del TFM.
+ *
+ * Existe porque el argumento de esa página no es la decisión sola, sino la
+ * terna: qué se decidió, qué se descartó y qué costó. Separarlas en tres
+ * zonas obliga a que las tres estén escritas — una tarjeta sin `discarded`
+ * se ve vacía, que es exactamente el recordatorio que se quiere.
+ *
+ * El descarte es lo que git no registra nunca: por eso va con el mismo peso
+ * visual que la decisión y no como nota al pie.
+ */
+interface Props {
+  n: string;
+  title: string;
+  discarded: string;
+  cost: string;
+}
+
+const { n, title, discarded, cost } = Astro.props;
+---
+
+<article class="dec">
+  <header class="dec__head">
+    <span class="dec__n" aria-hidden="true">{n}</span>
+    <h3 class="dec__title">{title}</h3>
+  </header>
+
+  <div class="dec__body">
+    <slot />
+  </div>
+
+  <dl class="dec__meta">
+    <div class="dec__meta-row dec__meta-row--discarded">
+      <dt class="mono-label">Discarded</dt>
+      <dd>{discarded}</dd>
+    </div>
+    <div class="dec__meta-row">
+      <dt class="mono-label">What it cost</dt>
+      <dd>{cost}</dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .dec {
+    position: relative;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md) var(--space-md) var(--space-sm);
+    border: var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius-lg);
+    background: var(--paper);
+    transition: border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+  .dec:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+    border-left-color: var(--accent);
+    box-shadow: var(--shadow-lift);
+  }
+
+  .dec__head {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+  /* El número no es decoración: las decisiones del proyecto van numeradas y
+     la ficha hereda esa gramática. */
+  .dec__n {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-wide);
+    color: color-mix(in srgb, var(--accent) 75%, var(--muted));
+  }
+  .dec__title {
+    font-size: var(--text-lg);
+    margin: 0;
+  }
+
+  .dec__body :global(p) {
+    max-width: var(--measure);
+    margin-bottom: var(--space-sm);
+  }
+  .dec__body :global(p:last-child) {
+    margin-bottom: var(--space-md);
+  }
+  .dec__body :global(strong) {
+    font-weight: var(--weight-semibold);
+  }
+
+  .dec__meta {
+    display: grid;
+    gap: var(--space-xs);
+    margin: 0;
+    padding-top: var(--space-sm);
+    border-top: var(--border);
+  }
+  .dec__meta-row {
+    display: grid;
+    gap: var(--space-2xs);
+  }
+  @media (min-width: 40rem) {
+    .dec__meta-row {
+      grid-template-columns: 9rem 1fr;
+      gap: var(--space-sm);
+      align-items: baseline;
+    }
+  }
+  .dec__meta dt {
+    padding-top: 0.15em;
+  }
+  /* El descarte se marca en acento porque es la mitad que no deja rastro en
+     ningún otro sitio; el coste queda en tinta secundaria. */
+  .dec__meta-row--discarded dt {
+    color: var(--accent);
+  }
+  .dec__meta dd {
+    margin: 0;
+    max-width: var(--measure);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+  .dec__meta-row--discarded dd {
+    color: var(--ink);
+  }
+</style>

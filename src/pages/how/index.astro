@@ -1,275 +1,139 @@
 ---
 /**
- * Página "A closer look" — NEXUS contado desde TRES problemas propios que se
- * resuelven juntos:
- *   (1) no poder recordar todo lo estudiado → lo arregla el vault.
- *   (2) perder tiempo planificando / reestructurar a mitad → lo arregla el
- *       método (axiomas, gates, decision log).
- *   (3) agentes de IA escribiendo dentro del registro → lo arregla la capa de
- *       gobernanza (permisos, buzón, integrador único, derecho de corte).
- * El (3) es el centro de gravedad: es lo que un PI tiene encima de la mesa hoy
- * y lo que distingue el perfil. La IA no aparece como amenaza ni como adorno,
- * sino como colaborador con permisos de escritura acotados.
+ * "How I work" — cómo un repositorio de apuntes acabó siendo MLabs.
  *
- * Figuras: las estructuras se DIBUJAN (GovernanceLoop, PermissionTable,
- * NexusLayers) porque son contenido del sitio y se editan en segundos cuando el
- * método se mueve — Charter §5, las vistas se generan. Solo quedan dos
- * fotografías, las que no se pueden redibujar: el grafo y un decision log real.
+ * ⚠️ Reescrita como HISTORIA, 2026-09-04. La versión anterior eran cuatro
+ * secciones temáticas y abría con una lista ("tres cosas me frenaban"); una
+ * lista no se sigue como una historia y no se dibuja.
+ *
+ * La forma: cada escena resuelve algo Y plantea el problema que su propio
+ * éxito creó. Eso es lo que la separa de una cronología, y es lo que hace que
+ * el enlace a MLabs al final esté GANADO en vez de anunciado.
+ *
+ * Reparto con la ficha de MLabs (AX-20, el mismo hecho no vive en dos sitios):
+ * aquí el RECORRIDO, los troncales del proyecto y la capa de captura; allí los
+ * tres bloques, el bucle de sesión, las cláusulas y la tabla de permisos.
+ *
+ * Presupuesto AX-9: 3 figuras = 36 s, quedan ~204 s de texto.
  */
 import Base from "../../layouts/Base.astro";
-import NexusLayers from "../../components/NexusLayers.astro";
-import GovernanceLoop from "../../components/GovernanceLoop.astro";
-import PermissionTable from "../../components/PermissionTable.astro";
+import StoryArc from "../../components/figures/StoryArc.astro";
+import ProjectCartridge from "../../components/figures/ProjectCartridge.astro";
+import CaptureLayer from "../../components/figures/CaptureLayer.astro";
 import { withBase } from "../../utils/url";
-
-const graphFig = {
-  img: "/how/graph.png",
-  alt: "Knowledge graph of the vault: hundreds of notes linked into one connected network.",
-  caption: "Notes linked into one navigable graph",
-};
-
-const logFig = {
-  img: "/how/closer/decision-log.png",
-  alt: "A decision log table: numbered decisions with their justification and date, one of them struck through and marked as replaced by a later decision.",
-  caption: "A superseded decision stays on the record, struck through — never deleted",
-};
-
-const methodFig = {
-  img: "/how/closer/log_method.png",
-  alt: "The method's own decision log: numbered rules, each with a status, a destination and its reasoning, and one shown revised by a later rule rather than overwritten.",
-  caption: "The rules have their own log — numbered, with reasoning, revised in place of overwritten",
-};
+import { LINKS } from "../../consts";
 ---
 
 <Base
-  title="A closer look — how I work"
-  description="NEXUS: a knowledge base, a plan-before-you-build method, and the write-permission rules that let AI agents do real work without clouding the record."
+  title="How I work"
+  description="How a folder of study notes turned into a knowledge base, then a way of running projects, and finally a published methodology with its own rules."
 >
   <article class="closer">
     <div class="container closer__wrap">
       <a class="closer__back" href={withBase("/#how-title")}>← Back to how I work</a>
 
       <header class="closer__header">
-        <span class="mono-label">How I work · a closer look</span>
-        <h1>NEXUS: a research record that AI can write into</h1>
+        <span class="mono-label">How I work · how it got built</span>
+        <h1>It started as a folder of notes</h1>
         <p class="closer__lede">
-          Three things slowed me down. I couldn't hold everything I studied in
-          my head. I lost time to planning itself — over-thinking it in the
-          abstract, or tearing up half-built work to restructure mid-way. And
-          then AI agents started doing real work inside my projects, writing
-          files I would have to trust months later. NEXUS is what I built for
-          all three: a knowledge base, a way of working, and a set of rules that
-          decide what a machine is allowed to write.
+          None of it was designed up front — each piece exists because the
+          previous one worked.
         </p>
       </header>
 
+      <StoryArc />
+
       <div class="closer__walk">
-        <NexusLayers />
-
-        <!-- Problem one — memory -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">A system that remembers for me</h2>
+        <!-- Escena 1 -->
+        <section class="closer__phase reveal">
+          <h2 class="closer__phase-title">A structure that came before the work</h2>
           <p class="closer__phase-intro">
-            I stopped relying on memory. Everything I learn — my whole
-            data-science master's — lives in NEXUS as linked notes across eight
-            domains: one growing graph I can always return to, instead of facts
-            I have to keep in my head. Theory stays separate from any single
-            project; the vault is knowledge, projects are where it gets applied.
-          </p>
-          <figure class="closer__fig closer__fig--solo">
-            <a
-              href={withBase(graphFig.img)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size: ${graphFig.caption}`}
-            >
-              <img src={withBase(graphFig.img)} alt={graphFig.alt} loading="lazy" decoding="async" />
-            </a>
-            <figcaption class="mono-label">{graphFig.caption}</figcaption>
-          </figure>
-        </section>
-
-        <!-- Problem two — planning -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">A way of working that plans before it builds</h2>
-          <p class="closer__phase-intro">
-            My second problem was planning. I'd either over-plan in the abstract
-            or, worse, tear up half-built work to restructure it mid-way. So
-            every project now gets its own architecture, fixed axioms and a
-            gated plan — shaped to it, not forced through a template. I
-            front-load the thinking once, in a structure I trust, and I don't
-            start building until the shape is clear.
+            I began saving what I studied into one repository so I wouldn't lose
+            it, and it grew into my whole master's as linked notes across eight
+            domains. The structure was in place <strong>before any project
+            started</strong>, which is why nothing since has had to begin from
+            nothing.
           </p>
           <p class="closer__phase-intro">
-            The rules are the ones I'd want in any lab: every decision logged
-            with its reasoning, every step gated before the next, and the source
-            of truth in plain markdown I own, with dashboards generated from it
-            rather than kept by hand.
-          </p>
-          <p class="closer__phase-intro">
-            Each project's planning layer — definition, architecture, living
-            state, decision log — sits in the vault beside the knowledge it
-            draws on, while the code lives in the project's own repository. They
-            are split by <em>owner</em>, not by how fast they change: the code
-            can have collaborators, the record has one author.
-          </p>
-          <figure class="closer__fig closer__fig--solo">
-            <a
-              href={withBase(logFig.img)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size: ${logFig.caption}`}
-            >
-              <img src={withBase(logFig.img)} alt={logFig.alt} loading="lazy" decoding="async" />
-            </a>
-            <figcaption class="mono-label">{logFig.caption}</figcaption>
-          </figure>
-        </section>
-
-        <!-- Problem three — governance (the centrepiece) -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">Rules for machines that write</h2>
-          <p class="closer__phase-intro">
-            Then the third problem arrived, and it's the one I'd argue matters
-            most now. AI agents don't just answer questions — they execute. They
-            refactor, sweep hundreds of files, and write into the same record I
-            rely on. An agent that tidies up a decision log has quietly
-            destroyed the evidence that log existed to hold, and nothing in the
-            diff will look alarming.
-          </p>
-          <p class="closer__phase-intro">
-            So I stopped treating AI as an assistant and started treating it as
-            a collaborator that needs write permissions. Everything below is a
-            rule I actually run, every day, across my thesis and this site.
-          </p>
-
-          <GovernanceLoop />
-
-          <h3 class="closer__rule-title">Write access is decided per artifact, not per session</h3>
-          <p class="closer__phase-intro">
-            Every kind of file has exactly one owner. The agent is the sole
-            author of code and tooling — that is genuinely its job, and I don't
-            pretend to review every line. What it is never allowed to be is
-            the <em>originator</em> of a change to knowledge or method: when I ask
-            for one it writes it and records it, but it never concludes on its
-            own that one is needed and goes ahead. Between the two sits a class
-            of files that are generated, where nobody edits anything by hand and
-            a script rebuilds them from the source.
-          </p>
-
-          <PermissionTable />
-
-          <h3 class="closer__rule-title">Proposals go to a mailbox, not into the file</h3>
-          <p class="closer__phase-intro">
-            When an agent concludes a structural document should change — and it
-            is often right — it doesn't act on that conclusion. It leaves a
-            signed, dated entry in a mailbox, drafted in the target document's
-            own style, with a destination drawn from a closed vocabulary so
-            triage stays scriptable. Then I integrate it, or I don't. Either way
-            the proposal and its author survive in the log.
-          </p>
-          <pre class="closer__sample"><code>### [pending] → charter §5 — Agents commit to a branch, never to the stable one
-· (claude-code, 2026-07-29)
-
-A branch is what makes undoing an entire session cheap. Reverting commit by
-commit is the wrong granularity when a single pass touches ten files.</code></pre>
-
-          <h3 class="closer__rule-title">The agent is required to refuse</h3>
-          <p class="closer__phase-intro">
-            Whoever plans the work is reading a conversation; whoever executes it
-            is reading the actual repository. Only one of them can see the real
-            state. So the executing agent holds a cutoff right, and it isn't a
-            courtesy — it's an obligation: if a task's premise doesn't survive
-            contact with the repo, it has to stop and say so instead of carrying
-            out an instruction it can demonstrate is wrong. The disagreement
-            goes back to the mailbox, with a file and a line.
-          </p>
-          <blockquote class="closer__quote">
-            Executing an instruction you know is incoherent is the failure.
-            Refusing isn't.
-          </blockquote>
-
-          <h3 class="closer__rule-title">What version control can't record</h3>
-          <p class="closer__phase-intro">
-            Git tells me what changed and when. It doesn't tell me why, who
-            originated the change, or — the part with no equivalent anywhere —
-            what was considered and discarded. A rejected approach leaves no
-            trace in a diff, because it was never written down. That gap is what
-            the logs exist to fill, and it's the whole difference between a
-            repository and a record.
-          </p>
-
-          <h3 class="closer__rule-title">And the method improves itself</h3>
-          <p class="closer__phase-intro">
-            None of this would be worth much if the rules were fixed. The same
-            mailbox that catches an agent's proposals also catches every
-            inconsistency it stumbles on and every task it refuses — and all of
-            it gets triaged into numbered method decisions, each carrying its
-            reasoning and what was rejected. Using the system is what produces
-            the next version of it.
-          </p>
-          <p class="closer__phase-intro">
-            That loop isn't a flattering story I tell about my own process; it's
-            visible in the log, which records who originated each decision.
-            Several of the rules now governing the agents were proposed by an
-            agent — including the one that changed how work is handed to me for
-            review, which came from the executor finding the old way expensive
-            and saying so.
-          </p>
-          <p class="closer__phase-intro">
-            And because the method is a single layer sitting above every project
-            rather than a habit inside each one, an improvement found while
-            working on the thesis lands in this site, in the next tool, and in
-            whatever comes after. I fix it once, where the rules live, and it
-            applies everywhere I work. That compounding is the real return: not
-            that any one project runs well, but that each one leaves the method
-            better than it found it.
-          </p>
-          <figure class="closer__fig closer__fig--solo">
-            <a
-              href={withBase(methodFig.img)}
-              target="_blank"
-              rel="noopener"
-              aria-label={`Open full-size: ${methodFig.caption}`}
-            >
-              <img src={withBase(methodFig.img)} alt={methodFig.alt} loading="lazy" decoding="async" />
-            </a>
-            <figcaption class="mono-label">{methodFig.caption}</figcaption>
-          </figure>
-        </section>
-
-        <!-- Self-consistency -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">One rule bites on this page</h2>
-          <p class="closer__phase-intro">
-            Views are generated, never hand-maintained — so the diagrams above
-            are drawn from the same design tokens as the rest of the site and
-            take seconds to correct when the method moves. The only photographs
-            left are the two things that can't be redrawn: the knowledge graph,
-            and a real decision log. A screenshot of a living system is a view
-            somebody has to remember to update, and I'd rather not rely on
-            remembering.
+            <strong>And then it stopped being enough.</strong> A knowledge base
+            answers <em>what do I know about this?</em> — never <em>how do I use
+            what I know?</em>
           </p>
         </section>
 
-        <!-- Trajectory -->
-        <section class="closer__phase">
-          <h2 class="closer__phase-title">Built to scale</h2>
+        <!-- Escena 2 -->
+        <section class="closer__phase reveal">
+          <h2 class="closer__phase-title">Then the projects moved in</h2>
           <p class="closer__phase-intro">
-            New domains, new projects, the same three fixes — each project
-            leaving the method sharper for the next, and, in time, a consultable
-            knowledge base over the whole vault. The system that organized a
-            master's is how I'd approach doctoral research. The governance layer
-            is the part I'd expect to matter most in a group, where the question
-            is no longer whether people will use AI, but whether anyone can
-            reconstruct what it did.
+            So the projects came to live beside the knowledge they draw on, and
+            each carries four documents of its own — answering what version
+            control cannot: git records what changed and when, never why, who
+            decided it, or what was rejected.
           </p>
+
+          <ProjectCartridge />
+
+          <p class="closer__phase-intro">
+            That is also what turned AI from an assistant into something doing
+            real work here.
+          </p>
+          <p class="closer__phase-intro">
+            <strong>Which created the next problem.</strong> A project you can
+            see clearly generates more ideas than one you can't, and they were
+            arriving faster than I could elaborate any of them. An idea I never
+            wrote down is one I did not have.
+          </p>
+        </section>
+
+        <!-- Escena 3 · la que más vende -->
+        <section class="closer__phase reveal">
+          <h2 class="closer__phase-title">Nothing gets lost on the way</h2>
+          <p class="closer__phase-intro">
+            So a raw idea, a thing waiting to be decided, and what is live right
+            now each got their own place — they are not the same object, and
+            together they get ignored.
+          </p>
+
+          <CaptureLayer />
+
+          <p class="closer__phase-intro">
+            The gate on agents is this same mechanism rather than a second one:
+            what an agent concludes on its own <em>initiative</em> lands in the
+            mailbox, and I integrate it or I don't.
+          </p>
+        </section>
+
+        <!-- Escena 4 · el traspaso a MLabs -->
+        <section class="closer__phase reveal">
+          <h2 class="closer__phase-title">So the method got rules of its own</h2>
+          <p class="closer__phase-intro">
+            By then the way of working was a thing in its own right, and it kept
+            growing. Anything that grows without rules collapses under itself, so
+            I wrapped it in some: roles that answer for what they do, checks
+            proven to fire, and a philosophy that decides when two rules
+            disagree.
+          </p>
+          <p class="closer__phase-intro">
+            It is a separate project now, published so that whether it works for
+            anyone but me is a question somebody can answer rather than a claim I
+            get to make.
+          </p>
+
+          <a class="closer__pointer" href={withBase("/work/mlabs")}>
+            <span class="mono-label">Where it ends up</span>
+            <span class="closer__pointer-title">
+              MLabs — the store, the method, and the philosophy that keeps it
+              from breaking
+              <span aria-hidden="true">→</span>
+            </span>
+          </a>
         </section>
       </div>
 
       <p class="closer__outro">
-        AI accelerates the work. The system that keeps it accountable is the
-        part I built — and the part I'd bring to a lab.
+        Still under construction, and always will be: a system that stops
+        changing has stopped being used.{" "}
+        <a href={`mailto:${LINKS.email}`}>Ask me about any of it</a>.
       </p>
     </div>
   </article>
@@ -278,6 +142,10 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
 <style>
   .closer {
     padding-block: var(--space-xl) var(--space-2xl);
+    /* AX-12 · atmósfera de capítulo en el suelo; el acento no se toca. */
+    --ground-2: color-mix(in srgb, var(--accent-deep) 6%, var(--paper));
+    --ground-tint: color-mix(in srgb, var(--accent-deep) 9%, var(--paper));
+    --ground-rule: color-mix(in srgb, var(--accent-deep) 32%, var(--line));
   }
   .closer__wrap {
     max-width: 54rem;
@@ -305,14 +173,13 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
     color: var(--muted);
   }
 
+  /* El arco va antes del recorrido y con aire propio: es el índice visual de
+     lo que viene, no la primera sección. */
   .closer__walk {
     display: grid;
     gap: var(--space-2xl);
+    margin-top: var(--space-2xl);
   }
-  /* Los grid items traen min-width:auto y no encogen por debajo de su
-     contenido: en móvil eso empujaba los SVG y la tabla a ~546px y hacía
-     scrollear la página entera en horizontal. Con min-width:0 encogen y el
-     scroll queda donde debe, dentro de .perm__scroll. */
   .closer__walk > * {
     min-width: 0;
   }
@@ -329,79 +196,53 @@ commit is the wrong granularity when a single pass touches ten files.</code></pr
   }
   .closer__phase-intro {
     max-width: var(--measure);
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
     font-size: var(--text-md);
   }
-  .closer__phase-intro:last-of-type {
-    margin-bottom: var(--space-lg);
+  .closer__phase-intro + :global(figure) {
+    margin-top: calc(var(--space-lg) * -1 + var(--space-md));
   }
-  .closer__phase-intro code {
-    background: var(--paper-2);
-    padding: 0.05em 0.35em;
-    border-radius: var(--radius);
+  :global(figure) + .closer__phase-intro {
+    margin-top: var(--space-lg);
+  }
+  .closer__phase-intro strong {
+    font-weight: var(--weight-semibold);
   }
 
-  /* Sub-encabezado dentro de la sección de gobernanza: una regla, un bloque. */
-  .closer__rule-title {
+  .closer__pointer {
+    display: grid;
+    gap: var(--space-2xs);
     max-width: var(--measure);
     margin-top: var(--space-lg);
-    margin-bottom: var(--space-sm);
-    font-size: var(--text-lg);
-  }
-
-  .closer__fig {
-    margin: 0;
-  }
-  .closer__fig--solo {
-    max-width: 38rem;
-  }
-  .closer__fig a {
-    display: block;
-    border: var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--paper-2);
-    transition: border-color var(--dur) var(--ease),
-      box-shadow var(--dur) var(--ease);
-  }
-  .closer__fig a:hover {
-    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
-    box-shadow: 0 6px 24px rgb(0 0 0 / 0.08);
-  }
-  .closer__fig img {
-    width: 100%;
-    height: auto;
-  }
-  .closer__fig figcaption {
-    margin-top: var(--space-2xs);
-  }
-
-  /* Entrada de buzón real, en el formato en que se escribe. */
-  .closer__sample {
-    max-width: var(--measure);
-    overflow-x: auto;
-    padding: var(--space-md);
-    border: var(--border);
-    border-left: 3px solid var(--accent);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
     border-radius: var(--radius);
-    background: var(--paper-2);
-    font-size: var(--text-xs);
-    line-height: var(--leading-snug);
-    white-space: pre;
+    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
+    text-decoration: none;
+    transition: background var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
   }
-
-  .closer__quote {
-    max-width: var(--measure);
-    margin-block: var(--space-md) var(--space-lg);
-    padding-left: var(--space-md);
-    border-left: 3px solid var(--accent);
+  .closer__pointer:hover {
+    background: color-mix(in srgb, var(--accent) 13%, var(--paper));
+    border-color: var(--accent);
+  }
+  .closer__pointer-title {
     font-family: var(--font-display);
-    font-size: var(--text-md);
-    font-weight: var(--weight-medium);
-    text-wrap: balance;
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+    color: var(--accent-deep);
+  }
+  /* La flecha va en su propio span y Astro se come el salto de línea que la
+     precede. Se resuelve en CSS y no con un espacio explícito porque aquí el
+     contenedor no es flex — un margen sobrevive a la siguiente reescritura del
+     texto, y un {" "} no. */
+  .closer__pointer-title span {
+    margin-left: 0.35em;
   }
 
   .closer__outro {
+    max-width: var(--measure);
     margin-top: var(--space-2xl);
     padding-top: var(--space-lg);
     border-top: var(--border);

@@ -1,0 +1,96 @@
+---
+import ScatterViridis from "../figures/ScatterViridis.astro";
+import { SITE } from "../../consts";
+import { withBase } from "../../utils/url";
+---
+
+<section class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <ScatterViridis />
+  </div>
+  <div class="container hero__inner">
+    <img
+      class="hero__portrait"
+      src={withBase("/portrait.jpg")}
+      alt="Portrait of Marc Recio"
+      width="144"
+      height="144"
+      loading="eager"
+    />
+    <p class="mono-label">Who I am · data scientist</p>
+    <h1 class="hero__name">{SITE.name}</h1>
+    <p class="hero__thesis">
+      Data scientist in plant genomics. I came from the wet lab — in vitro,
+      PCR, sequencing — and now I build the pipelines that read what those
+      experiments produce, designed so a scientist can audit every call the
+      machine makes.
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: min(88vh, 760px);
+    overflow: hidden;
+    border-bottom: var(--border);
+  }
+
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.32;
+    pointer-events: none;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__bg {
+      opacity: 0.5;
+    }
+  }
+
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__portrait {
+    display: block;
+    width: 144px;
+    height: 144px;
+    margin-bottom: var(--space-md);
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--line), var(--shadow-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .hero__portrait {
+      width: 168px;
+      height: 168px;
+    }
+  }
+
+  .hero__name {
+    margin-block: var(--space-2xs) var(--space-sm);
+    font-size: var(--text-3xl);
+  }
+
+  .hero__thesis {
+    max-width: 34ch;
+    font-size: var(--text-lg);
+    font-weight: var(--weight-normal);
+    line-height: var(--leading-snug);
+    color: var(--ink);
+  }
+
+  @media (min-width: 48rem) {
+    .hero__thesis {
+      max-width: 44ch;
+    }
+  }
+</style>

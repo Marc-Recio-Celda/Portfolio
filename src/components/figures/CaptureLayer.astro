@@ -1,0 +1,105 @@
+---
+/**
+ * CaptureLayer — Notebook · Mailbox · Compass, la capa que impide que una idea
+ * se pierda.
+ *
+ * Por qué existe, y es la causa que cuenta Marc: tener los proyectos bien
+ * documentados genera MÁS ideas de las que caben en la cabeza, y una idea que
+ * no se elabora se pierde igual que si no se hubiera tenido. Los tres sitios
+ * son la respuesta, y son distintos porque una idea cruda, una decisión
+ * pendiente y lo que está vivo ahora no se guardan en el mismo sitio.
+ *
+ * ⚠️ La tercera columna es la que hace el trabajo. Sin ella esto son tres
+ * carpetas; con ella es un recorrido — dónde cae, quién la mira, cuándo sale.
+ *
+ * El buzón del agente es una FILA de esta tabla, no una capa aparte (D23): lo
+ * que yo no elaboro y lo que un agente concluye por su cuenta esperan en el
+ * mismo sitio, y salen por la misma puerta.
+ */
+const stops = [
+  {
+    name: "Notebook",
+    what: "The raw idea",
+    note: "Written the second it appears, before it is worth anything",
+  },
+  {
+    name: "Mailbox",
+    what: "Anything asking to be decided",
+    note: "Mine, and what an agent concluded on its own — it waits here either way",
+  },
+  {
+    name: "Compass",
+    what: "What is live right now",
+    note: "One front at a time, so what am I doing now is never a guess",
+  },
+];
+---
+
+<figure class="cap">
+  <ol class="cap__list">
+    {
+      stops.map((s) => (
+        <li class="cap__row">
+          <span class="cap__name mono-label">{s.name}</span>
+          <span class="cap__what">{s.what}</span>
+          <span class="cap__note">{s.note}</span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="cap__caption mono-label">
+    Nothing waits in my head, so nothing is lost to forgetting it
+  </figcaption>
+</figure>
+
+<style>
+  .cap {
+    margin: var(--space-lg) 0;
+  }
+
+  .cap__list {
+    display: grid;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--ground-rule);
+  }
+
+  /* Mobile-first: apilado. En ancho, las tres columnas del recorrido. */
+  .cap__row {
+    display: grid;
+    gap: var(--space-2xs);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--ground, var(--paper));
+  }
+
+  @media (min-width: 40rem) {
+    .cap__row {
+      grid-template-columns: 7rem minmax(10rem, 14rem) 1fr;
+      align-items: baseline;
+      gap: var(--space-md);
+    }
+  }
+
+  .cap__name {
+    color: var(--accent-deep);
+  }
+
+  .cap__what {
+    font-weight: var(--weight-medium);
+    color: var(--ink);
+  }
+
+  .cap__note {
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .cap__caption {
+    margin-top: var(--space-xs);
+  }
+</style>

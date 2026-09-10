@@ -6,6 +6,7 @@
 import { getCollection, render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { withBase } from "../../utils/url";
+import { LINKS } from "../../consts";
 
 export async function getStaticPaths() {
   const entries = await getCollection("work", ({ data }) => !data.draft);
@@ -20,7 +21,7 @@ const { Content } = await render(entry);
 ---
 
 <Base title={entry.data.title} description={entry.data.summary}>
-  <article class="detail">
+  <article class="detail" data-theme={entry.data.theme}>
     <div class="container detail__wrap">
       <a class="detail__back" href={withBase("/#worknav-title")}>← Back to work</a>
 
@@ -42,6 +43,21 @@ const { Content } = await render(entry);
       <div class="prose">
         <Content />
       </div>
+
+      {entry.data.deeper ? (
+        <a class="detail__deeper" href={withBase(entry.data.deeper.href)}>
+          {entry.data.deeper.label}
+          <span aria-hidden="true">→</span>
+        </a>
+      ) : (
+        /* AX-11 · ninguna página termina sin salida. Donde no hay una página
+           más profunda, la puerta es la conversación — que es el objetivo
+           declarado del sitio. */
+        <a class="detail__deeper" href={`mailto:${LINKS.email}`}>
+          Ask me about this one
+          <span aria-hidden="true">→</span>
+        </a>
+      )}
     </div>
   </article>
 </Base>
@@ -49,6 +65,20 @@ const { Content } = await render(entry);
 <style>
   .detail {
     padding-block: var(--space-xl) var(--space-2xl);
+  }
+
+  /* AX-12 · la atmósfera del capítulo vive en el suelo. El acento no se
+     toca: un enlace es del mismo color en todo el sitio, porque uno que
+     cambia obliga a reaprender el código en cada página. */
+  .detail[data-theme="lab"] {
+    --ground-2: color-mix(in srgb, var(--accent) 7%, var(--paper));
+    --ground-tint: color-mix(in srgb, var(--accent) 11%, var(--paper));
+    --ground-rule: color-mix(in srgb, var(--accent) 38%, var(--line));
+  }
+  .detail[data-theme="method"] {
+    --ground-2: color-mix(in srgb, var(--accent-deep) 6%, var(--paper));
+    --ground-tint: color-mix(in srgb, var(--accent-deep) 9%, var(--paper));
+    --ground-rule: color-mix(in srgb, var(--accent-deep) 32%, var(--line));
   }
   .detail__wrap {
     max-width: 46rem;
@@ -85,6 +115,31 @@ const { Content } = await render(entry);
     margin-top: var(--space-sm);
     font-size: var(--text-md);
     color: var(--muted);
+  }
+
+  /* Enlace a la página propia del proyecto. Peso de llamada a la acción:
+     en el TFM es la pieza que más se quiere que se abra. */
+  .detail__deeper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: var(--space-lg);
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-md);
+    text-decoration: none;
+    color: var(--accent-deep);
+    transition: gap var(--dur) var(--ease), background var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  .detail__deeper:hover {
+    gap: var(--space-sm);
+    background: color-mix(in srgb, var(--accent) 13%, var(--paper));
+    border-color: var(--accent);
   }
 
   .detail__figure {

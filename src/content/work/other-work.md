@@ -1,10 +1,10 @@
 ---
 title: "Data capture, databases & visualization"
 kind: "Other work"
-summary: "A Selenium scraper whose dataset is now published on Zenodo with a DOI, plus a working reference of the databases I model with and the tools I visualize data with across the master's."
+summary: "A scraper whose dataset is published on Zenodo with a DOI, plus the databases I model with and the tools I visualise data with."
 thumb: "/work/viz.jpeg"
 thumbAlt: "A Power BI dashboard of Spanish vehicle registrations: headline totals, distribution by province, vehicle origin and type, and registrations per year."
-order: 5
+order: 6
 draft: false
 ---
 
@@ -16,7 +16,7 @@ built is **openly published on Zenodo with a DOI**.
 
 > **Letterboxd 1000 Popular Movies Dataset** — Recio Celda, M. & Soriano Reos, J.
 > (2025). Zenodo. [10.5281/zenodo.17578619](https://doi.org/10.5281/zenodo.17578619)
-> · CC BY-NC-SA 4.0 — 1,000 films × ~25 fields in a single CSV.
+> · CC BY-NC-SA 4.0 — 1,000 films × ≈25 fields in a single CSV.
 
 The scraper is built to behave: per-field `try/except` so one missing element never
 aborts a film, explicit waits instead of brittle sleeps, and resumable

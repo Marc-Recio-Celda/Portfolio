@@ -1,0 +1,216 @@
+---
+/**
+ * EvidenceLadder — el problema del que parte el TFM, dibujado (AX-8).
+ *
+ * Lo que se muestra es el CATÁLOGO DE PARTIDA, publicado por la acción COST
+ * Integrape (Navarro-Payá et al., 2022), no resultados de este trabajo: por eso
+ * el pie lo dice. El embargo de la defensa cubre los hallazgos de Marc, no la
+ * literatura previa que motiva el proyecto.
+ *
+ * FORMA, y por qué esta:
+ * De la escala conozco los seis peldaños y sus dos extremos; NO conozco cuántos
+ * genes hay en cada nivel. Así que los peldaños van todos del mismo largo —son
+ * la escala, no un dato— y el orden lo lleva el COLOR. Dibujarlos de largos
+ * distintos sería inventarse un reparto que no tengo.
+ * Lo que sí está medido son dos proporciones, y una proporción contra un total
+ * se dibuja como medidor, no como barra suelta.
+ *
+ * COLOR: rampa secuencial de UN SOLO tono, más evidencia = más oscuro, mezclada
+ * desde --accent. La viridis no se toca: está reservada al scatter de firma
+ * (AX-6), y además una rampa multitono para una escala ordinal se lee peor.
+ */
+const RUNGS = [
+  { n: 6, anchor: "experimentally validated in grapevine" },
+  { n: 5, anchor: null },
+  { n: 4, anchor: null },
+  { n: 3, anchor: null },
+  { n: 2, anchor: null },
+  { n: 1, anchor: "hypothetical" },
+];
+
+/** Proporción con descripción escrita de función, del catálogo curado. */
+const DESCRIBED = 8;
+---
+
+<figure class="ladder">
+  <div class="ladder__scale">
+    <p class="ladder__axis mono-label">Evidence level</p>
+    <ol class="ladder__rungs">
+      {
+        RUNGS.map((r) => (
+          <li class={`ladder__rung ladder__rung--${r.n}`}>
+            <span class="ladder__n mono-label">{r.n}</span>
+            <span class="ladder__bar" aria-hidden="true" />
+            <span class="ladder__anchor">{r.anchor}</span>
+          </li>
+        ))
+      }
+    </ol>
+    <p class="ladder__band">
+      Roughly <strong>three quarters</strong> of the catalogue sits in these
+      lower, putative tiers
+    </p>
+  </div>
+
+  <div class="ladder__stats">
+    <div class="ladder__stat">
+      <span class="ladder__value">~3,000</span>
+      <span class="ladder__label">genes curated on the scale</span>
+    </div>
+    <div class="ladder__stat">
+      <span class="ladder__value">{DESCRIBED}%</span>
+      <span class="ladder__label">carry a written description of function</span>
+      <span class="ladder__meter" aria-hidden="true">
+        <span class="ladder__fill" style={`inline-size: ${DESCRIBED}%`} />
+      </span>
+    </div>
+  </div>
+
+  <figcaption class="mono-label">
+    The starting point, not this work's results — Integrape COST action, Navarro-Payá
+    et al. 2022
+  </figcaption>
+</figure>
+
+<style>
+  .ladder {
+    margin: 0 0 var(--space-xl);
+  }
+
+  .ladder__axis {
+    margin: 0 0 var(--space-xs);
+  }
+
+  .ladder__rungs {
+    display: grid;
+    gap: 2px; /* separador de superficie entre rellenos contiguos */
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Mobile-first: en estrecho el ancla no cabe al lado de la barra sin llegar
+     al borde, así que baja a su propia línea bajo el peldaño. */
+  .ladder__rung {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    align-items: center;
+    gap: 2px var(--space-xs);
+  }
+
+  .ladder__anchor {
+    grid-column: 2;
+  }
+
+  @media (min-width: 34rem) {
+    .ladder__rung {
+      grid-template-columns: 1.4rem minmax(3.5rem, 8rem) 1fr;
+      gap: var(--space-xs);
+    }
+    .ladder__anchor {
+      grid-column: 3;
+    }
+  }
+
+  /* La llave que marca los tiers putativos. Va en las filas, no aparte, para
+     que mida exactamente lo que abarca aunque cambien los tamaños de texto. */
+  .ladder__rung--1::before,
+  .ladder__rung--2::before {
+    content: "";
+    position: absolute;
+    inset-block: -1px;
+    inset-inline-start: 0;
+    inline-size: 3px;
+    background: var(--ground-rule);
+  }
+  .ladder__rung--2::before { border-start-start-radius: 3px; border-start-end-radius: 3px; }
+  .ladder__rung--1::before { border-end-start-radius: 3px; border-end-end-radius: 3px; }
+
+  /* Deja sitio a la llave sin mover la columna de números. */
+  .ladder__rung,
+  .ladder__axis,
+  .ladder__band { padding-inline-start: var(--space-xs); }
+
+  .ladder__n {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .ladder__bar {
+    block-size: 0.85rem;
+    border-radius: 4px; /* extremos redondeados, spec de marca */
+    background: var(--rung);
+  }
+
+  /* Rampa secuencial de un solo tono: más evidencia, más oscuro. */
+  .ladder__rung--1 { --rung: color-mix(in srgb, var(--accent) 14%, var(--paper)); }
+  .ladder__rung--2 { --rung: color-mix(in srgb, var(--accent) 30%, var(--paper)); }
+  .ladder__rung--3 { --rung: color-mix(in srgb, var(--accent) 50%, var(--paper)); }
+  .ladder__rung--4 { --rung: color-mix(in srgb, var(--accent) 74%, var(--paper)); }
+  .ladder__rung--5 { --rung: var(--accent); }
+  .ladder__rung--6 { --rung: color-mix(in srgb, var(--accent) 72%, var(--ink)); }
+
+  /* El texto lleva tokens de texto, nunca el color de la serie. */
+  .ladder__anchor {
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .ladder__band {
+    margin: var(--space-sm) 0 0;
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .ladder__stats {
+    display: grid;
+    gap: var(--space-md);
+    margin-block-start: var(--space-lg);
+    padding-block-start: var(--space-md);
+    border-block-start: var(--border);
+  }
+
+  @media (min-width: 34rem) {
+    .ladder__stats {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .ladder__value {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    line-height: var(--leading-tight);
+    color: var(--ink);
+  }
+
+  .ladder__label {
+    display: block;
+    margin-block-start: var(--space-2xs);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  /* Medidor: el hueco es un peldaño más claro de la MISMA rampa, para que el
+     estado se lea a lo largo de toda la barra. */
+  .ladder__meter {
+    display: block;
+    margin-block-start: var(--space-xs);
+    block-size: 0.5rem;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--accent) 14%, var(--paper));
+  }
+
+  .ladder__fill {
+    display: block;
+    block-size: 100%;
+    border-radius: 4px;
+    background: var(--accent);
+  }
+
+  .ladder figcaption {
+    margin-block-start: var(--space-md);
+  }
+</style>

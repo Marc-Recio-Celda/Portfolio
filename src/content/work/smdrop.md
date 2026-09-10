@@ -1,11 +1,12 @@
 ---
 title: "SMDrop: smart irrigation"
 kind: "Side project · RL"
-summary: "An adaptive irrigation system framed as a reinforcement-learning problem, built to pitch at SpinUOC. IoT data pipeline, a physics-based simulator as the environment, and reward logging. Currently frozen."
+summary: "Adaptive irrigation as a reinforcement-learning problem: an IoT pipeline, a physics-based simulator as the environment, and reward logging."
 thumb: "/work/smdrop.jpg"
 thumbAlt: "Infographic of the SMDrop pipeline: sensor data collected on a Raspberry Pi hub, cleaned and stored in a database, and AI-driven decisions feeding a smart sprinkler, with a weather API in the loop."
 status: "Frozen"
-order: 6
+order: 7
+theme: "lab"
 draft: false
 ---
 

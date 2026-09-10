@@ -1,0 +1,80 @@
+---
+/**
+ * AccuracyResult — la única cifra medida y propia que enseña el sitio.
+ *
+ * Era BenchmarkArc, con cinco hitos por delante; se queda sólo el hero porque
+ * aquí es un ADELANTO de resultado, no la crónica de cómo se ganó. Los hitos
+ * (24 configuraciones, 17/17, 35/35, 40/40) siguen en el historial si alguna
+ * vez vuelve a hacer falta contar el camino.
+ *
+ * El denominador va pegado al número y no es decoración: un porcentaje sin
+ * denominador es un número, no una medición — y el sitio entero existe para
+ * sostener esa distinción.
+ *
+ * ⛔ Sólo cifras de INGENIERÍA. Esto valida la maquinaria, no los hallazgos
+ * del catálogo, que son material del manuscrito con el laboratorio.
+ */
+---
+
+<figure class="arc">
+  <div class="arc__hero">
+    <span class="mono-label">Level accuracy, against a gold set curated by hand</span>
+    <p class="arc__hero-value">98.7<span class="arc__hero-unit">%</span></p>
+    <p class="arc__hero-note">
+      74 of 75 genes, across 9 scorable papers of 11 reviewed by hand
+    </p>
+  </div>
+
+  <figcaption class="arc__caption">
+    The one remaining failure was the model disagreeing with itself at a boundary
+    in the scale — not a prompt, gold or code error, confirmed by going back to
+    the papers. <strong>Tuning further would have been chasing noise</strong>, so
+    the prompt was frozen there.
+  </figcaption>
+</figure>
+
+<style>
+  .arc {
+    margin: 0;
+  }
+
+  /* Un solo hero por vista. El denominador va pegado y no en una nota al pie:
+     un porcentaje sin él es un número, no una medición. */
+  .arc__hero {
+    padding: var(--space-md);
+    border: 1px solid color-mix(in srgb, var(--accent-deep) 40%, var(--line));
+    border-radius: var(--radius-lg);
+    background: color-mix(in srgb, var(--accent-deep) 7%, var(--paper));
+  }
+  .arc__hero-value {
+    margin-top: var(--space-2xs);
+    font-family: var(--font-body);
+    font-weight: var(--weight-semibold);
+    font-size: clamp(2.6rem, 1.9rem + 3.2vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: var(--tracking-tight);
+    color: var(--accent-deep);
+  }
+  .arc__hero-unit {
+    font-size: 0.45em;
+    font-weight: var(--weight-medium);
+    margin-left: 0.1em;
+  }
+  .arc__hero-note {
+    margin-top: var(--space-2xs);
+    font-size: var(--text-sm);
+    color: var(--muted);
+  }
+
+  .arc__caption {
+    max-width: var(--measure);
+    margin-top: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: var(--leading-snug);
+  }
+  .arc__caption strong {
+    color: var(--ink);
+    font-weight: var(--weight-semibold);
+  }
+</style>

@@ -24,10 +24,16 @@ pnpm-debug.log*
 .idea/
 
 # agent tooling config — holds absolute machine-specific paths
-.claude/
+.claude/*
+# …pero las skills SÍ son del proyecto: describen cómo se revisa este sitio y
+# se quieren versionadas junto a lo que revisan.
+!.claude/skills/
 
 # obsidian vault config (created when opening a folder as a vault)
 .obsidian/
 
 # temporary: English source files for re-screenshotting NEXUS notes (not part of the site)
 translations-en/
+
+# Paquete frío de revisión: se regenera, no se versiona (8 MB de capturas)
+.cold-packet/

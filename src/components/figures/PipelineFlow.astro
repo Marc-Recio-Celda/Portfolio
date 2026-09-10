@@ -1,0 +1,155 @@
+---
+/**
+ * PipelineFlow — el flujo del TFM dibujado, no capturado (AX-8).
+ *
+ * Se dibuja en HTML+CSS y no en SVG a propósito: un flujo horizontal en SVG
+ * encoge el texto hasta lo ilegible en móvil, y aquí el argumento ESTÁ en las
+ * etiquetas — qué paso es modelo, cuál es código y dónde entra la persona.
+ * En rejilla se reordena a vertical y todo sigue leyéndose.
+ *
+ * El orden de los roles es el mensaje: el modelo aparece dos veces y siempre
+ * entre código y una puerta humana. Eso es lo que contesta "¿cuánto de esto
+ * es IA?" sin tener que afirmarlo.
+ */
+type Role = "code" | "model" | "gate";
+
+const ROLE_LABEL: Record<Role, string> = {
+  code: "Code",
+  model: "Model",
+  gate: "Human gate",
+};
+
+const steps: { role: Role; name: string; note: string }[] = [
+  { role: "code", name: "Extract text", note: "Paper in, structured text out" },
+  { role: "model", name: "Find the genes", note: "Candidates, never conclusions" },
+  { role: "gate", name: "Confirm", note: "The expert fixes identity before anything is built on it" },
+  { role: "model", name: "Answer · describe", note: "Structured questions, asked more than once" },
+  { role: "code", name: "Derive · resolve", note: "The level, from the answers. Identifiers and metadata" },
+  { role: "gate", name: "Adjudicate", note: "Only when the answers disagreed with themselves" },
+  { role: "code", name: "Table · log", note: "A versioned format another repository can refuse" },
+];
+---
+
+<figure class="flow">
+  <ol class="flow__track">
+    {
+      steps.map((s) => (
+        <li class={`flow__step flow__step--${s.role}`}>
+          <span class="flow__role mono-label">{ROLE_LABEL[s.role]}</span>
+          <span class="flow__name">{s.name}</span>
+          <span class="flow__note">{s.note}</span>
+        </li>
+      ))
+    }
+  </ol>
+  <figcaption class="mono-label">
+    The model answers; code decides; the expert holds the two points where being wrong is expensive
+  </figcaption>
+</figure>
+
+<style>
+  .flow {
+    margin: 0 0 var(--space-xl);
+  }
+
+  .flow__track {
+    display: grid;
+    gap: var(--space-sm);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  /* Siete pasos no caben en una fila legible: en pantalla ancha van en dos
+     filas de rejilla automática, que es lo que mantiene el texto a tamaño
+     real en vez de encogerlo como haría un SVG. */
+  @media (min-width: 46rem) {
+    .flow__track {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md) var(--space-sm);
+    }
+  }
+
+  .flow__step {
+    position: relative;
+    display: grid;
+    gap: var(--space-2xs);
+    max-width: none;
+    padding: var(--space-sm);
+    border: var(--border);
+    border-top: 3px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--paper);
+  }
+
+  /* El conector va como pseudo-elemento: vertical apilado, horizontal en
+     rejilla. Se oculta en el último de cada fila con :nth-child. */
+  .flow__step::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--space-sm) * -1);
+    width: 1px;
+    height: var(--space-sm);
+    background: color-mix(in srgb, var(--accent) 40%, var(--line));
+  }
+  .flow__step:last-child::after {
+    display: none;
+  }
+  @media (min-width: 46rem) {
+    .flow__step::after {
+      left: auto;
+      bottom: auto;
+      top: 50%;
+      right: calc(var(--space-sm) * -1);
+      width: var(--space-sm);
+      height: 1px;
+    }
+    .flow__step:nth-child(4n)::after {
+      display: none;
+    }
+  }
+
+  .flow__role {
+    color: var(--muted);
+  }
+  .flow__name {
+    font-family: var(--font-display);
+    font-weight: var(--weight-semibold);
+    font-size: var(--text-base);
+    line-height: var(--leading-snug);
+  }
+  .flow__note {
+    font-size: var(--text-sm);
+    color: var(--muted);
+    line-height: var(--leading-snug);
+  }
+
+  /* Tres tratamientos, sin rojo/ámbar/verde y sin tocar la rampa viridis
+     (AX-6): el código es el fondo neutro, el modelo se tiñe, la puerta
+     humana lleva el acento profundo y el peso. */
+  .flow__step--code {
+    background: var(--paper-2);
+  }
+  .flow__step--model {
+    border-top-color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 8%, var(--paper));
+  }
+  .flow__step--model .flow__role {
+    color: var(--accent);
+  }
+  .flow__step--gate {
+    border-top-color: var(--accent-deep);
+    border-color: color-mix(in srgb, var(--accent-deep) 35%, var(--line));
+    background: color-mix(in srgb, var(--accent-deep) 6%, var(--paper));
+  }
+  .flow__step--gate .flow__role {
+    color: var(--accent-deep);
+  }
+  .flow__step--gate .flow__name {
+    font-weight: var(--weight-bold);
+  }
+
+  .flow figcaption {
+    margin-top: var(--space-sm);
+  }
+</style>
