@@ -79,6 +79,13 @@ li {
   text-wrap: pretty;
 }
 
+/* Una lista DENTRO de una figura no es prosa: es una tabla, un flujo o una
+   escala, y tiene que llegar al ancho de la figura. Sin esto la fila se corta
+   en 68ch y deja un hueco a la derecha. */
+figure li {
+  max-width: none;
+}
+
 a {
   color: var(--accent-deep);
   text-decoration-color: color-mix(in srgb, var(--accent-deep) 35%, transparent);

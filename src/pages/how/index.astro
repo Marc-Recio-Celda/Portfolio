@@ -11,15 +11,15 @@
  * el enlace a MLabs al final esté GANADO en vez de anunciado.
  *
  * Reparto con la ficha de MLabs (AX-20, el mismo hecho no vive en dos sitios):
- * aquí el RECORRIDO y los ficheros de proyecto; allí los tres bloques, el
- * bucle de sesión y las cláusulas de filosofía.
+ * aquí el RECORRIDO, los troncales del proyecto y la capa de captura; allí los
+ * tres bloques, el bucle de sesión, las cláusulas y la tabla de permisos.
  *
  * Presupuesto AX-9: 3 figuras = 36 s, quedan ~204 s de texto.
  */
 import Base from "../../layouts/Base.astro";
 import StoryArc from "../../components/figures/StoryArc.astro";
 import ProjectCartridge from "../../components/figures/ProjectCartridge.astro";
-import PermissionTable from "../../components/figures/PermissionTable.astro";
+import CaptureLayer from "../../components/figures/CaptureLayer.astro";
 import { withBase } from "../../utils/url";
 import { LINKS } from "../../consts";
 ---
@@ -36,8 +36,8 @@ import { LINKS } from "../../consts";
         <span class="mono-label">How I work · how it got built</span>
         <h1>It started as a folder of notes</h1>
         <p class="closer__lede">
-          None of it was designed up front: each piece exists because the
-          previous one worked well enough to create a new problem.
+          None of it was designed up front — each piece exists because the
+          previous one worked.
         </p>
       </header>
 
@@ -46,16 +46,18 @@ import { LINKS } from "../../consts";
       <div class="closer__walk">
         <!-- Escena 1 -->
         <section class="closer__phase reveal">
-          <h2 class="closer__phase-title">A system that remembers for me</h2>
+          <h2 class="closer__phase-title">A structure that came before the work</h2>
           <p class="closer__phase-intro">
-            I began saving summaries and notes from what I studied into a
-            repository, so I wouldn't lose them. It grew into my whole master's
-            as linked notes across eight domains.
+            I began saving what I studied into one repository so I wouldn't lose
+            it, and it grew into my whole master's as linked notes across eight
+            domains. The structure was in place <strong>before any project
+            started</strong>, which is why nothing since has had to begin from
+            nothing.
           </p>
           <p class="closer__phase-intro">
             <strong>And then it stopped being enough.</strong> A knowledge base
-            answers <em>what do I know about this?</em> — never <em>what do I do
-            on Monday?</em>
+            answers <em>what do I know about this?</em> — never <em>how do I use
+            what I know?</em>
           </p>
         </section>
 
@@ -64,41 +66,41 @@ import { LINKS } from "../../consts";
           <h2 class="closer__phase-title">Then the projects moved in</h2>
           <p class="closer__phase-intro">
             So the projects came to live beside the knowledge they draw on, and
-            each new one starts from what is there rather than nothing.
-          </p>
-          <p class="closer__phase-intro">
-            <strong>Which created the next problem.</strong> Several running at
-            once, and no way to tell where any stood without rebuilding it from
-            memory every time I came back.
-          </p>
-        </section>
-
-        <!-- Escena 3 · la que más vende -->
-        <section class="closer__phase reveal">
-          <h2 class="closer__phase-title">A record someone else could pick up</h2>
-          <p class="closer__phase-intro">
-            Every project keeps a small set of files, and each answers a
-            question the others don't — and that version control can't. Git
-            records what changed and when, never why, who decided it, or what
-            was rejected: a rejected approach is never written down at all.
+            each carries four documents of its own — answering what version
+            control cannot: git records what changed and when, never why, who
+            decided it, or what was rejected.
           </p>
 
           <ProjectCartridge />
 
           <p class="closer__phase-intro">
-            That is what turned AI from an assistant into something doing real
-            work here. An agent opens the project, reads what is true today and
-            what was already decided, and starts — without me rebuilding the
-            context in a prompt.
+            That is also what turned AI from an assistant into something doing
+            real work here.
           </p>
           <p class="closer__phase-intro">
-            Which only works if it is safe. Write access is decided per artifact,
-            and the gate is on the agent's <em>initiative</em>, not its hands:
-            what it concludes on its own goes to a mailbox, and I integrate it or
-            I don't.
+            <strong>Which created the next problem.</strong> A project you can
+            see clearly generates more ideas than one you can't, and they were
+            arriving faster than I could elaborate any of them. An idea I never
+            wrote down is one I did not have.
+          </p>
+        </section>
+
+        <!-- Escena 3 · la que más vende -->
+        <section class="closer__phase reveal">
+          <h2 class="closer__phase-title">Nothing gets lost on the way</h2>
+          <p class="closer__phase-intro">
+            So a raw idea, a thing waiting to be decided, and what is live right
+            now each got their own place — they are not the same object, and
+            together they get ignored.
           </p>
 
-          <PermissionTable />
+          <CaptureLayer />
+
+          <p class="closer__phase-intro">
+            The gate on agents is this same mechanism rather than a second one:
+            what an agent concludes on its own <em>initiative</em> lands in the
+            mailbox, and I integrate it or I don't.
+          </p>
         </section>
 
         <!-- Escena 4 · el traspaso a MLabs -->
