@@ -9,6 +9,7 @@ draft: false
 ---
 
 import EvidenceLadder from "../../components/figures/EvidenceLadder.astro";
+import AccuracyResult from "../../components/figures/AccuracyResult.astro";
 
 The anchor of my data-science master's (UOC), developed with the **TomsBioLab**
 research group: a computational-genomics project where the machine-learning and
@@ -59,15 +60,20 @@ check, correct and reproduce.
   every level is reproducible and traceable back to the facts behind it. No black boxes.
 - **Model-agnostic and portable.** Providers sit behind a single interface, so any lab
   can run the whole pipeline locally on its own, more powerful reasoning model if it has
-  one — though the base model already performs very well. The model it ships with was
-  chosen after benchmarking many candidates, not by default.
+  one. The model it ships with was chosen after benchmarking many candidates against a
+  hand-curated gold set, not by default.
 
 ## Status, and where it's going
 
-The thesis is in progress, and I'm deliberately not posting results yet. If they hold,
-the extended catalogue and the classifier are intended to be published as part of the
-**PlantaeViz** platform — including a web app where a researcher uploads a paper and
-gets evidence-graded classifications back, ready to review and correct.
+The thesis is in progress, and I'm deliberately not posting the catalogue findings yet.
+**What the machinery does is a different question, and that one I can answer:**
+
+<AccuracyResult />
+
+If the findings hold, the extended catalogue and the classifier are intended to be
+published as part of the **PlantaeViz** platform — including a web app where a researcher
+uploads a paper and gets evidence-graded classifications back, ready to review and
+correct.
 
 What I can talk through in full is **how it was built** — the design decisions,
 the alternatives they discarded, and what each one cost. Happy to go into any of
