@@ -31,3 +31,6 @@ pnpm-debug.log*
 
 # temporary: English source files for re-screenshotting NEXUS notes (not part of the site)
 translations-en/
+
+# Paquete frío de revisión: se regenera, no se versiona (8 MB de capturas)
+.cold-packet/
