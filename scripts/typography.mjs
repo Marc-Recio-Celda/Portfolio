@@ -41,6 +41,26 @@ const prosa = (html) => {
 
 console.log("Tipografía · un solo estilo de apóstrofo y comilla en todo el sitio\n");
 
+/* Tachado accidental. Nadie en este sitio quiere tachar nada: cuando aparece
+   un <del> es que markdown ha emparejado dos `~` de "aproximadamente" y está
+   tachando el texto que hay entre ellos. Pasó con las dos cifras centrales de
+   /work/r-analysis y ninguna revisión de las mías lo vio; dos lectores
+   externos lo vieron a la primera. */
+let tachados = 0;
+for (const f of paginas.sort()) {
+  const t = prosa(readFileSync(f, "utf8"));
+  void t;
+  const bruto = readFileSync(f, "utf8");
+  const main = bruto.slice(bruto.indexOf("<main"), bruto.indexOf("</main>"));
+  for (const m of main.matchAll(/<(del|s)>([\s\S]{0,120}?)<\/\1>/g)) {
+    tachados++;
+    console.log(`FAIL  tachado accidental en ${relative(DIST, f)}: «${m[2].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 70)}…»`);
+    console.log(`         casi seguro son dos \`~\` emparejados por markdown — usa ≈`);
+  }
+}
+if (!tachados) console.log("  ok  sin tachados   ninguna cifra aparece retractada por accidente");
+
+
 let roto = 0;
 for (const { nombre, variantes } of ESTILOS) {
   const total = {};
@@ -68,6 +88,8 @@ for (const { nombre, variantes } of ESTILOS) {
     console.log(`  ok  ${nombre.padEnd(14)} ${estilo} en las ${paginas.length} páginas (${n} usos)`);
   }
 }
+
+if (tachados) roto += tachados;
 
 if (roto) {
   console.log(`\n${roto} estilo(s) mezclados entre páginas.`);

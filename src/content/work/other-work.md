@@ -16,7 +16,7 @@ built is **openly published on Zenodo with a DOI**.
 
 > **Letterboxd 1000 Popular Movies Dataset** — Recio Celda, M. & Soriano Reos, J.
 > (2025). Zenodo. [10.5281/zenodo.17578619](https://doi.org/10.5281/zenodo.17578619)
-> · CC BY-NC-SA 4.0 — 1,000 films × ~25 fields in a single CSV.
+> · CC BY-NC-SA 4.0 — 1,000 films × ≈25 fields in a single CSV.
 
 The scraper is built to behave: per-field `try/except` so one missing element never
 aborts a film, explicit waits instead of brittle sleeps, and resumable

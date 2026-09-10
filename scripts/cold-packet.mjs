@@ -18,6 +18,7 @@
 import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
+import zlib from "node:zlib";
 import { fileURLToPath } from "node:url";
 
 const ROOT = path.dirname(fileURLToPath(new URL("../package.json", import.meta.url)));
@@ -48,6 +49,59 @@ const server = http.createServer((req, res) => {
     res.end(fs.readFileSync(f));
   } catch { res.writeHead(404).end("404"); }
 });
+
+/* ---------- el CV: enlazado en el pie, así que un lector lo abre ----------
+   ReportLab escribe los flujos en ASCII85 sobre Flate; se admiten también
+   Flate a secas y sin comprimir. Si no se puede leer, se DICE — un CV
+   ausente en silencio haría que el revisor lo dé por inexistente. */
+const a85 = (buf) => {
+  const s = buf.toString("latin1").replace(/\s/g, "").replace(/^<~/, "").replace(/~>$/, "");
+  const out = [];
+  let tuple = 0, count = 0;
+  for (const ch of s) {
+    if (ch === "z" && count === 0) { out.push(0, 0, 0, 0); continue; }
+    const v = ch.charCodeAt(0) - 33;
+    if (v < 0 || v > 84) continue;
+    tuple = tuple * 85 + v; count++;
+    if (count === 5) {
+      for (let i = 3; i >= 0; i--) out.push((tuple >>> (i * 8)) & 0xff);
+      tuple = 0; count = 0;
+    }
+  }
+  if (count > 0) {
+    for (let i = count; i < 5; i++) tuple = tuple * 85 + 84;
+    for (let i = 3; i >= 4 - (count - 1); i--) out.push((tuple >>> (i * 8)) & 0xff);
+  }
+  return Buffer.from(out);
+};
+
+const pdfText = (file) => {
+  const d = fs.readFileSync(file);
+  const piezas = [];
+  let idx = 0;
+  while ((idx = d.indexOf("stream", idx)) !== -1) {
+    let s = idx + 6;
+    if (d[s] === 0x0d) s++;
+    if (d[s] === 0x0a) s++;
+    const e = d.indexOf("endstream", s);
+    if (e === -1) break;
+    idx = e;
+    const raw = d.subarray(s, e);
+    let dec = null;
+    for (const cand of [() => zlib.inflateSync(a85(raw)), () => zlib.inflateSync(raw), () => raw]) {
+      try { const r = cand(); if (r && r.includes("(")) { dec = r; break; } } catch { /* siguiente */ }
+    }
+    if (!dec) continue;
+    for (const m of dec.toString("latin1").matchAll(/\((?:\\.|[^\\()])*\)/g)) {
+      piezas.push(
+        m[0].slice(1, -1)
+          .replace(/\\([0-7]{1,3})/g, (_, o) => Buffer.from([parseInt(o, 8)]).toString("latin1"))
+          .replace(/\\([()\\])/g, "$1"),
+      );
+    }
+  }
+  return piezas.join(" ").replace(/\s+/g, " ").trim();
+};
 
 /* ---------- texto visible, en orden de lectura ---------- */
 const visible = (html) => {
@@ -132,10 +186,21 @@ server.listen(PORT, async () => {
   if (browser) await browser.close();
 
   const cv = path.join(DIST, "cv.pdf");
-  const cvNota = fs.existsSync(cv)
-    ? `El sitio ofrece un CV en PDF (${Math.round(fs.statSync(cv).size / 1024)} KB). NO está en este paquete:
-   júzgalo como lo que es, un enlace que aún no has abierto.`
-    : "El sitio no ofrece CV descargable.";
+  let cvNota = "El sitio no ofrece CV descargable.";
+  if (fs.existsSync(cv)) {
+    const texto = pdfText(cv);
+    if (texto.length > 200) {
+      fs.writeFileSync(path.join(OUT, "00-CV.txt"),
+        `EL CV QUE OFRECE EL SITIO (descargado del enlace del pie)\n${"=".repeat(60)}\n\n${texto}\n`);
+      cvNota = `El sitio ofrece un CV en PDF y lo has descargado: está en 00-CV.txt.
+   Léelo — quien criba perfiles lo abre siempre, y contrasta lo que dice
+   contra lo que dicen las páginas.`;
+    } else {
+      cvNota = `⚠️ El sitio enlaza un CV en PDF (${Math.round(fs.statSync(cv).size / 1024)} KB) pero no
+   se ha podido extraer su texto. Trátalo como un enlace que existe y funciona,
+   no como un CV ausente.`;
+    }
+  }
 
   fs.writeFileSync(path.join(OUT, "00-LEEME.txt"),
 `PAQUETE FRÍO — el portfolio tal y como lo recibe un desconocido

@@ -20,7 +20,7 @@ systematic, data-driven screen.
 Rising temperatures hit plant sexual reproduction hard, and pollen is one of the
 most heat-sensitive stages, which makes it a direct threat to crop yield. In
 rapeseed (*Brassica napus* DH4079), a short heat shock (38 °C for two hours)
-collapses pollen germination from ~61% down to below 2%. The question: can small
+collapses pollen germination from ≈61% down to below 2%. The question: can small
 molecules buffer that damage?
 
 ## What I did
