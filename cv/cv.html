@@ -1,0 +1,277 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Marc Recio — CV</title>
+<!--
+  FUENTE del CV. `public/cv.pdf` se GENERA de aquí con `npm run cv`.
+
+  Por qué existe este fichero: el PDF anterior era un binario sin fuente en el
+  repositorio, así que se quedó obsoleto en silencio — su resumen seguía siendo
+  el párrafo genérico que el sitio ya había retirado, y nadie podía verlo en un
+  diff. Ahora el CV se revisa como se revisa cualquier otra cosa: leyendo el
+  cambio.
+-->
+<style>
+  /* Las fuentes del propio sitio, cargadas del paquete instalado: sin esto el
+     PDF se compone en Helvetica y el CV deja de parecerse a la web a la que
+     acompaña. Rutas relativas a este fichero — Chromium las lee por file://. */
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+    font-weight: 400; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2") format("woff2");
+    font-weight: 500; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+    font-weight: 600; font-style: normal; font-display: block;
+  }
+  @font-face {
+    font-family: "IBM Plex Sans";
+    src: url("../node_modules/@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-italic.woff2") format("woff2");
+    font-weight: 400; font-style: italic; font-display: block;
+  }
+
+  @page { size: A4; margin: 14mm 15mm; }
+
+  :root {
+    --ink: #16181d;
+    --muted: #5b6672;
+    --line: #d9dde2;
+    --accent: #21908c;
+    --accent-deep: #3b528b;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.4pt;
+    line-height: 1.42;
+    color: var(--ink);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h1 { margin: 0; font-size: 21pt; font-weight: 600; letter-spacing: -0.02em; }
+
+  .role {
+    margin: 1mm 0 0;
+    font-size: 10.5pt;
+    color: var(--accent-deep);
+    font-weight: 500;
+  }
+
+  .contact {
+    margin: 2.5mm 0 0;
+    font-size: 8.6pt;
+    color: var(--muted);
+  }
+  .contact a { color: var(--muted); text-decoration: none; }
+  .contact span + span::before { content: "  ·  "; color: var(--line); }
+
+  h2 {
+    margin: 6mm 0 2mm;
+    padding-bottom: 1mm;
+    border-bottom: 0.6pt solid var(--line);
+    font-size: 8pt;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  p { margin: 0 0 1.5mm; }
+  .summary { max-width: 165mm; }
+
+  .row { display: flex; justify-content: space-between; gap: 6mm; align-items: baseline; }
+  .row + .body { margin-top: 0.8mm; }
+
+  .title { font-weight: 600; font-size: 10pt; }
+  .where { color: var(--muted); font-size: 8.8pt; }
+  .when { color: var(--muted); font-size: 8.4pt; white-space: nowrap; }
+
+  ul { margin: 1mm 0 0; padding-left: 4.5mm; }
+  li { margin-bottom: 0.7mm; }
+  li::marker { color: var(--accent); }
+
+  .entry + .entry { margin-top: 3.5mm; }
+
+  .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 1.2mm 4mm; }
+  .skills dt { font-weight: 600; }
+  .skills dd { margin: 0; color: var(--ink); }
+
+  .certs { columns: 2; column-gap: 8mm; margin: 0; padding-left: 4.5mm; }
+  .certs li { break-inside: avoid; }
+
+  .metric {
+    display: inline-block;
+    padding: 0.3mm 1.4mm;
+    border-radius: 1mm;
+    background: color-mix(in srgb, var(--accent) 12%, white);
+    color: #14655f;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
+
+<h1>Marc Recio</h1>
+<p class="role">Data scientist · plant genomics</p>
+<p class="contact">
+  <span>Valencia, Spain (open to relocation)</span>
+  <span>+34 655 37 03 77</span>
+  <span><a href="mailto:marcreciocel@gmail.com">marcreciocel@gmail.com</a></span>
+  <span><a href="https://marc-recio-celda.github.io/Portfolio/">marc-recio-celda.github.io/Portfolio</a></span>
+  <span><a href="https://github.com/Marc-Recio-Celda">github.com/Marc-Recio-Celda</a></span>
+</p>
+
+<h2>Summary</h2>
+<p class="summary">Data scientist working in plant genomics. I came from the wet lab — in vitro
+  culture, PCR, sequencing — and now build the pipelines that read what those experiments produce,
+  designed so a scientist can audit the calls the machine makes. Current work pairs large language
+  models with deterministic, tested code so that every reproducible decision is made by the code and
+  never by the model. Classical machine learning, databases and the full data lifecycle; deep
+  learning and reinforcement learning in progress. Fluent English, and experience in international,
+  research-driven environments.</p>
+
+<h2>Selected work</h2>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">Evidence-graded gene curation from the literature</span>
+    <span class="when">2025 – present</span>
+  </div>
+  <p class="where">MSc data-science thesis · with the TomsBioLab research group</p>
+  <div class="body">
+    <ul>
+      <li>Pipeline that turns grapevine-genomics papers into evidence-graded catalogue rows: language
+        models read, deterministic code makes every call that has to be reproducible.</li>
+      <li>The model never assigns the evidence level. It answers a fixed set of yes/no questions and
+        tested code maps those booleans onto the published 6-level scale — so a level can be
+        re-derived, audited and unit-tested, which an opinion cannot.</li>
+      <li><span class="metric">98.7 % level accuracy</span> against a hand-curated gold set — 74 of 75
+        genes across 9 scorable papers. Providers sit behind one interface, so a lab can run the whole
+        pipeline on its own model.</li>
+      <li>Findings are held for the January defence; the engineering is documented in the portfolio.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">High-throughput screen for heat-stress protection in pollen</span>
+    <span class="when">2024</span>
+  </div>
+  <p class="where">MSc plant-breeding thesis (COMAV, UPV) · graded 10/10</p>
+  <div class="body">
+    <ul>
+      <li>Screened 800 compounds for protection of rapeseed (<i>Brassica napus</i> DH4079) pollen
+        against a heat shock that collapses germination from ≈61 % to below 2 %; returned 8 candidate
+        hits as a shortlist for follow-up.</li>
+      <li>Designed the assay, ran the statistics behind the results, and reported the negative
+        controls — DMSO protects at mild heat (32 °C) but not at 38 °C.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">Published dataset · scraper and data contract</span>
+    <span class="when">2025</span>
+  </div>
+  <p class="where">Zenodo, DOI 10.5281/zenodo.17578619 · CC BY-NC-SA 4.0</p>
+  <div class="body">
+    <ul>
+      <li>1,000 films × ≈25 fields in a single CSV. Per-field error handling so one missing element
+        never aborts a record, explicit waits instead of brittle sleeps, and resumable output that
+        survives interruption.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Experience</h2>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">Research staff</span>
+    <span class="when">May 2024 – Dec 2024</span>
+  </div>
+  <p class="where">COMAV — Institute for Conservation and Improvement of Valencian Agrodiversity (UPV), Valencia</p>
+  <ul>
+    <li>Developed a protocol for obtaining transgenic rapeseed and ran in vitro microspore cultures
+      (gametophytic development and androgenesis).</li>
+    <li>PCR and sequencing for genetic analysis, plus histological analysis of salinity impact on
+      reproductive development of <i>Cakile maritima</i>.</li>
+    <li>Designed and carried out the statistical analyses behind the experimental results.</li>
+  </ul>
+</div>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">Laboratory technician (internship)</span>
+    <span class="when">Jun 2023 – Nov 2023</span>
+  </div>
+  <p class="where">Semillas Fitó, Cabrera de Mar, Barcelona</p>
+  <ul>
+    <li>In vitro procedures producing double haploids in pepper, cucumber and watermelon.</li>
+    <li>DNA-extraction protocols in the molecular-biology department.</li>
+  </ul>
+</div>
+
+<h2>Skills</h2>
+<dl class="skills">
+  <dt>Machine learning</dt>
+  <dd>Supervised and unsupervised methods, model evaluation on imbalanced data (F1-macro,
+    class weighting), dimensionality reduction (PCA, t-SNE, UMAP).</dd>
+  <dt>LLM engineering</dt>
+  <dd>Structured extraction, prompt design against a gold set, provider-agnostic interfaces,
+    rule-based post-processing of model output.</dd>
+  <dt>Data &amp; databases</dt>
+  <dd>SQL, NoSQL, schema design, data modelling, ETL, cleaning and preprocessing.</dd>
+  <dt>Programming</dt>
+  <dd>Python, R, SQL. Modular packages, unit tests, command-line and API entry points.</dd>
+  <dt>Collection &amp; visualization</dt>
+  <dd>Web scraping, APIs, exploratory analysis, reporting, Power BI.</dd>
+  <dt>Domain</dt>
+  <dd>Plant genomics and breeding, molecular biology, experimental design, statistical analysis.</dd>
+  <dt>Languages</dt>
+  <dd>Spanish (native), Catalan (native), English (fluent — B2 First certified), French (A2).</dd>
+</dl>
+
+<h2>Education</h2>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">MSc in Data Science</span>
+    <span class="when">Feb 2025 – expected 2026</span>
+  </div>
+  <p class="where">Universitat Oberta de Catalunya (UOC) · top grade in Machine Learning</p>
+</div>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">MSc in Plant Genetic Breeding</span>
+    <span class="when">Sep 2021 – Sep 2024</span>
+  </div>
+  <p class="where">Universitat Politècnica de València (COMAV) · thesis graded 10/10</p>
+</div>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">BSc in Food Science and Technology</span>
+    <span class="when">Sep 2017 – Sep 2021</span>
+  </div>
+  <p class="where">Universitat Politècnica de València</p>
+</div>
+
+<h2>Certificates</h2>
+<ul class="certs">
+  <li>CS50's Introduction to Programming with Python — HarvardX (edX)</li>
+  <li>Data Science: R Basics — HarvardX PH125.1x (edX)</li>
+  <li>Cambridge English: B2 First — Cambridge Assessment English</li>
+  <li>Valencian language, level C1 — JQCV</li>
+</ul>

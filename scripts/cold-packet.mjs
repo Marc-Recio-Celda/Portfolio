@@ -85,11 +85,22 @@ const pdfText = (file) => {
     if (d[s] === 0x0a) s++;
     const e = d.indexOf("endstream", s);
     if (e === -1) break;
-    idx = e;
+    // Saltar TRAS `endstream`: quedarse encima hace que el siguiente
+    // indexOf("stream") pique dentro de esa misma palabra y descoloque
+    // todos los desplazamientos a partir de ahí.
+    idx = e + "endstream".length;
     const raw = d.subarray(s, e);
     let dec = null;
     for (const cand of [() => zlib.inflateSync(a85(raw)), () => zlib.inflateSync(raw), () => raw]) {
-      try { const r = cand(); if (r && r.includes("(")) { dec = r; break; } } catch { /* siguiente */ }
+      try {
+        const r = cand();
+        // Filtrar por OPERADORES DE TEXTO, no por "contiene un paréntesis": un
+        // programa de fuente embebido también los tiene, y colarlo devuelve
+        // binario disfrazado de CV. `BT` abre un bloque de texto y sólo aparece
+        // en flujos de contenido.
+        const cabecera = r ? r.toString("latin1").slice(0, 8192) : "";
+        if (cabecera.includes("BT") && /T[jJ]/.test(r.toString("latin1"))) { dec = r; break; }
+      } catch { /* siguiente candidato */ }
     }
     if (!dec) continue;
     for (const m of dec.toString("latin1").matchAll(/\((?:\\.|[^\\()])*\)/g)) {
@@ -188,7 +199,12 @@ server.listen(PORT, async () => {
   const cv = path.join(DIST, "cv.pdf");
   let cvNota = "El sitio no ofrece CV descargable.";
   if (fs.existsSync(cv)) {
-    const texto = pdfText(cv);
+    // La transcripción que emite `npm run cv` sale del mismo HTML que el PDF,
+    // así que se prefiere: parsear un PDF con fuentes subseteadas no da texto.
+    const transcripcion = path.join(ROOT, "cv", "cv.txt");
+    const texto = fs.existsSync(transcripcion)
+      ? fs.readFileSync(transcripcion, "utf8")
+      : pdfText(cv);
     if (texto.length > 200) {
       fs.writeFileSync(path.join(OUT, "00-CV.txt"),
         `EL CV QUE OFRECE EL SITIO (descargado del enlace del pie)\n${"=".repeat(60)}\n\n${texto}\n`);

@@ -1,0 +1,108 @@
+Marc Recio
+
+Data scientist · plant genomics
+
+Valencia, Spain (open to relocation) +34 655 37 03 77 marcreciocel@gmail.com marc-recio-celda.github.io/Portfolio github.com/Marc-Recio-Celda
+
+
+SUMMARY
+-------
+
+Data scientist working in plant genomics. I came from the wet lab — in vitro culture, PCR, sequencing — and now build the pipelines that read what those experiments produce, designed so a scientist can audit the calls the machine makes. Current work pairs large language models with deterministic, tested code so that every reproducible decision is made by the code and never by the model. Classical machine learning, databases and the full data lifecycle; deep learning and reinforcement learning in progress. Fluent English, and experience in international, research-driven environments.
+
+
+SELECTED WORK
+-------------
+
+Evidence-graded gene curation from the literature
+2025 – present
+
+MSc data-science thesis · with the TomsBioLab research group
+
+Pipeline that turns grapevine-genomics papers into evidence-graded catalogue rows: language models read, deterministic code makes every call that has to be reproducible.
+The model never assigns the evidence level. It answers a fixed set of yes/no questions and tested code maps those booleans onto the published 6-level scale — so a level can be re-derived, audited and unit-tested, which an opinion cannot.
+98.7 % level accuracy against a hand-curated gold set — 74 of 75 genes across 9 scorable papers. Providers sit behind one interface, so a lab can run the whole pipeline on its own model.
+Findings are held for the January defence; the engineering is documented in the portfolio.
+
+High-throughput screen for heat-stress protection in pollen
+2024
+
+MSc plant-breeding thesis (COMAV, UPV) · graded 10/10
+
+Screened 800 compounds for protection of rapeseed (Brassica napus DH4079) pollen against a heat shock that collapses germination from ≈61 % to below 2 %; returned 8 candidate hits as a shortlist for follow-up.
+Designed the assay, ran the statistics behind the results, and reported the negative controls — DMSO protects at mild heat (32 °C) but not at 38 °C.
+
+Published dataset · scraper and data contract
+2025
+
+Zenodo, DOI 10.5281/zenodo.17578619 · CC BY-NC-SA 4.0
+
+1,000 films × ≈25 fields in a single CSV. Per-field error handling so one missing element never aborts a record, explicit waits instead of brittle sleeps, and resumable output that survives interruption.
+
+
+EXPERIENCE
+----------
+
+Research staff
+May 2024 – Dec 2024
+
+COMAV — Institute for Conservation and Improvement of Valencian Agrodiversity (UPV), Valencia
+
+Developed a protocol for obtaining transgenic rapeseed and ran in vitro microspore cultures (gametophytic development and androgenesis).
+PCR and sequencing for genetic analysis, plus histological analysis of salinity impact on reproductive development of Cakile maritima.
+Designed and carried out the statistical analyses behind the experimental results.
+
+Laboratory technician (internship)
+Jun 2023 – Nov 2023
+
+Semillas Fitó, Cabrera de Mar, Barcelona
+
+In vitro procedures producing double haploids in pepper, cucumber and watermelon.
+DNA-extraction protocols in the molecular-biology department.
+
+
+SKILLS
+------
+
+Machine learning
+Supervised and unsupervised methods, model evaluation on imbalanced data (F1-macro, class weighting), dimensionality reduction (PCA, t-SNE, UMAP).
+LLM engineering
+Structured extraction, prompt design against a gold set, provider-agnostic interfaces, rule-based post-processing of model output.
+Data & databases
+SQL, NoSQL, schema design, data modelling, ETL, cleaning and preprocessing.
+Programming
+Python, R, SQL. Modular packages, unit tests, command-line and API entry points.
+Collection & visualization
+Web scraping, APIs, exploratory analysis, reporting, Power BI.
+Domain
+Plant genomics and breeding, molecular biology, experimental design, statistical analysis.
+Languages
+Spanish (native), Catalan (native), English (fluent — B2 First certified), French (A2).
+
+
+EDUCATION
+---------
+
+MSc in Data Science
+Feb 2025 – expected 2026
+
+Universitat Oberta de Catalunya (UOC) · top grade in Machine Learning
+
+MSc in Plant Genetic Breeding
+Sep 2021 – Sep 2024
+
+Universitat Politècnica de València (COMAV) · thesis graded 10/10
+
+BSc in Food Science and Technology
+Sep 2017 – Sep 2021
+
+Universitat Politècnica de València
+
+
+CERTIFICATES
+------------
+
+CS50's Introduction to Programming with Python — HarvardX (edX)
+Data Science: R Basics — HarvardX PH125.1x (edX)
+Cambridge English: B2 First — Cambridge Assessment English
+Valencian language, level C1 — JQCV

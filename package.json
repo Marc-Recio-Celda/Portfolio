@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "astro build && node scripts/palette.mjs && node scripts/typography.mjs && node scripts/attention.mjs && node scripts/contrast.mjs"
+    "check": "astro build && node scripts/palette.mjs && node scripts/typography.mjs && node scripts/attention.mjs && node scripts/contrast.mjs",
+    "cv": "node scripts/build-cv.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.0",
