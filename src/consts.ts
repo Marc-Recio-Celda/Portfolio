@@ -2,9 +2,9 @@
 export const SITE = {
   name: "Marc Recio",
   // Positioning line (tunable). Used in the hero and in metadata.
-  tagline: "Data scientist bringing rigorous ML and data engineering to plant genomics",
+  tagline: "AI systems engineer and data scientist",
   description:
-    "Portfolio of Marc Recio, data scientist with a background in plant breeding and molecular biology: classical ML, databases and data engineering applied to problems in plant genomics.",
+    "Portfolio of Marc Recio, AI systems engineer and data scientist: harnesses, checks and evaluations that let AI agents do real work, and language-model pipelines for genomics.",
   // Content language (confirmed: English, for international research PIs).
   lang: "en",
   // Canonical URL — GitHub Pages project site.

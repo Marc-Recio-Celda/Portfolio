@@ -1,0 +1,145 @@
+---
+/**
+ * Drawn — una figura dibujada en draw.io, pintada con los tokens del sitio (AX-6, AX-8).
+ *
+ * La fuente es un `.drawio.svg` en `figures/`, en la raíz del repositorio: draw.io lo abre
+ * (el diagrama va dentro, en `content`) y al guardar reescribe el dibujo, así que una figura
+ * se corrige en el editor y no aquí. Este componente, al construir:
+ *   · quita el diagrama embebido y el aviso de texto que draw.io añade;
+ *   · cambia cada color por su token, leído de tokens.css y no copiado, y FALLA el build ante
+ *     un color que no sea un token: un color fuera de tokens.css es lo que AX-6 prohíbe, y
+ *     que el build se pare es lo que lo deja comprobado y no confiado;
+ *   · cambia cada fuente por la del sistema, y falla ante otra.
+ *
+ * La rampa viridis no entra en el mapa: es del scatter y de nada más (AX-6).
+ *
+ * Va en un contenedor con scroll horizontal y ancho mínimo: un SVG apaisado encoge el texto
+ * hasta lo ilegible en móvil (por eso los flujos del sitio son HTML); así se lee entero y se
+ * desplaza con el dedo, sin JS (AX-1).
+ */
+import tokensCss from "../../styles/tokens.css?raw";
+
+interface Props {
+  svg: string;
+  caption: string;
+  alt: string;
+  minWidth?: number;
+}
+const { svg, caption, alt, minWidth = 620 } = Astro.props;
+
+const TOKENS = new Map<string, string>();
+for (const m of tokensCss.matchAll(/--([a-z0-9-]+):\s*#([0-9a-fA-F]{6})\b/g)) {
+  if (!/^v\d$/.test(m[1])) TOKENS.set(m[2].toLowerCase(), `var(--${m[1]})`);
+}
+const FONTS: Record<string, string> = {
+  "ibm plex sans": "var(--font-body)",
+  "space grotesk": "var(--font-display)",
+  "ibm plex mono": "var(--font-mono)",
+};
+const KEEP = new Set(["none", "transparent", "currentcolor", "inherit"]);
+
+const fail = (what: string) => {
+  throw new Error(`Drawn: «${caption}» usa ${what}, que no es un token de tokens.css (AX-6)`);
+};
+
+/** Un valor de color de draw.io → su token. Acepta #rgb, #rrggbb, la forma funcional en
+ *  tres enteros, y light-dark(claro, oscuro), del que se queda el claro. */
+function color(value: string): string {
+  let v = value.trim();
+  const ld = v.match(/^light-dark\(\s*([^,]+?)\s*,/i);
+  if (ld) v = ld[1];
+  if (KEEP.has(v.toLowerCase())) return v;
+  let hex = "";
+  const h = v.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (h) hex = h[1].length === 3 ? h[1].replace(/./g, "$&$&") : h[1];
+  const f = v.match(/^rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*(?:,\s*1(?:\.0*)?\s*)?\)$/i);
+  if (f) hex = f.slice(1, 4).map((n) => Number(n).toString(16).padStart(2, "0")).join("");
+  const t = TOKENS.get(hex.toLowerCase());
+  if (!t) fail(value);
+  return t as string;
+}
+
+function font(value: string): string {
+  const first = value.split(",")[0].replace(/&quot;|["']/g, "").trim().toLowerCase();
+  const t = FONTS[first];
+  if (!t) fail(`la fuente ${value}`);
+  return t;
+}
+
+const COLOR_PROPS = new Set(["fill", "stroke", "color", "stop-color", "background-color"]);
+
+/** Una declaración CSS en línea, propiedad a propiedad. */
+function restyle(css: string): string {
+  return css
+    .split(";")
+    .map((d) => d.trim())
+    .filter(Boolean)
+    .map((d) => {
+      const i = d.indexOf(":");
+      const prop = d.slice(0, i).trim().toLowerCase();
+      const val = d.slice(i + 1).trim();
+      if (COLOR_PROPS.has(prop)) return `${prop}:${color(val)}`;
+      if (prop === "font-family") return `font-family:${font(val)}`;
+      if (prop === "background") return "";
+      return `${prop}:${val}`;
+    })
+    .filter(Boolean)
+    .join(";");
+}
+
+/** Cada etiqueta: los atributos de color y de fuente pasan a su estilo, ya con tokens. */
+function retag(attrs: string): string {
+  const out: string[] = [];
+  const style: string[] = [];
+  for (const m of attrs.matchAll(/([\w:-]+)="([^"]*)"/g)) {
+    const [, name, val] = m;
+    const n = name.toLowerCase();
+    if (n === "content") continue;
+    if (COLOR_PROPS.has(n)) style.push(`${n}:${color(val)}`);
+    else if (n === "font-family") style.push(`font-family:${font(val)}`);
+    else if (n === "font-weight") style.push(`font-weight:${val === "bold" ? "var(--weight-semibold)" : val}`);
+    else if (n === "style") style.unshift(restyle(val));
+    else out.push(`${name}="${val}"`);
+  }
+  const css = style.filter(Boolean).join(";");
+  return (out.length ? " " + out.join(" ") : "") + (css ? ` style="${css}"` : "");
+}
+
+const clean = svg
+  .replace(/\scontent=("[^"]*"|'[^']*')/, "")
+  .replace(/<\?xml[^>]*>/, "")
+  .replace(/<!DOCTYPE[^>]*>/i, "")
+  .replace(/<switch>\s*<g requiredFeatures[^>]*\/>\s*<a [\s\S]*?<\/a>\s*<\/switch>/g, "")
+  .replace(/<([a-zA-Z][\w:-]*)(\s[^>]*?)?(\/?)>/g, (_, tag, attrs = "", end) => `<${tag}${retag(attrs)}${end}>`)
+  .replace(/<svg\b([^>]*?)\swidth="[^"]*"/, "<svg$1")
+  .replace(/<svg\b([^>]*?)\sheight="[^"]*"/, "<svg$1")
+  .replace(/<svg\b/, `<svg class="drawn__svg" role="img" aria-label="${alt.replace(/"/g, "&quot;")}"`);
+---
+
+<figure class="drawn">
+  <div class="drawn__scroll" style={`--drawn-min: ${minWidth}px`}>
+    <Fragment set:html={clean} />
+  </div>
+  <figcaption class="mono-label">{caption}</figcaption>
+</figure>
+
+<style>
+  .drawn {
+    margin: var(--space-lg) 0;
+  }
+  /* El ancho mínimo es lo que mantiene el texto legible; lo que no cabe se
+     desplaza dentro de la figura, nunca la página entera. */
+  .drawn__scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+  }
+  .drawn__scroll :global(.drawn__svg) {
+    display: block;
+    width: 100%;
+    min-width: var(--drawn-min);
+    height: auto;
+  }
+  .drawn figcaption {
+    margin-top: var(--space-xs);
+  }
+</style>
