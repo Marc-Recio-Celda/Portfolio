@@ -41,6 +41,9 @@
 
 /* ---- Light only (D30): a browser's forced dark mode leaves the page as drawn ---- */
 :root{color-scheme:only light}
+/* Samsung Internet ignores color-scheme and repaints any page without a dark theme of its own;
+   it leaves alone a page that declares one. This is that declaration: in dark mode, the same page. */
+@media (prefers-color-scheme:dark){:root{color-scheme:only light}}
 
 /* ---- The mockups' other colours, by value ---- */
 :root{
