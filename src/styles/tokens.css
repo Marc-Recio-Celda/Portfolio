@@ -39,6 +39,9 @@
   --shadow-lifted:0 2px 4px rgb(40 30 20 / .06),0 28px 56px -22px rgb(40 30 20 / .3);
 }
 
+/* ---- Light only (D30): a browser's forced dark mode leaves the page as drawn ---- */
+:root{color-scheme:only light}
+
 /* ---- The mockups' other colours, by value ---- */
 :root{
   --c-000000:#000000;

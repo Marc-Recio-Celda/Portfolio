@@ -36,6 +36,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- The site is drawn light only (D30): this keeps a phone's dark mode from repainting it. -->
+<meta name="color-scheme" content="only light">
 <title>{title}</title>
 <meta name="description" content={description}>
 <link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")}>
