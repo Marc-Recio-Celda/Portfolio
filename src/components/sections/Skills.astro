@@ -13,24 +13,20 @@ import SectionHeader from "../ui/SectionHeader.astro";
 
 const groups = [
   {
-    label: "AI systems",
-    items: [
-      { title: "Agent harnesses", note: "Hooks · guards · skills · bounded autonomy" },
-      { title: "Verification & evaluation", note: "Planted faults · held-out cases · graders" },
-      { title: "Language-model pipelines", note: "Structured answers · gold-set benchmarks" },
-    ],
-  },
-  {
-    label: "Data science",
+    label: "Core strengths",
     items: [
       { title: "Classical machine learning", note: "Top grade — matrícula de honor" },
       { title: "Databases & data engineering", note: "SQL · NoSQL · schema design" },
-      { title: "Deep learning & reinforcement learning", note: "In progress, this autumn" },
+      { title: "Data collection, prep & visualization", note: "Scraping · APIs · end to end" },
     ],
   },
   {
+    label: "In progress",
+    items: [{ title: "Deep learning & reinforcement learning", note: "On a settled mathematical base" }],
+  },
+  {
     label: "Domain",
-    items: [{ title: "Genomics & plant breeding", note: "In vitro · PCR · sequencing · transgenics" }],
+    items: [{ title: "Plant genomics & breeding", note: "In vitro · PCR · sequencing · transgenics" }],
   },
 ];
 ---
@@ -38,8 +34,8 @@ const groups = [
 <section class="section skills" aria-labelledby="skills-title">
   <div class="container">
     <SectionHeader
-      kicker="Skills · what I bring"
-      title="AI systems, on a data-science base"
+      kicker="Formation · what I bring"
+      title="A multidisciplinary data scientist"
       id="skills-title"
     />
     <div class="skills__groups reveal">
