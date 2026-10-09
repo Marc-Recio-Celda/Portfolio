@@ -1,0 +1,53 @@
+---
+/**
+ * The frame every page of the redesign shares (Portfolio's D30): the head, the four type
+ * families, the tokens, the floating nav and the footer on paper. Each page brings its own CSS,
+ * imported after this file, so that its rules win over the shared paint (`paint.css`).
+ * No client JavaScript (AX-1): the sources need none.
+ */
+import "@fontsource/space-grotesk/latin-500.css";
+import "@fontsource/space-grotesk/latin-700.css";
+import "@fontsource/ibm-plex-sans/latin-400.css";
+import "@fontsource/ibm-plex-sans/latin-500.css";
+import "@fontsource/ibm-plex-sans/latin-600.css";
+import "@fontsource/ibm-plex-mono/latin-400.css";
+import "@fontsource/ibm-plex-mono/latin-500.css";
+import "@fontsource/newsreader/latin-500-italic.css";
+import "../styles/tokens.css";
+import "../styles/paint.css";
+import Nav from "../components/site/Nav.astro";
+import Footer from "../components/site/Footer.astro";
+import { SITE } from "../consts";
+import { withBase } from "../utils/url";
+
+interface Props {
+  title: string;
+  description: string;
+  nav: "landing" | "work" | "path" | "inner" | "none";
+  footer: "landing" | "inner" | "none";
+}
+
+const { title, description, nav, footer } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).href;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title}</title>
+<meta name="description" content={description}>
+<link rel="icon" type="image/svg+xml" href={withBase("/favicon.svg")}>
+<link rel="canonical" href={canonical}>
+<meta property="og:type" content="website">
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+</head>
+<body>
+{nav !== "none" && <Nav current={nav} />}
+<slot />
+{footer !== "none" && <Footer variant={footer} />}
+</body>
+</html>

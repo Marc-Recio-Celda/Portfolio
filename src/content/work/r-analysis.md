@@ -4,6 +4,32 @@ kind: "Statistics · R"
 summary: "Cleaning, hypothesis testing, regression and ANOVA in R. What I'm proudest of is the interpretation: what the numbers mean, and where they stop meaning it."
 order: 5
 draft: false
+page:
+  metaTitle: "Statistics in R · Marc Recio"
+  metaDescription: "Cleaning, tests, regression and ANOVA, read for what the numbers mean, and for where they stop meaning it."
+  label: "More work · 2025 · Statistics"
+  headline: "Statistics <span class=\"accent-word\">in R</span>."
+  lead: "Cleaning, tests, regression and ANOVA, read for what the numbers mean, and for where they stop meaning it."
+  chips: "<span class=\"tag\">MSc in Data Science · UOC</span>"
+  shot:
+    src: "/work/r-salary-boxplot.jpg"
+    alt: "Box plots of gross annual salary for men and women in Spain, on a log scale, the women's box lower"
+    caption: "Gross annual salary by sex, from the analysis's INE 2022 data, on a log scale."
+  blocks:
+    - heading: "What it is"
+      html: "<p>Four analyses in R and the tidyverse, each an R Markdown document with its data, knitted so that GitHub renders them, plots and tables, without R.</p>"
+    - heading: "How"
+      html: "<ul><li>The Spanish pay gap, on INE's 2022 salary survey: the raw gap, about €6,472, barely moves once education, job, tenure and contract are controlled, about €6,131.</li><li>The nationality gap reverses its sign once controlled: Simpson's paradox, caught.</li><li>Tests also written by hand; ANOVA with its assumptions checked first.</li></ul>"
+    - heading: "What came out"
+      html: "<p>A gap that is structural, and a model honest about its limits: it explains about 36% of the variance, the survey may select, and sex is recorded as a binary.</p>"
+  stack: ["R", "tidyverse", "R Markdown", "ANOVA"]
+  actions:
+    - href: "https://github.com/Marc-Recio-Celda/DS-miniprojects/tree/main/data-analysis-r"
+      label: "See the analyses"
+      dark: true
+    - href: "/work/"
+      label: "All the work"
+      dark: false
 ---
 
 Four self-contained analyses in R (tidyverse), each an R Markdown document with its

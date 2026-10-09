@@ -1,98 +1,186 @@
 /* ============================================================
-   NEXUS-Web — Design system (única fuente de color/tipo).
-   Dirección: instrumento científico. Toda la osadía en la firma
-   viridis; el resto, callado y disciplinado.
+   Portfolio's design tokens: the one source of colour and type (AX-6).
+   The first two blocks are the approved mockups' own, word for word
+   (D30). The third holds every other colour the mockups use, each
+   named for its value, generated from the mockups on 2026-10-09.
    ============================================================ */
 
-:root {
-  /* ---- Color -------------------------------------------------- */
-  --paper: #f7f9fa;        /* fondo casi-blanco frío */
-  --paper-2: #eef2f4;      /* superficie sutil (tarjetas, código) */
-  --ink: #161b22;          /* tinta pizarra profunda */
-  --muted: #5b6672;        /* texto secundario / captions */
-  --line: #e2e7eb;         /* hairlines, bordes */
-  --accent: #21908c;       /* viridis mid (teal) — acento primario */
-  --accent-deep: #3b528b;  /* viridis índigo — hover / énfasis */
+:root{
+  --paper:#f7f9fa;--paper-2:#eef2f4;--ink:#161b22;--muted:#5b6672;--line:#e2e7eb;
+  --accent:#21908c;--accent-deep:#3b528b;
+  --v0:#440154;--v1:#414487;--v2:#2a788e;--v3:#22a884;--v4:#7ad151;--v5:#fde725;
+  --font-display:"Space Grotesk","IBM Plex Sans",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",monospace;
+  --font-accent:"Newsreader",Georgia,serif; /* NEW: the italic serif of the accent words; AX-6 has to admit it */
+  --text-xs:.8rem;--text-sm:.9rem;--text-base:1rem;--text-md:1.25rem;
+  --text-lg:clamp(1.4rem,1.15rem + 1.1vw,1.5625rem);
+  --text-xl:clamp(1.7rem,1.35rem + 1.6vw,1.953rem);
+  --text-2xl:clamp(2.1rem,1.55rem + 2.6vw,2.441rem);
+  --text-3xl:clamp(2.5rem,1.7rem + 3.9vw,3.815rem);
+  --leading-tight:1.15;--leading-snug:1.3;--leading-normal:1.6;
+  --tracking-tight:-.02em;--tracking-wide:.06em;
+  --space-2xs:.375rem;--space-xs:.625rem;--space-sm:1rem;--space-md:1.5rem;--space-lg:2.5rem;--space-xl:4rem;--space-2xl:6.5rem;
+  --container:72rem;--measure:68ch;--radius:6px;--radius-lg:12px;--border:1px solid var(--line);
+  --shadow-sm:0 4px 16px rgb(0 0 0 / .08);--shadow-lift:0 6px 26px rgb(0 0 0 / .06);
+  --ease:cubic-bezier(.22,1,.36,1);--dur:240ms;--dur-slow:620ms;--ease-out:cubic-bezier(.16,1,.3,1);
+  --ground:var(--paper);--ground-2:var(--paper-2);
+  --ground-tint:color-mix(in srgb,var(--accent) 6%,var(--paper));
+  --ground-rule:color-mix(in srgb,var(--accent) 30%,var(--line));
+}
 
-  /* Rampa viridis completa — SOLO para el scatter de firma */
-  --v0: #440154;
-  --v1: #414487;
-  --v2: #2a788e;
-  --v3: #22a884;
-  --v4: #7ad151;
-  --v5: #fde725;
+/* ---- D30: a white page, warm paper, one muted tone for each section ---- */
+:root{
+  --page:#ffffff; --paper-warm:#fbf8f3; --paper-frame:#f1ece3;
+  --ink:#141414; --soft:#5f5f5f; --faint:#6b6b6b; --rule:#ece8e1;
+  --a-plum:#6b4a7a; --a-indigo:#4b5487; --a-teal:#336f7e; --a-sage:#376e56; --a-olive:#5f6f2a; --a-mustard:#75621a;
+  --warm:232 200 140;
+  --shadow-soft:0 1px 2px rgb(40 30 20 / .06),0 18px 40px -18px rgb(40 30 20 / .24);
+  --shadow-lifted:0 2px 4px rgb(40 30 20 / .06),0 28px 56px -22px rgb(40 30 20 / .3);
+}
 
-  /* ---- Tipografía -------------------------------------------- */
-  --font-display: "Space Grotesk", "IBM Plex Sans", system-ui, sans-serif;
-  --font-body: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
-
-  /* Escala modular 1.25 (tercera mayor), base 16px.
-     Los tamaños grandes son fluidos vía clamp. */
-  --text-xs: 0.8rem;      /* 12.8 */
-  --text-sm: 0.9rem;      /* 14.4 */
-  --text-base: 1rem;      /* 16 */
-  --text-md: 1.25rem;     /* 20 */
-  --text-lg: clamp(1.4rem, 1.15rem + 1.1vw, 1.5625rem);
-  --text-xl: clamp(1.7rem, 1.35rem + 1.6vw, 1.953rem);
-  --text-2xl: clamp(2.1rem, 1.55rem + 2.6vw, 2.441rem);
-  --text-3xl: clamp(2.5rem, 1.7rem + 3.9vw, 3.815rem);
-
-  --leading-tight: 1.15;
-  --leading-snug: 1.3;
-  --leading-normal: 1.6;
-
-  --weight-normal: 400;
-  --weight-medium: 500;
-  --weight-semibold: 600;
-  --weight-bold: 700;
-
-  --tracking-tight: -0.02em;
-  --tracking-wide: 0.06em;   /* labels mono en mayúsculas */
-
-  /* ---- Espaciado (escala 1.5) -------------------------------- */
-  --space-2xs: 0.375rem;
-  --space-xs: 0.625rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2.5rem;
-  --space-xl: 4rem;
-  --space-2xl: 6.5rem;
-
-  /* ---- Layout ------------------------------------------------- */
-  --container: 72rem;   /* ancho máx. del contenedor */
-  --measure: 68ch;      /* medida de lectura cómoda */
-  --radius: 6px;
-  --radius-lg: 12px;
-  --border: 1px solid var(--line);
-
-  /* ---- Sombra --------------------------------------------------
-     Nombradas por ROL, no por tamaño: --shadow-lift es «una tarjeta
-     que se levanta al pasar por encima», y por eso Cover y DecisionCard
-     comparten la misma y no dos casi iguales. */
-  --shadow-sm: 0 4px 16px rgb(0 0 0 / 0.08);    /* apoyo fijo (retrato) */
-  --shadow-lift: 0 6px 26px rgb(0 0 0 / 0.06);  /* elevación en hover */
-
-  /* ---- Movimiento -------------------------------------------- */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur: 240ms;
-
-  /* ---- Suelo: la capa que da atmósfera por capítulo ------------
-     AX-12. El ACENTO no cambia nunca — un enlace es del mismo color en
-     todo el sitio, porque un acento que varía obliga a reaprender el
-     código en cada página. Lo que cambia es el SUELO: el fondo sobre
-     el que se apoya una página.
-
-     Son tokens semánticos: cada página los repunta en su :root local y
-     no inventa valores. Todos salen de mezclar los acentos que ya
-     existen, así que no entra ningún color nuevo al sistema. */
-  --ground: var(--paper);
-  --ground-2: var(--paper-2);
-  --ground-tint: color-mix(in srgb, var(--accent) 6%, var(--paper));
-  --ground-rule: color-mix(in srgb, var(--accent) 30%, var(--line));
-
-  /* ---- Movimiento ---------------------------------------------- */
-  --dur-slow: 620ms;
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-
+/* ---- The mockups' other colours, by value ---- */
+:root{
+  --c-000000:#000000;
+  --c-000000-20:rgb(0 0 0 / .2);
+  --c-000000-22:rgb(0 0 0 / .22);
+  --c-000000-34:rgb(0 0 0 / .34);
+  --c-000000-60:rgb(0 0 0 / .6);
+  --c-0e260c-35:rgb(14 38 12 / .35);
+  --c-0e260c-5:rgb(14 38 12 / .05);
+  --c-0e260c-92:rgb(14 38 12 / .92);
+  --c-111111-35:rgb(17 17 17 / .35);
+  --c-111111-6:rgb(17 17 17 / .06);
+  --c-141414:#141414;
+  --c-141414-5:rgb(20 20 20 / .05);
+  --c-141414-8:rgb(20 20 20 / .08);
+  --c-1b766f:#1b766f;
+  --c-1d1622:#1d1622;
+  --c-1d4c56:#1d4c56;
+  --c-1e1d1b:#1e1d1b;
+  --c-1f2024:#1f2024;
+  --c-1f9e7a:#1f9e7a;
+  --c-281e14-10:rgb(40 30 20 / .1);
+  --c-281e14-22:rgb(40 30 20 / .22);
+  --c-281e14-28:rgb(40 30 20 / .28);
+  --c-281e14-30:rgb(40 30 20 / .3);
+  --c-281e14-32:rgb(40 30 20 / .32);
+  --c-281e14-34:rgb(40 30 20 / .34);
+  --c-281e14-35:rgb(40 30 20 / .35);
+  --c-281e14-38:rgb(40 30 20 / .38);
+  --c-281e14-40:rgb(40 30 20 / .4);
+  --c-281e14-45:rgb(40 30 20 / .45);
+  --c-281e14-5:rgb(40 30 20 / .05);
+  --c-281e14-55:rgb(40 30 20 / .55);
+  --c-281e14-8:rgb(40 30 20 / .08);
+  --c-2a3270:#2a3270;
+  --c-2a6170:#2a6170;
+  --c-2d58b0:#2d58b0;
+  --c-2e6a2b:#2e6a2b;
+  --c-2f9e5e:#2f9e5e;
+  --c-336f7e:#336f7e;
+  --c-336f7e-8:rgb(51 111 126 / .08);
+  --c-35b36b-0:rgb(53 179 107 / 0);
+  --c-35b36b-45:rgb(53 179 107 / .45);
+  --c-3a2a17-25:rgb(58 42 23 / .25);
+  --c-3a2a17-35:rgb(58 42 23 / .35);
+  --c-3a2a17-40:rgb(58 42 23 / .4);
+  --c-3a5a78:#3a5a78;
+  --c-3d342f:#3d342f;
+  --c-3d3934:#3d3934;
+  --c-3d3d3d:#3d3d3d;
+  --c-3f2f52:#3f2f52;
+  --c-3f4a1c:#3f4a1c;
+  --c-3f7c89:#3f7c89;
+  --c-4a4a4a:#4a4a4a;
+  --c-4a6cc0:#4a6cc0;
+  --c-4b5487:#4b5487;
+  --c-4d4943:#4d4943;
+  --c-57467a:#57467a;
+  --c-5a5a5a:#5a5a5a;
+  --c-5f5f5f:#5f5f5f;
+  --c-5f6f2a:#5f6f2a;
+  --c-6b4a7a:#6b4a7a;
+  --c-6b4a7a-18:rgb(107 74 122 / .18);
+  --c-6b4a7a-5:rgb(107 74 122 / .05);
+  --c-6b4a7a-7:rgb(107 74 122 / .07);
+  --c-6b6b6b:#6b6b6b;
+  --c-75621a:#75621a;
+  --c-79a5ae:#79a5ae;
+  --c-7a5a12:#7a5a12;
+  --c-8a4a12:#8a4a12;
+  --c-8a847b:#8a847b;
+  --c-8d887f:#8d887f;
+  --c-8d9a5e:#8d9a5e;
+  --c-9c2468:#9c2468;
+  --c-9c9284:#9c9284;
+  --c-9fe0c4:#9fe0c4;
+  --c-a39c91:#a39c91;
+  --c-a65a1a:#a65a1a;
+  --c-a94c14:#a94c14;
+  --c-a94c14-65:rgb(169 76 20 / .65);
+  --c-aecbd0:#aecbd0;
+  --c-b3ab9f:#b3ab9f;
+  --c-b8561a:#b8561a;
+  --c-b99ec8:#b99ec8;
+  --c-bdb6aa:#bdb6aa;
+  --c-cdb8d6:#cdb8d6;
+  --c-cfc6b6:#cfc6b6;
+  --c-cfd3bd:#cfd3bd;
+  --c-d3ccc1:#d3ccc1;
+  --c-d6e5e8:#d6e5e8;
+  --c-d6e6e8:#d6e6e8;
+  --c-d9c9df:#d9c9df;
+  --c-d9d1c3:#d9d1c3;
+  --c-d9d3c7:#d9d3c7;
+  --c-dccbe7:#dccbe7;
+  --c-e1d8c8:#e1d8c8;
+  --c-e2dbcf:#e2dbcf;
+  --c-e3eef0:#e3eef0;
+  --c-e4dccf:#e4dccf;
+  --c-e6e2db:#e6e2db;
+  --c-ebe4d8:#ebe4d8;
+  --c-ece8e1:#ece8e1;
+  --c-ece9e3:#ece9e3;
+  --c-ececec:#ececec;
+  --c-ededed:#ededed;
+  --c-eef0e2:#eef0e2;
+  --c-eef1f2:#eef1f2;
+  --c-eef2fb:#eef2fb;
+  --c-eef3f7:#eef3f7;
+  --c-efe9df:#efe9df;
+  --c-efefef:#efefef;
+  --c-f0ebe3:#f0ebe3;
+  --c-f1ece4:#f1ece4;
+  --c-f3eee6:#f3eee6;
+  --c-f4cf86:#f4cf86;
+  --c-f4eef6:#f4eef6;
+  --c-f4efe7:#f4efe7;
+  --c-f6e5da:#f6e5da;
+  --c-f7a9cb:#f7a9cb;
+  --c-f8f4ec:#f8f4ec;
+  --c-faf7fb:#faf7fb;
+  --c-fbf8f3:#fbf8f3;
+  --c-ffd3b0:#ffd3b0;
+  --c-ffd3b0-0:rgb(255 211 176 / 0);
+  --c-ffd3b0-80:rgb(255 211 176 / .8);
+  --c-fff8f2:#fff8f2;
+  --c-fffdf9:#fffdf9;
+  --c-ffffff:#ffffff;
+  --c-ffffff-16:rgb(255 255 255 / .16);
+  --c-ffffff-17:rgb(255 255 255 / .17);
+  --c-ffffff-20:rgb(255 255 255 / .2);
+  --c-ffffff-22:rgb(255 255 255 / .22);
+  --c-ffffff-30:rgb(255 255 255 / .3);
+  --c-ffffff-40:rgb(255 255 255 / .4);
+  --c-ffffff-50:rgb(255 255 255 / .5);
+  --c-ffffff-60:rgb(255 255 255 / .6);
+  --c-ffffff-62:rgb(255 255 255 / .62);
+  --c-ffffff-7:rgb(255 255 255 / .07);
+  --c-ffffff-70:rgb(255 255 255 / .7);
+  --c-ffffff-85:rgb(255 255 255 / .85);
+  --c-ffffff-86:rgb(255 255 255 / .86);
+  --c-ffffff-9:rgb(255 255 255 / .09);
+  --warm-22:rgb(var(--warm) / .22);
+  --warm-34:rgb(var(--warm) / .34);
 }

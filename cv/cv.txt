@@ -1,6 +1,6 @@
 Marc Recio
 
-Data scientist · plant genomics
+Data scientist who builds AI systems
 
 Valencia, Spain (open to relocation) +34 655 37 03 77 marcreciocel@gmail.com marc-recio-celda.github.io/Portfolio github.com/Marc-Recio-Celda
 
@@ -8,40 +8,44 @@ Valencia, Spain (open to relocation) +34 655 37 03 77 marcreciocel@gmail.com mar
 SUMMARY
 -------
 
-Data scientist working in plant genomics. I came from the wet lab — in vitro culture, PCR, sequencing — and now build the pipelines that read what those experiments produce, designed so a scientist can audit the calls the machine makes. Current work pairs large language models with deterministic, tested code so that every reproducible decision is made by the code and never by the model. Classical machine learning, databases and the full data lifecycle; deep learning and reinforcement learning in progress. Fluent English, and experience in international, research-driven environments.
+Data scientist, plant breeder by training. I build language-model pipelines that curate the genomics literature, and I want to keep growing in machine learning, deep learning, data analysis and AI systems. I like problems that cross fields and solve them by building systems. On the side: Aevifex, my own method for working with AI agents.
 
 
 SELECTED WORK
 -------------
 
-Evidence-graded gene curation from the literature
+Human-in-the-loop gene curation
 2025 – present
 
-MSc data-science thesis · with the TomsBioLab research group
+MSc data-science thesis (UOC) · with the TomsBioLab group, I2SysBio (CSIC – Universitat de València)
 
-Pipeline that turns grapevine-genomics papers into evidence-graded catalogue rows: language models read, deterministic code makes every call that has to be reproducible.
-The model never assigns the evidence level. It answers a fixed set of yes/no questions and tested code maps those booleans onto the published 6-level scale — so a level can be re-derived, audited and unit-tested, which an opinion cannot.
-98.7 % level accuracy against a hand-curated gold set — 74 of 75 genes across 9 scorable papers. Providers sit behind one interface, so a lab can run the whole pipeline on its own model.
-Findings are held for the January defence; the engineering is documented in the portfolio.
+A language-model pipeline that curates the literature for the gene catalogues of the PlantaeViz species: models read the papers, tested code assigns each gene's evidence level, and a curator holds two gates.
+Evaluated against a gold set curated by hand; the results are held until the paper and the defence.
 
-High-throughput screen for heat-stress protection in pollen
+A chemical screen for heat-stressed pollen
 2024
 
-MSc plant-breeding thesis (COMAV, UPV) · graded 10/10
+MSc plant-breeding thesis (COMAV, UPV) · supervised by Dr. Ricardo Mir Moreno · graded 10/10
 
-Screened 800 compounds for protection of rapeseed (Brassica napus DH4079) pollen against a heat shock that collapses germination from ≈61 % to below 2 %; returned 8 candidate hits as a shortlist for follow-up.
-Designed the assay, ran the statistics behind the results, and reported the negative controls — DMSO protects at mild heat (32 °C) but not at 38 °C.
+800 compounds screened on rapeseed pollen in a germination assay I designed, plated by an Opentrons OT-2 robot and counted in ImageJ: a single-well primary screen that left 8 candidates to retest.
 
-Published dataset · scraper and data contract
-2025
+Aevifex, my method for working with AI agents
+2026
 
-Zenodo, DOI 10.5281/zenodo.17578619 · CC BY-NC-SA 4.0
+Own project · in daily use · private until its first release
 
-1,000 films × ≈25 fields in a single CSV. Per-field error handling so one missing element never aborts a record, explicit waits instead of brittle sleeps, and resumable output that survives interruption.
+Rules, skills, hooks and a guard for Claude Code agents; the guard tested on 1,319 labelled tool calls, the checks on planted faults and controls.
 
 
 EXPERIENCE
 ----------
+
+Internship, master's thesis
+2026 – present
+
+TomsBioLab, I2SysBio (CSIC – Universitat de València), Valencia
+
+Building the thesis's curation pipeline for the gene catalogues of the PlantaeViz species.
 
 Research staff
 May 2024 – Dec 2024
@@ -64,27 +68,29 @@ DNA-extraction protocols in the molecular-biology department.
 SKILLS
 ------
 
+LLM pipelines
+Structured extraction from papers, gold-set evaluation, provider-agnostic interfaces, rule-based decisions over model output.
+Agents
+Claude Code: rules, skills, hooks and guards, tested on labelled cases, planted faults and controls.
 Machine learning
-Supervised and unsupervised methods, model evaluation on imbalanced data (F1-macro, class weighting), dimensionality reduction (PCA, t-SNE, UMAP).
-LLM engineering
-Structured extraction, prompt design against a gold set, provider-agnostic interfaces, rule-based post-processing of model output.
+Supervised and unsupervised methods, evaluation on imbalanced data, PCA, t-SNE and UMAP; statistics in R.
 Data & databases
-SQL, NoSQL, schema design, data modelling, ETL, cleaning and preprocessing.
+SQL, PostgreSQL, schema design, ETL, web scraping, Power BI.
 Programming
-Python, R, SQL. Modular packages, unit tests, command-line and API entry points.
-Collection & visualization
-Web scraping, APIs, exploratory analysis, reporting, Power BI.
+Python, R, SQL, Bash; Git, Docker, Linux.
 Domain
-Plant genomics and breeding, molecular biology, experimental design, statistical analysis.
+Plant genomics and breeding, molecular biology, experimental design.
+In progress
+Deep learning and reinforcement learning.
 Languages
-Spanish (native), Catalan (native), English (fluent — B2 First certified), French (A2).
+Spanish (native), Valencian (Catalan, native), English (fluent, Cambridge B2 First), French (A2).
 
 
 EDUCATION
 ---------
 
 MSc in Data Science
-Feb 2025 – expected 2026
+Feb 2025 – expected Jan 2027
 
 Universitat Oberta de Catalunya (UOC) · top grade in Machine Learning
 

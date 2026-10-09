@@ -1,0 +1,29 @@
+---
+/**
+ * The floating nav. On the landing its links are the page's own anchors; elsewhere they lead
+ * back into the site, the page you are on marked `aria-current` and pointing at its own top.
+ */
+import { withBase } from "../../utils/url";
+
+interface Props {
+  current: "landing" | "work" | "path" | "inner";
+}
+const { current } = Astro.props;
+const landing = current === "landing";
+---
+
+<header class="topnav">
+  <nav class="topnav__pill" aria-label="Sections">
+    <a class="topnav__brand" href={landing ? "#top" : withBase("/")}>Marc Recio</a>
+    {landing ? <a class="l" href="#work">Work</a>
+      : current === "work" ? <a class="l" href="#top" aria-current="page">Work</a>
+      : current === "path" ? <a class="l" href={withBase("/work/")}>Work</a>
+      : <a class="l" href={withBase("/work/")} aria-current="page">Work</a>}
+    <a class="l" href={landing ? "#skills" : withBase("/#skills")}>Skills</a>
+    <a class="l wide" href={landing ? "#toolkit" : current === "work" ? "#toolkit" : withBase("/work/#toolkit")}>Toolkit</a>
+    {landing ? <a class="l wide" href="#experience">Experience</a>
+      : current === "path" ? <a class="l wide" href="#top" aria-current="page">Experience</a>
+      : <a class="l wide" href={withBase("/path/")}>Experience</a>}
+    <a class="cta" href="#contact">Get in touch</a>
+  </nav>
+</header>

@@ -1,0 +1,121 @@
+---
+import Page from "../../../layouts/Page.astro";
+import { withBase } from "../../../utils/url";
+import { LINKS } from "../../../consts";
+import "../../../styles/pages/tfm.css";
+---
+
+<Page title="Human-in-the-loop gene curation · Marc Recio" description="Marc Recio's data-science master's thesis: a human-in-the-loop AI-driven workflow for literature curation, improving the gene reference catalogues of PlantaeViz species. Its results wait for the paper and the thesis's defence." nav="inner" footer="inner">
+<main id="top">
+  <section class="head" aria-labelledby="page-title">
+    <div class="container head__inner">
+      <div>
+        <a class="back" href={withBase("/")}><span aria-hidden="true">←</span> Back to the landing</a>
+        <p class="label"><span class="label__n">01</span>Selected work</p>
+        <h1 id="page-title" class="page-title"><span class="nowrap">Human-in-the-loop</span> <span class="accent-word">gene curation</span>.</h1>
+        <p class="page-full">“A human-in-the-loop AI-driven workflow for literature curation: improving the gene reference catalogues of PlantaeViz species”</p>
+        <p class="page-lead">My data-science master's thesis at the UOC, built with the TomsBioLab group. Language models read the papers, tested code makes the calls, and a curator holds two gates.</p>
+        <div class="page-chips"><span class="chip">In progress</span><span class="tag">Master's thesis · UOC</span></div>
+      </div>
+      <nav aria-label="The four parts">
+        <ul class="index">
+          <li class="c-prob"><a href="#problem"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20h34l10 10v48h-44z"/><path d="M30 14h34l10 10v48h-44z"/><path d="M42 8h34l10 10v48h-44z"/><path d="M50 30h22M50 40h26M50 50h18"/><circle cx="88" cy="58" r="12"/><path d="M97 67l12 12"/></svg><span class="index__num">I.</span><span class="index__name">The problem</span></a></li>
+          <li class="c-pipe"><a href="#pipeline"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="45" r="10"/><path d="M28 45h18"/><rect x="46" y="33" width="24" height="24" rx="5"/><path d="M70 45h18"/><circle cx="100" cy="45" r="10"/><path d="M40 41l6 4-6 4M82 41l6 4-6 4"/></svg><span class="index__num">II.</span><span class="index__name">The pipeline</span></a></li>
+          <li class="c-eval"><a href="#evaluation"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="22" r="5.5" fill="currentColor"/><circle cx="33" cy="22" r="5.5" fill="currentColor"/><circle cx="51" cy="22" r="5.5" fill="currentColor"/><circle cx="69" cy="22" r="5.5" fill="currentColor"/><circle cx="87" cy="22" r="5.5" fill="currentColor"/><circle cx="105" cy="22" r="5.5" fill="currentColor"/><circle cx="15" cy="44" r="5.5" fill="currentColor"/><circle cx="33" cy="44" r="5.5" fill="currentColor"/><circle cx="51" cy="44" r="5.5" fill="currentColor"/><circle cx="69" cy="44" r="5.5" fill="currentColor"/><circle cx="87" cy="44" r="5.5" fill="currentColor"/><circle cx="105" cy="44" r="5.5" fill="currentColor"/><circle cx="15" cy="66" r="5.5" fill="currentColor"/><circle cx="33" cy="66" r="5.5" fill="currentColor"/><circle cx="51" cy="66" r="5.5" fill="currentColor"/><circle cx="69" cy="66" r="5.5" fill="currentColor"/><circle cx="87" cy="66" r="5.5" fill="currentColor"/><circle cx="105" cy="66" r="5.5" fill="currentColor"/></svg><span class="index__num">III.</span><span class="index__name">The evaluation</span></a></li>
+          <li class="c-gate"><a href="#gates"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(26 14) scale(1.25)"><circle cx="12" cy="20" r="6"/><path d="M2 46v-8c0-6 4-10 10-10s8 2 10 5l6 7h12"/><path d="M24 38h22l6-14h-24z"/><path d="M18 46h36"/><rect x="26" y="0" width="24" height="17" rx="4"/><path d="M33 17l-3 5 7-5"/><path d="M33 8.5l3.5 3.5 6-6.5"/></g></svg><span class="index__num">IV.</span><span class="index__name">Human-in-the-loop gates</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="part c-prob" id="problem" aria-labelledby="problem-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20h34l10 10v48h-44z"/><path d="M30 14h34l10 10v48h-44z"/><path d="M42 8h34l10 10v48h-44z"/><path d="M50 30h22M50 40h26M50 50h18"/><circle cx="88" cy="58" r="12"/><path d="M97 67l12 12"/></svg>
+        <span class="card__num">I.</span>
+        <div><h2 id="problem-title" class="card__title">The problem</h2><p class="card__sum">Thousands of papers, and a catalogue curated by hand.</p></div>
+      </div>
+      <div class="body reveal">
+        <p>What is known about grapevine genes is scattered across thousands of papers. The field's reference catalogue curates about 3,000 of them on a six-level evidence scale, and raising a gene's level means reading the literature by hand, which does not scale. Grapevine came first; the thesis now covers the working system across the PlantaeViz species.</p>
+        <figure class="ladder panel">
+          <svg viewBox="0 0 470 236" role="img" aria-label="The six-level evidence scale, from 1, hypothetical, to 6, experimentally validated in grapevine; about three quarters of the catalogue sits at levels 1 and 2" font-family="IBM Plex Sans, sans-serif"><text x="0" y="12" font-family="IBM Plex Mono, monospace" font-size="11" letter-spacing="1.6" data-pf="c-6b6b6b">EVIDENCE LEVEL</text><rect x="0" y="24" width="170" height="28" rx="6" data-pf="c-1d4c56"/><text x="12" y="43" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" data-pf="c-ffffff">6</text><rect x="0" y="58" width="170" height="28" rx="6" data-pf="c-2a6170"/><text x="12" y="77" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" data-pf="c-ffffff">5</text><rect x="0" y="92" width="170" height="28" rx="6" data-pf="c-3f7c89"/><text x="12" y="111" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" data-pf="c-ffffff">4</text><rect x="0" y="126" width="170" height="28" rx="6" data-pf="c-79a5ae"/><text x="12" y="145" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" data-pf="c-141414">3</text><rect x="0" y="160" width="170" height="28" rx="6" data-pf="c-aecbd0"/><text x="12" y="179" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" data-pf="c-141414">2</text><rect x="0" y="194" width="170" height="28" rx="6" data-pf="c-d6e5e8"/><text x="12" y="213" font-family="IBM Plex Mono, monospace" font-size="13" font-weight="500" data-pf="c-141414">1</text><text x="184" y="43" font-size="13" data-pf="c-3d3d3d">experimentally validated</text><text x="184" y="59" font-size="13" data-pf="c-3d3d3d">in grapevine</text><text x="36" y="213" font-size="13" data-pf="c-141414">hypothetical</text><path d="M180 160h8v62h-8" data-ps="c-141414" stroke-width="1.6" fill="none"/><text x="198" y="182" font-size="14" font-weight="600" data-pf="c-141414">about three quarters</text><text x="198" y="200" font-size="13" data-pf="c-3d3d3d">of the catalogue, the</text><text x="198" y="217" font-size="13" data-pf="c-3d3d3d">putative tiers</text></svg>
+          <ul class="ladder__stats">
+            <li><span class="ladder__v">~3,000</span><span class="ladder__l">genes curated on the scale</span></li>
+            <li><span class="ladder__v">8%</span><span class="ladder__l">carry a written description of function</span><span class="meter" aria-hidden="true"><span style="width:8%"></span></span></li>
+          </ul>
+          <figcaption class="caption">The starting point, not this work's results: Integrape COST action, Navarro-Payá et al. 2022.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="part c-pipe" id="pipeline" aria-labelledby="pipeline-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="45" r="10"/><path d="M28 45h18"/><rect x="46" y="33" width="24" height="24" rx="5"/><path d="M70 45h18"/><circle cx="100" cy="45" r="10"/><path d="M40 41l6 4-6 4M82 41l6 4-6 4"/></svg>
+        <span class="card__num">II.</span>
+        <div><h2 id="pipeline-title" class="card__title">The pipeline</h2><p class="card__sum">Models read the papers; tested code makes the calls.</p></div>
+      </div>
+      <div class="body reveal">
+        <ol class="steps">
+          <li><p class="steps__name">Read</p><p class="steps__text">Docling turns the paper into text; a recall model lists its genes with the paper's identifiers, and code maps each one to the current annotation.</p></li>
+          <li><p class="steps__name">Decide by rule</p><p class="steps__text">A classifier model answers yes-or-no questions on the evidence, five runs by majority vote; tested code turns the answers into the level.</p></li>
+          <li><p class="steps__name">Characterise</p><p class="steps__text">An extractor model takes what only language gives: the gene's type and its function.</p></li>
+          <li><p class="steps__name">Emit</p><p class="steps__text">The curation application writes the catalogue row, with a CSV and a provenance log.</p></li>
+        </ol>
+      </div>
+    </div>
+    <div class="container">
+      <figure class="pipe panel reveal">
+        <img src={withBase("/work/thesis-pipeline.jpg")} alt="The thesis's pipeline: a paper turned into text by Docling, its genes found by a language model and checked by code, a curator's first gate, yes-or-no questions answered five times and turned into a level by a rule, a curator's second gate, and the result written to the catalogue" loading="lazy">
+        <figcaption class="caption">The pipeline as I drew it for the thesis, one gene, MYB24, followed through it.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="part c-eval" id="evaluation" aria-labelledby="evaluation-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="22" r="5.5" fill="currentColor"/><circle cx="33" cy="22" r="5.5" fill="currentColor"/><circle cx="51" cy="22" r="5.5" fill="currentColor"/><circle cx="69" cy="22" r="5.5" fill="currentColor"/><circle cx="87" cy="22" r="5.5" fill="currentColor"/><circle cx="105" cy="22" r="5.5" fill="currentColor"/><circle cx="15" cy="44" r="5.5" fill="currentColor"/><circle cx="33" cy="44" r="5.5" fill="currentColor"/><circle cx="51" cy="44" r="5.5" fill="currentColor"/><circle cx="69" cy="44" r="5.5" fill="currentColor"/><circle cx="87" cy="44" r="5.5" fill="currentColor"/><circle cx="105" cy="44" r="5.5" fill="currentColor"/><circle cx="15" cy="66" r="5.5" fill="currentColor"/><circle cx="33" cy="66" r="5.5" fill="currentColor"/><circle cx="51" cy="66" r="5.5" fill="currentColor"/><circle cx="69" cy="66" r="5.5" fill="currentColor"/><circle cx="87" cy="66" r="5.5" fill="currentColor"/><circle cx="105" cy="66" r="5.5" fill="currentColor"/></svg>
+        <span class="card__num">III.</span>
+        <div><h2 id="evaluation-title" class="card__title">The evaluation</h2><p class="card__sum">Every level scored against a gold set curated by hand.</p></div>
+      </div>
+      <div class="body reveal">
+        <figure class="gold gold--held panel">
+          <div class="gold__veil" aria-hidden="true"><svg viewBox="0 0 372 132" aria-hidden="true"><circle cx="14.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="38.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="63.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="87.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="112.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="136.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="161.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="185.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="210.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="234.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="259.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="283.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="308.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="332.5" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="357.0" cy="18.0" r="8" data-pf="c-336f7e"/><circle cx="14.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="38.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="63.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="87.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="112.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="136.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="161.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="185.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="210.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="234.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="259.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="283.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="308.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="332.5" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="357.0" cy="49.0" r="8" data-pf="c-336f7e"/><circle cx="14.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="38.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="63.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="87.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="112.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="136.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="161.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="185.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="210.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="234.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="259.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="283.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="308.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="332.5" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="357.0" cy="80.0" r="8" data-pf="c-336f7e"/><circle cx="14.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="38.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="63.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="87.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="112.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="136.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="161.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="185.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="210.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="234.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="259.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="283.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="308.0" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="332.5" cy="111.0" r="8" data-pf="c-336f7e"/><circle cx="357.0" cy="111.0" r="8" data-pf="c-336f7e"/></svg><div><p class="gold__n">00.0<small>%</small></p><p class="gold__what">level accuracy</p></div></div>
+          <p class="gold__held">Held until the paper and the defence</p>
+          <figcaption class="caption">Each level the pipeline gives, scored against a gold set curated by hand.</figcaption>
+        </figure>
+        <p>The evaluation is done; its results stay hidden until the paper is published and the thesis is defended.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part c-gate" id="gates" aria-labelledby="gates-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(26 14) scale(1.25)"><circle cx="12" cy="20" r="6"/><path d="M2 46v-8c0-6 4-10 10-10s8 2 10 5l6 7h12"/><path d="M24 38h22l6-14h-24z"/><path d="M18 46h36"/><rect x="26" y="0" width="24" height="17" rx="4"/><path d="M33 17l-3 5 7-5"/><path d="M33 8.5l3.5 3.5 6-6.5"/></g></svg>
+        <span class="card__num">IV.</span>
+        <div><h2 id="gates-title" class="card__title">Human-in-the-loop gates</h2><p class="card__sum">A human expert stays in charge, at two gates.</p></div>
+      </div>
+      <div class="body reveal">
+        <figure class="zoom panel">
+          <div class="zoom__item"><p class="zoom__t"><b>Gate 1</b> the gene and its paper</p><img src={withBase("/work/thesis-gate-1.jpg")} alt="A detail of the pipeline figure: the gene's identifier mapped to the v5.1 annotation, and the curator at the first gate confirming the gene, its identifier and the paper's DOI" loading="lazy"><p class="zoom__x">Code maps the paper's identifier to the current annotation; the curator confirms the gene, its identifier and the paper before anything is built on them.</p></div>
+          <div class="zoom__item"><p class="zoom__t"><b>Gate 2</b> the level</p><img src={withBase("/work/thesis-gate-2.jpg")} alt="A detail of the pipeline figure: the yes-or-no answers, the level rule, and the curator at the second gate settling the unstable answers before level 5 stands" loading="lazy"><p class="zoom__x">The classifier answers each question five times and the rule turns the answers into a level; where the answers changed between runs, the curator settles them before the level stands.</p></div>
+          <figcaption class="caption">Two details of the pipeline figure above, enlarged.</figcaption>
+        </figure>
+        <p>The curator can override every stage: the genes assigned, the level, the characteristics. Since the level comes from tested code over the model's answers, each one traces back to the facts behind it. The providers sit behind one interface, so a lab can run it all locally, with its own model.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stands" aria-labelledby="stands-title">
+    <div class="container stands__inner reveal">
+      <p class="minilabel">Where it stands</p>
+      <h2 id="stands-title" class="h2">In progress, its findings <span class="accent-word">kept for the paper</span>.</h2>
+      <p class="lede">If they hold, the extended catalogue and the classifier go into PlantaeViz, with a web app where a researcher uploads a paper and gets evidence-graded classifications back, ready to review. I am glad to walk through how it was built: the decisions, the alternatives discarded, and what each one cost.</p>
+      <div class="stack"><span class="tag">Python</span><span class="tag">Docling</span><span class="tag">LLMs</span><span class="tag">Gold-set evaluation</span><span class="tag">Full-stack app</span></div>
+    </div>
+  </section>
+</main>
+</Page>

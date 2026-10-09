@@ -1,204 +1,48 @@
 ---
 /**
- * Páginas de detalle de la collection `work`.
- * Una ruta por entrada (no-draft). Renderiza el markdown con estilos prose.
+ * The smaller projects' shared page (Portfolio's D30), one template for the five: each
+ * project's words and image live in its `.md` of the `work` collection, under `page` (AX-5),
+ * carried word for word from the approved mockups. The entries with a page of their own (the
+ * two theses, Aevifex) carry no `page` and are not built here.
  */
-import { getCollection, render } from "astro:content";
-import Base from "../../layouts/Base.astro";
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
 import { withBase } from "../../utils/url";
-import { LINKS } from "../../consts";
+import "../../styles/pages/small.css";
 
 export async function getStaticPaths() {
-  const entries = await getCollection("work", ({ data }) => !data.draft);
-  return entries.map((entry) => ({
-    params: { slug: entry.id },
-    props: { entry },
-  }));
+  const entries = await getCollection("work", ({ data }) => !data.draft && Boolean(data.page));
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
-const { entry } = Astro.props;
-const { Content } = await render(entry);
+const page = Astro.props.entry.data.page!;
+// An address inside the site goes through withBase (AX-2); one outside it stays as it is.
+const to = (href: string) => (href.startsWith("/") ? withBase(href) : href);
 ---
 
-<Base title={entry.data.title} description={entry.data.summary}>
-  <article class="detail" data-theme={entry.data.theme}>
-    <div class="container detail__wrap">
-      <a class="detail__back" href={withBase("/#worknav-title")}>← Back to work</a>
-
-      <header class="detail__header">
-        <div class="detail__meta">
-          <span class="mono-label">{entry.data.kind}</span>
-          {entry.data.status && <span class="detail__status">{entry.data.status}</span>}
-        </div>
-        <h1>{entry.data.title}</h1>
-        <p class="detail__summary">{entry.data.summary}</p>
-      </header>
-
-      {entry.data.thumb && (
-        <figure class="detail__figure">
-          <img src={withBase(entry.data.thumb)} alt={entry.data.thumbAlt ?? ""} />
-        </figure>
-      )}
-
-      <div class="prose">
-        <Content />
+<Page title={page.metaTitle} description={page.metaDescription} nav="inner" footer="inner">
+<main id="top">
+  <section class="head head--plain" aria-labelledby="page-title">
+    <div class="container head__inner">
+      <div>
+        <a class="back" href={withBase("/work/")}><span aria-hidden="true">←</span> All the work</a>
+        <p class="label"><span class="label__n">05</span>{page.label}</p>
+        <h1 id="page-title" class="page-title" set:html={page.headline} />
+        {page.full && <p class="page-full" set:html={page.full} />}
+        <p class="page-lead" set:html={page.lead} />
+        <div class="page-chips" set:html={page.chips} />
       </div>
-
-      {entry.data.deeper ? (
-        <a class="detail__deeper" href={withBase(entry.data.deeper.href)}>
-          {entry.data.deeper.label}
-          <span aria-hidden="true">→</span>
-        </a>
-      ) : (
-        /* AX-11 · ninguna página termina sin salida. Donde no hay una página
-           más profunda, la puerta es la conversación — que es el objetivo
-           declarado del sitio. */
-        <a class="detail__deeper" href={`mailto:${LINKS.email}`}>
-          Ask me about this one
-          <span aria-hidden="true">→</span>
-        </a>
-      )}
     </div>
-  </article>
-</Base>
-
-<style>
-  .detail {
-    padding-block: var(--space-xl) var(--space-2xl);
-  }
-
-  /* AX-12 · la atmósfera del capítulo vive en el suelo. El acento no se
-     toca: un enlace es del mismo color en todo el sitio, porque uno que
-     cambia obliga a reaprender el código en cada página. */
-  .detail[data-theme="lab"] {
-    --ground-2: color-mix(in srgb, var(--accent) 7%, var(--paper));
-    --ground-tint: color-mix(in srgb, var(--accent) 11%, var(--paper));
-    --ground-rule: color-mix(in srgb, var(--accent) 38%, var(--line));
-  }
-  .detail[data-theme="method"] {
-    --ground-2: color-mix(in srgb, var(--accent-deep) 6%, var(--paper));
-    --ground-tint: color-mix(in srgb, var(--accent-deep) 9%, var(--paper));
-    --ground-rule: color-mix(in srgb, var(--accent-deep) 32%, var(--line));
-  }
-  .detail__wrap {
-    max-width: 46rem;
-  }
-  .detail__back {
-    display: inline-block;
-    margin-bottom: var(--space-lg);
-    font-family: var(--font-mono);
-    font-size: var(--text-sm);
-    text-decoration: none;
-  }
-  .detail__meta {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
-  }
-  .detail__status {
-    font-family: var(--font-mono);
-    font-size: var(--text-xs);
-    letter-spacing: var(--tracking-wide);
-    text-transform: uppercase;
-    color: var(--accent);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-    border-radius: 999px;
-    padding: 0.1em 0.6em;
-  }
-  .detail__header {
-    padding-bottom: var(--space-lg);
-    margin-bottom: var(--space-lg);
-    border-bottom: var(--border);
-  }
-  .detail__summary {
-    margin-top: var(--space-sm);
-    font-size: var(--text-md);
-    color: var(--muted);
-  }
-
-  /* Enlace a la página propia del proyecto. Peso de llamada a la acción:
-     en el TFM es la pieza que más se quiere que se abra. */
-  .detail__deeper {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    margin-top: var(--space-lg);
-    padding: var(--space-sm) var(--space-md);
-    border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
-    border-radius: var(--radius);
-    background: color-mix(in srgb, var(--accent) 7%, var(--paper));
-    font-family: var(--font-display);
-    font-weight: var(--weight-semibold);
-    font-size: var(--text-md);
-    text-decoration: none;
-    color: var(--accent-deep);
-    transition: gap var(--dur) var(--ease), background var(--dur) var(--ease),
-      border-color var(--dur) var(--ease);
-  }
-  .detail__deeper:hover {
-    gap: var(--space-sm);
-    background: color-mix(in srgb, var(--accent) 13%, var(--paper));
-    border-color: var(--accent);
-  }
-
-  .detail__figure {
-    margin: 0 0 var(--space-xl);
-  }
-  .detail__figure img {
-    width: 100%;
-    height: auto;
-    border: var(--border);
-    border-radius: var(--radius-lg);
-    background: var(--paper-2);
-  }
-
-  /* Prose — estilos del markdown renderizado */
-  .prose :global(img) {
-    width: 100%;
-    height: auto;
-    margin-block: var(--space-md);
-    border: var(--border);
-    border-radius: var(--radius);
-    background: var(--paper-2);
-  }
-  .prose :global(h2) {
-    font-size: var(--text-xl);
-    margin-top: var(--space-xl);
-    margin-bottom: var(--space-sm);
-  }
-  .prose :global(h3) {
-    font-size: var(--text-lg);
-    margin-top: var(--space-lg);
-    margin-bottom: var(--space-xs);
-  }
-  .prose :global(p),
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin-bottom: var(--space-md);
-  }
-  .prose :global(ul),
-  .prose :global(ol) {
-    padding-left: 1.25em;
-  }
-  .prose :global(li) {
-    margin-bottom: var(--space-2xs);
-  }
-  .prose :global(li::marker) {
-    color: var(--accent);
-  }
-  .prose :global(strong) {
-    font-weight: var(--weight-semibold);
-  }
-  .prose :global(blockquote) {
-    margin: var(--space-lg) 0;
-    padding-left: var(--space-md);
-    border-left: 3px solid var(--accent);
-    color: var(--muted);
-  }
-  .prose :global(code) {
-    background: var(--paper-2);
-    padding: 0.1em 0.4em;
-    border-radius: var(--radius);
-  }
-</style>
+  </section>
+  <section class="small" aria-label="The project">
+    <div class="container">
+      <figure class="shot reveal"><img src={withBase(page.shot.src)} alt={page.shot.alt} loading="lazy"><figcaption class="caption" set:html={page.shot.caption} /></figure>
+      <div class="trio reveal">
+        {page.blocks.map((b) => <div class="blk"><h2>{b.heading}</h2><Fragment set:html={b.html} /></div>)}
+      </div>
+      {page.paper && <Fragment set:html={page.paper} />}
+      <div class="tail reveal"><div class="stack">{page.stack.map((t) => <span class="tag">{t}</span>)}</div><div class="foot__actions">{page.actions.map((a) => <a class={a.dark ? "btn btn--dark" : "btn"} href={to(a.href)}>{a.label} <span class="arrow" aria-hidden="true">→</span></a>)}</div></div>
+    </div>
+  </section>
+</main>
+</Page>

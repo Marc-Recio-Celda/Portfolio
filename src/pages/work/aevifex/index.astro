@@ -1,0 +1,144 @@
+---
+import Page from "../../../layouts/Page.astro";
+import { withBase } from "../../../utils/url";
+import { LINKS } from "../../../consts";
+import "../../../styles/pages/aevifex.css";
+---
+
+<Page title="Aevifex · Marc Recio" description="Aevifex, the method Marc Recio built for working with AI agents: how he built it, what it is now, how he works with it, and what building it teaches him." nav="inner" footer="inner">
+<main id="top">
+  <section class="head" aria-labelledby="page-title">
+    <img class="head__vault" src={withBase("/how/vault-colour.jpg")} alt="" aria-hidden="true">
+    <div class="container head__inner">
+      <div>
+        <a class="back" href={withBase("/")}><span aria-hidden="true">←</span> Back to the landing</a>
+        <p class="label"><span class="label__n">02</span>Selected work</p>
+        <h1 id="page-title" class="page-title">Aevifex, how I work with <span class="accent-word">AI agents</span>.</h1>
+        <p class="page-lead">The AI agents in my private vault follow Aevifex, the method I built to work efficiently and keep learning. I use it every day.</p>
+        <div class="page-chips"><span class="chip">In daily use</span><span class="tag">Private until its first release</span></div>
+      </div>
+      <nav aria-label="The four parts">
+        <ul class="index">
+          <li class="c-built"><a href="#built"><svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g opacity=".3" stroke-width=".6"><path d="M0 20h160M0 40h160M0 60h160M0 80h160M20 0v100M40 0v100M60 0v100M80 0v100M100 0v100M120 0v100M140 0v100"/></g><rect x="30" y="34" width="70" height="46"/><rect x="40" y="44" width="50" height="26" stroke-dasharray="4 3"/><path d="M30 16v10M100 16v10M30 21h70"/><path d="M36 18l-6 3 6 3M94 18l6 3-6 3"/><path d="M142 80A42 42 0 0 0 100 38" stroke-dasharray="2 4"/><path d="M100 80L129.7 50.3"/><circle cx="100" cy="80" r="2.6" fill="currentColor"/><path d="M127 20h14M134 13v14"/></svg><span class="index__num">I.</span><span class="index__name">How I built it</span></a></li>
+          <li class="c-now"><a href="#now"><svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="18" y="8" width="124" height="84" rx="14"/><rect x="36" y="21" width="88" height="58" rx="10" stroke-dasharray="20 7"/><rect x="56" y="34" width="48" height="32" rx="7"/><circle cx="80" cy="50" r="5" fill="currentColor"/><path d="M80 3v10M80 87v10M13 50h10M137 50h10" stroke-width="2"/></svg><span class="index__num">II.</span><span class="index__name">What it is now</span></a></li>
+          <li class="c-work"><a href="#work-with"><svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="80" cy="50" r="32"/><path d="M95.9 26.3L102.6 27.4L101.6 20.7M103.7 65.9L102.6 72.6L109.3 71.6M64.1 73.7L57.4 72.6L58.4 79.3M56.3 34.1L57.4 27.4L50.7 28.4"/><circle cx="112" cy="50" r="6.5" style="fill:var(--c)"/><circle cx="80" cy="82" r="6.5" style="fill:var(--c)"/><circle cx="48" cy="50" r="6.5" style="fill:var(--c)"/><circle cx="80" cy="18" r="7.5" fill="currentColor"/><path d="M76.4 18.3l2.4 2.4 4.8-5" style="stroke:var(--c)" stroke-width="1.8"/></svg><span class="index__num">III.</span><span class="index__name">How I work with it</span></a></li>
+          <li class="c-learn"><a href="#learn"><svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g opacity=".4" stroke-width=".8"><path d="M14 26h132M14 44h132M14 62h132M14 80h132"/></g><path d="M36 6v90" opacity=".8"/><g stroke-width="2.3"><path d="M44 21h70M44 39h52M44 57h84M44 75h30"/></g><text x="15" y="43" font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="500" font-size="12.5" fill="currentColor" stroke="none">L6</text><path d="M82 75h13M91 71.5l4 3.5-4 3.5"/><path d="M107 67c-3 0-4 1.5-4 4v.8c0 1.6-1 2.2-2.6 2.2 1.6 0 2.6.6 2.6 2.2v.8c0 2.5 1 4 4 4"/><path d="M121 67c3 0 4 1.5 4 4v.8c0 1.6 1 2.2 2.6 2.2-1.6 0-2.6.6-2.6 2.2v.8c0 2.5-1 4-4 4"/><path d="M111 75h6" stroke-width="2.3"/></svg><span class="index__num">IV.</span><span class="index__name">What building it teaches me</span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="part c-built" id="built" aria-labelledby="built-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g opacity=".3" stroke-width=".6"><path d="M0 20h160M0 40h160M0 60h160M0 80h160M20 0v100M40 0v100M60 0v100M80 0v100M100 0v100M120 0v100M140 0v100"/></g><rect x="30" y="34" width="70" height="46"/><rect x="40" y="44" width="50" height="26" stroke-dasharray="4 3"/><path d="M30 16v10M100 16v10M30 21h70"/><path d="M36 18l-6 3 6 3M94 18l6 3-6 3"/><path d="M142 80A42 42 0 0 0 100 38" stroke-dasharray="2 4"/><path d="M100 80L129.7 50.3"/><circle cx="100" cy="80" r="2.6" fill="currentColor"/><path d="M127 20h14M134 13v14"/></svg>
+        <span class="card__num">I.</span>
+        <div><h2 id="built-title" class="card__title">How I built it</h2><p class="card__sum">From a folder of notes to a harness.</p></div>
+      </div>
+      <div class="body reveal">
+        <p>None of it was designed up front: each piece answered a problem the one before it created.</p>
+        <ol class="blueprint panel">
+          <li><p class="blueprint__stage">Notes</p><p class="blueprint__text">I began saving what I studied in one repository, and it grew into my whole master's as linked notes.</p></li>
+          <li><p class="blueprint__stage">Projects</p><p class="blueprint__text">Projects moved in beside the knowledge they draw on, each with its plan and decisions: why, who decided, what was rejected.</p></li>
+          <li><p class="blueprint__stage">Capture</p><p class="blueprint__text">A raw idea, a decision waiting and the work under way each got a place of their own, so that nothing gets lost on the way.</p></li>
+          <li><p class="blueprint__stage">Rules</p><p class="blueprint__text">The way of working became a method with rules of its own, and the rules that matter became code.</p></li>
+          <li><p class="blueprint__stage">Rebuilt · September 2026</p><p class="blueprint__text">I rebuilt it from its foundations, on two principles: keep and attention.</p></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="part c-now" id="now" aria-labelledby="now-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="18" y="8" width="124" height="84" rx="14"/><rect x="36" y="21" width="88" height="58" rx="10" stroke-dasharray="20 7"/><rect x="56" y="34" width="48" height="32" rx="7"/><circle cx="80" cy="50" r="5" fill="currentColor"/><path d="M80 3v10M80 87v10M13 50h10M137 50h10" stroke-width="2"/></svg>
+        <span class="card__num">II.</span>
+        <div><h2 id="now-title" class="card__title">What it is now</h2><p class="card__sum">Rules read first, a guard on what agents run, and checks proven on planted faults.</p></div>
+      </div>
+      <div class="body reveal">
+        <p>Two principles hold it together. <strong>Keep:</strong> everything I produce is kept whole, with its origin. <strong>Attention:</strong> each task loads only what makes a difference.</p>
+        <figure class="lay panel">
+          <div class="lay__col">
+            <p class="lay__head"><b>Aevifex</b> the method</p>
+            <ul>
+              <li><code>AGENTS.md</code><span>the desk, read first</span></li>
+              <li><code>skills/</code><span>define, plan, triage, gather, audit</span></li>
+              <li><code>.claude/hooks</code><span>the guard; the compaction pair</span></li>
+              <li><code>tools/</code><span>the gate, the record, the checks</span></li>
+            </ul>
+          </div>
+          <div class="lay__col lay__col--vault">
+            <p class="lay__head"><b>NEXUS</b> my second brain</p>
+            <ul>
+              <li><b>Knowledge</b><span>notes by domain, from statistics to deep learning</span></li>
+              <li><b>Study</b><span>every course of my master's</span></li>
+              <li><b>Projects</b><span>a cartridge each: definition, decisions, plan, lessons</span></li>
+              <li><b>Office</b><span>the live plans</span></li>
+              <li><b>Inbox</b><span>my sheet and the agents'</span></li>
+              <li><b>Library</b><span>the sources the notes cite</span></li>
+            </ul>
+          </div>
+          <figcaption class="caption">The method in one repository, the vault in another, private; each project's code in its own.</figcaption>
+        </figure>
+        <h3>What was measured</h3>
+        <ul class="stats">
+          <li class="stat panel"><p class="stat__n">688</p><p class="stat__what">planted faults and controls</p><p class="stat__base">in 24 test programs, each with the result it was planted for</p></li>
+          <li class="stat panel"><p class="stat__n">1,319</p><p class="stat__what">labelled cases for the guard</p><p class="stat__base">627 must pass, 509 must ask me, 183 must be shut</p></li>
+          <li class="stat panel"><p class="stat__n">110</p><p class="stat__what">cases for the audit</p><p class="stat__base">32 near misses on which nothing must fire, 34 held for validation</p></li>
+          <li class="stat panel"><p class="stat__n">15</p><p class="stat__what">known gaps</p><p class="stat__base">calls the guard cannot see, kept as tests that fail when one closes</p></li>
+        </ul>
+        <p class="caption">Measured on 7 October 2026, from each command's own output.</p>
+        <p class="note">The guard runs only where Claude Code's hooks run, and does not guard reading files; one result failed once in 20 runs.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part part--map c-work" id="work-with" aria-labelledby="work-title">
+    <div class="container">
+      <div class="card card--band">
+        <span class="card__num">III.</span>
+        <div><h2 id="work-title" class="card__title">How I work with it</h2><p class="card__sum">A plan per task, agents that keep its record, nothing shipped without my yes.</p></div>
+      </div>
+      <figure class="hmap panel reveal">
+        <img src={withBase("/work/aevifex/harness-map.svg")} alt="The harness, mapped: an agent enters through AGENTS.md, finds its plan or makes one by interviewing me, works in a loop under a guard and my yes, and what it learns returns to NEXUS for the next plan" loading="lazy">
+        <figcaption class="caption">The harness, mapped. <a href={withBase("/work/aevifex/harness/")}>Open it full size</a>.</figcaption>
+      </figure>
+      <ol class="loop loop--four reveal">
+          <li><p class="loop__name">A plan</p><p class="loop__text">Work that outlives a conversation gets a plan, and a pointer to where we are.</p></li>
+          <li><p class="loop__name">Agents</p><p class="loop__text">A fresh agent resumes from the files alone, with no recap: Claude Code on my machine, Claude in Cowork beside me.</p></li>
+          <li><p class="loop__name">A record</p><p class="loop__text">Every session is appended to the plan's record, and a note-taker keeps its memory: decisions, changes of mind, lessons.</p></li>
+          <li class="yes"><p class="loop__name">My yes</p><p class="loop__text">Commits, merges, sends and publications wait for my word, once I have seen the diff.</p></li>
+        </ol>
+      <p class="loop-back reveal"><span aria-hidden="true">↺</span> Then the plan's next step</p>
+    </div>
+  </section>
+
+  <section class="part c-learn" id="learn" aria-labelledby="learn-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 160 100" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><g opacity=".4" stroke-width=".8"><path d="M14 26h132M14 44h132M14 62h132M14 80h132"/></g><path d="M36 6v90" opacity=".8"/><g stroke-width="2.3"><path d="M44 21h70M44 39h52M44 57h84M44 75h30"/></g><text x="15" y="43" font-family="Newsreader, Georgia, serif" font-style="italic" font-weight="500" font-size="12.5" fill="currentColor" stroke="none">L6</text><path d="M82 75h13M91 71.5l4 3.5-4 3.5"/><path d="M107 67c-3 0-4 1.5-4 4v.8c0 1.6-1 2.2-2.6 2.2 1.6 0 2.6.6 2.6 2.2v.8c0 2.5 1 4 4 4"/><path d="M121 67c3 0 4 1.5 4 4v.8c0 1.6 1 2.2 2.6 2.2-1.6 0-2.6.6-2.6 2.2v.8c0 2.5-1 4-4 4"/><path d="M111 75h6" stroke-width="2.3"/></svg>
+        <span class="card__num">IV.</span>
+        <div><h2 id="learn-title" class="card__title">What building it teaches me</h2><p class="card__sum">Every mistake becomes a lesson, and the lessons that matter become rules in code.</p></div>
+      </div>
+      <div class="body reveal">
+        <ol class="notebook panel">
+          <li><span class="notebook__n">1</span><p class="notebook__text">A rule that is only read stops being kept. The ones that matter become code, and the code is tested.</p></li>
+          <li><span class="notebook__n">2</span><p class="notebook__text">A check is trusted once a planted fault fires it and a clean input leaves it silent.</p></li>
+          <li><span class="notebook__n">3</span><p class="notebook__text">A page about a method shows a measured result before the method.</p></li>
+          <li><span class="notebook__n">4</span><p class="notebook__text">A figure that refuses to invent must say why.</p></li>
+          <li><span class="notebook__n">5</span><p class="notebook__text">A rule that cannot be followed is worth nothing: it is cut, or it becomes a check. And the system never just agrees with me.</p></li>
+        </ol>
+        <p class="closing">I improve it alongside my studies and my work, convinced that the effort now makes me faster later.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="stands" aria-labelledby="stands-title">
+    <div class="container stands__inner reveal">
+      <p class="minilabel">Where it stands</p>
+      <h2 id="stands-title" class="h2">One user, <span class="accent-word">one vault</span>.</h2>
+      <p class="lede">Whether it holds for anyone else is open until it goes public, for friends to copy and break.</p>
+    </div>
+  </section>
+</main>
+</Page>

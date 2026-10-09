@@ -19,4 +19,6 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/marc-recio-05b085211/",
   // CV lives in public/. Provided by Marc.
   cv: "/cv.pdf",
+  // Where he lives, beside the phone in the footer.
+  location: "Valencia, Spain",
 } as const;

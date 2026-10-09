@@ -100,6 +100,10 @@
   li::marker { color: var(--accent); }
 
   .entry + .entry { margin-top: 3.5mm; }
+  /* an entry never splits across the page, and a heading never ends one */
+  .entry { break-inside: avoid; }
+  h2 { break-after: avoid; }
+  dl.skills { break-inside: avoid; }
 
   .skills { display: grid; grid-template-columns: 34mm 1fr; gap: 1.2mm 4mm; }
   .skills dt { font-weight: 600; }
@@ -120,7 +124,7 @@
 </style>
 
 <h1>Marc Recio</h1>
-<p class="role">Data scientist · plant genomics</p>
+<p class="role">Data scientist who builds AI systems</p>
 <p class="contact">
   <span>Valencia, Spain (open to relocation)</span>
   <span>+34 655 37 03 77</span>
@@ -130,70 +134,60 @@
 </p>
 
 <h2>Summary</h2>
-<p class="summary">Data scientist working in plant genomics. I came from the wet lab — in vitro
-  culture, PCR, sequencing — and now build the pipelines that read what those experiments produce,
-  designed so a scientist can audit the calls the machine makes. Current work pairs large language
-  models with deterministic, tested code so that every reproducible decision is made by the code and
-  never by the model. Classical machine learning, databases and the full data lifecycle; deep
-  learning and reinforcement learning in progress. Fluent English, and experience in international,
-  research-driven environments.</p>
+<p class="summary">Data scientist, plant breeder by training. I build language-model pipelines that curate the genomics
+  literature, and I want to keep growing in machine learning, deep learning, data analysis and AI systems. I like problems
+  that cross fields and solve them by building systems. On the side: Aevifex, my own method for working with AI agents.</p>
 
 <h2>Selected work</h2>
 
 <div class="entry">
   <div class="row">
-    <span class="title">Evidence-graded gene curation from the literature</span>
+    <span class="title">Human-in-the-loop gene curation</span>
     <span class="when">2025 – present</span>
   </div>
-  <p class="where">MSc data-science thesis · with the TomsBioLab research group</p>
-  <div class="body">
-    <ul>
-      <li>Pipeline that turns grapevine-genomics papers into evidence-graded catalogue rows: language
-        models read, deterministic code makes every call that has to be reproducible.</li>
-      <li>The model never assigns the evidence level. It answers a fixed set of yes/no questions and
-        tested code maps those booleans onto the published 6-level scale — so a level can be
-        re-derived, audited and unit-tested, which an opinion cannot.</li>
-      <li><span class="metric">98.7 % level accuracy</span> against a hand-curated gold set — 74 of 75
-        genes across 9 scorable papers. Providers sit behind one interface, so a lab can run the whole
-        pipeline on its own model.</li>
-      <li>Findings are held for the January defence; the engineering is documented in the portfolio.</li>
-    </ul>
-  </div>
+  <p class="where">MSc data-science thesis (UOC) · with the TomsBioLab group, I2SysBio (CSIC – Universitat de València)</p>
+  <ul>
+    <li>A language-model pipeline that curates the literature for the gene catalogues of the PlantaeViz species: models
+      read the papers, tested code assigns each gene's evidence level, and a curator holds two gates.</li>
+    <li>Evaluated against a gold set curated by hand; the results are held until the paper and the defence.</li>
+  </ul>
 </div>
 
 <div class="entry">
   <div class="row">
-    <span class="title">High-throughput screen for heat-stress protection in pollen</span>
+    <span class="title">A chemical screen for heat-stressed pollen</span>
     <span class="when">2024</span>
   </div>
-  <p class="where">MSc plant-breeding thesis (COMAV, UPV) · graded 10/10</p>
-  <div class="body">
-    <ul>
-      <li>Screened 800 compounds for protection of rapeseed (<i>Brassica napus</i> DH4079) pollen
-        against a heat shock that collapses germination from ≈61 % to below 2 %; returned 8 candidate
-        hits as a shortlist for follow-up.</li>
-      <li>Designed the assay, ran the statistics behind the results, and reported the negative
-        controls — DMSO protects at mild heat (32 °C) but not at 38 °C.</li>
-    </ul>
-  </div>
+  <p class="where">MSc plant-breeding thesis (COMAV, UPV) · supervised by Dr. Ricardo Mir Moreno · graded 10/10</p>
+  <ul>
+    <li>800 compounds screened on rapeseed pollen in a germination assay I designed, plated by an Opentrons OT-2 robot
+      and counted in ImageJ: a single-well primary screen that left 8 candidates to retest.</li>
+  </ul>
 </div>
 
 <div class="entry">
   <div class="row">
-    <span class="title">Published dataset · scraper and data contract</span>
-    <span class="when">2025</span>
+    <span class="title">Aevifex, my method for working with AI agents</span>
+    <span class="when">2026</span>
   </div>
-  <p class="where">Zenodo, DOI 10.5281/zenodo.17578619 · CC BY-NC-SA 4.0</p>
-  <div class="body">
-    <ul>
-      <li>1,000 films × ≈25 fields in a single CSV. Per-field error handling so one missing element
-        never aborts a record, explicit waits instead of brittle sleeps, and resumable output that
-        survives interruption.</li>
-    </ul>
-  </div>
+  <p class="where">Own project · in daily use · private until its first release</p>
+  <ul>
+    <li>Rules, skills, hooks and a guard for Claude Code agents; the guard tested on 1,319 labelled tool calls, the checks on planted faults and controls.</li>
+  </ul>
 </div>
 
 <h2>Experience</h2>
+
+<div class="entry">
+  <div class="row">
+    <span class="title">Internship, master's thesis</span>
+    <span class="when">2026 – present</span>
+  </div>
+  <p class="where">TomsBioLab, I2SysBio (CSIC – Universitat de València), Valencia</p>
+  <ul>
+    <li>Building the thesis's curation pipeline for the gene catalogues of the PlantaeViz species.</li>
+  </ul>
+</div>
 
 <div class="entry">
   <div class="row">
@@ -224,22 +218,23 @@
 
 <h2>Skills</h2>
 <dl class="skills">
+  <dt>LLM pipelines</dt>
+  <dd>Structured extraction from papers, gold-set evaluation, provider-agnostic interfaces, rule-based
+    decisions over model output.</dd>
+  <dt>Agents</dt>
+  <dd>Claude Code: rules, skills, hooks and guards, tested on labelled cases, planted faults and controls.</dd>
   <dt>Machine learning</dt>
-  <dd>Supervised and unsupervised methods, model evaluation on imbalanced data (F1-macro,
-    class weighting), dimensionality reduction (PCA, t-SNE, UMAP).</dd>
-  <dt>LLM engineering</dt>
-  <dd>Structured extraction, prompt design against a gold set, provider-agnostic interfaces,
-    rule-based post-processing of model output.</dd>
+  <dd>Supervised and unsupervised methods, evaluation on imbalanced data, PCA, t-SNE and UMAP; statistics in R.</dd>
   <dt>Data &amp; databases</dt>
-  <dd>SQL, NoSQL, schema design, data modelling, ETL, cleaning and preprocessing.</dd>
+  <dd>SQL, PostgreSQL, schema design, ETL, web scraping, Power BI.</dd>
   <dt>Programming</dt>
-  <dd>Python, R, SQL. Modular packages, unit tests, command-line and API entry points.</dd>
-  <dt>Collection &amp; visualization</dt>
-  <dd>Web scraping, APIs, exploratory analysis, reporting, Power BI.</dd>
+  <dd>Python, R, SQL, Bash; Git, Docker, Linux.</dd>
   <dt>Domain</dt>
-  <dd>Plant genomics and breeding, molecular biology, experimental design, statistical analysis.</dd>
+  <dd>Plant genomics and breeding, molecular biology, experimental design.</dd>
+  <dt>In progress</dt>
+  <dd>Deep learning and reinforcement learning.</dd>
   <dt>Languages</dt>
-  <dd>Spanish (native), Catalan (native), English (fluent — B2 First certified), French (A2).</dd>
+  <dd>Spanish (native), Valencian (Catalan, native), English (fluent, Cambridge B2 First), French (A2).</dd>
 </dl>
 
 <h2>Education</h2>
@@ -247,7 +242,7 @@
 <div class="entry">
   <div class="row">
     <span class="title">MSc in Data Science</span>
-    <span class="when">Feb 2025 – expected 2026</span>
+    <span class="when">Feb 2025 – expected Jan 2027</span>
   </div>
   <p class="where">Universitat Oberta de Catalunya (UOC) · top grade in Machine Learning</p>
 </div>

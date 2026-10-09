@@ -1,0 +1,40 @@
+---
+/**
+ * The footer on paper, with the contacts from `consts.ts` (AX-3). The landing's adds the
+ * relocation and the credit of the licensed photo of plants in vitro (Portfolio's D31).
+ */
+import { withBase } from "../../utils/url";
+import { LINKS } from "../../consts";
+
+interface Props {
+  variant: "landing" | "inner";
+}
+const { variant } = Astro.props;
+const landing = variant === "landing";
+---
+
+<footer class="foot" id="contact">
+  <div class="container">
+    <div class="foot__grid">
+      <div>
+        <span class="avail">Looking for roles and a PhD</span>
+        <h2 class="foot__title">Open to the <span class="accent-word">next step</span>.</h2>
+        <p class="foot__text">Roles that build and evaluate AI systems, in companies or public research, and a PhD where they meet genomics. I am looking for projects I can throw myself into.</p>
+      </div>
+      <div>
+        <div class="foot__actions">
+          <a class="btn btn--dark" href={`mailto:${LINKS.email}`}>Contact me <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn" href={withBase(LINKS.cv)}>Download CV</a>
+        </div>
+        <p class="phone">{LINKS.phone} · {LINKS.location}{landing && ", open to relocation"}</p>
+        <div class="dock dock--foot">
+          <a href={LINKS.linkedin} aria-label="LinkedIn" data-label="LinkedIn"><span class="logo" style={`--m:url(${withBase("/icons/linkedin.svg")})`}></span></a>
+          <a href={LINKS.github} aria-label="GitHub" data-label="GitHub"><span class="logo" style={`--m:url(${withBase("/icons/github.svg")})`}></span></a>
+          <a href={`mailto:${LINKS.email}`} aria-label="Email" data-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5.5" width="18" height="13" rx="2.2"/><path d="M3.8 7.2l8.2 5.9 8.2-5.9"/></svg></a>
+          <a class="cv" href={withBase(LINKS.cv)} aria-label="CV, PDF" data-label="CV · PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 2.5h15v15l-4 4h-11z"/><path d="M19.5 17.5h-4v4"/><rect x="6.5" y="4.6" width="5.2" height="6.2" rx=".6"/><circle cx="9.1" cy="7" r="1.1"/><path d="M7.5 10.2c.3-.9.9-1.4 1.6-1.4s1.3.5 1.6 1.4"/><path d="M15.84 5.86A1.75 1.75 0 1 0 15.84 8.34" stroke-width="1.55"/><path d="M16.6 5.3l1.05 3.6 1.05-3.6" stroke-width="1.55"/><path d="M6.5 13.6h11M6.5 16.2h11M6.5 18.8h7"/></svg></a>
+        </div>
+      </div>
+    </div>
+    <div class="foot__base"><span>© 2026 Marc Recio</span>{landing && <span>Photo of plants in vitro: © Shaiith | Dreamstime.com</span>}</div>
+  </div>
+</footer>

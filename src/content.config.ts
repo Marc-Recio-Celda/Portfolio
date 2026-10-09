@@ -30,6 +30,24 @@ const work = defineCollection({
         label: z.string(),
       })
       .optional(),
+    // La página propia de un proyecto pequeño (D30), con las palabras de su maqueta tal
+    // cual. Sin `page`, el proyecto no se construye con la plantilla de `work/[...slug]`.
+    page: z
+      .object({
+        metaTitle: z.string(),
+        metaDescription: z.string(),
+        label: z.string(),
+        headline: z.string(),
+        full: z.string().nullable().optional(),
+        lead: z.string(),
+        chips: z.string(),
+        shot: z.object({ src: z.string(), alt: z.string(), caption: z.string() }),
+        blocks: z.array(z.object({ heading: z.string(), html: z.string() })),
+        paper: z.string().nullable().optional(),
+        stack: z.array(z.string()),
+        actions: z.array(z.object({ href: z.string(), label: z.string(), dark: z.boolean() })),
+      })
+      .optional(),
   }),
 });
 
