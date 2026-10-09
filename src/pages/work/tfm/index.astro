@@ -10,19 +10,20 @@ import "../../../styles/pages/tfm.css";
   <section class="head" aria-labelledby="page-title">
     <div class="container head__inner">
       <div>
-        <a class="back" href={withBase("/")}><span aria-hidden="true">←</span> Back to the landing</a>
+        <a class="back" href={withBase("/work/")}><span aria-hidden="true">←</span> All the work</a>
         <p class="label"><span class="label__n">01</span>Selected work</p>
         <h1 id="page-title" class="page-title"><span class="nowrap">Human-in-the-loop</span> <span class="accent-word">gene curation</span>.</h1>
         <p class="page-full">“A human-in-the-loop AI-driven workflow for literature curation: improving the gene reference catalogues of PlantaeViz species”</p>
         <p class="page-lead">My data-science master's thesis at the UOC, built with the TomsBioLab group. Language models read the papers, tested code makes the calls, and a curator holds two gates.</p>
         <div class="page-chips"><span class="chip">In progress</span><span class="tag">Master's thesis · UOC</span></div>
       </div>
-      <nav aria-label="The four parts">
+      <nav aria-label="The five parts">
         <ul class="index">
           <li class="c-prob"><a href="#problem"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20h34l10 10v48h-44z"/><path d="M30 14h34l10 10v48h-44z"/><path d="M42 8h34l10 10v48h-44z"/><path d="M50 30h22M50 40h26M50 50h18"/><circle cx="88" cy="58" r="12"/><path d="M97 67l12 12"/></svg><span class="index__num">I.</span><span class="index__name">The problem</span></a></li>
           <li class="c-pipe"><a href="#pipeline"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="45" r="10"/><path d="M28 45h18"/><rect x="46" y="33" width="24" height="24" rx="5"/><path d="M70 45h18"/><circle cx="100" cy="45" r="10"/><path d="M40 41l6 4-6 4M82 41l6 4-6 4"/></svg><span class="index__num">II.</span><span class="index__name">The pipeline</span></a></li>
           <li class="c-eval"><a href="#evaluation"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="15" cy="22" r="5.5" fill="currentColor"/><circle cx="33" cy="22" r="5.5" fill="currentColor"/><circle cx="51" cy="22" r="5.5" fill="currentColor"/><circle cx="69" cy="22" r="5.5" fill="currentColor"/><circle cx="87" cy="22" r="5.5" fill="currentColor"/><circle cx="105" cy="22" r="5.5" fill="currentColor"/><circle cx="15" cy="44" r="5.5" fill="currentColor"/><circle cx="33" cy="44" r="5.5" fill="currentColor"/><circle cx="51" cy="44" r="5.5" fill="currentColor"/><circle cx="69" cy="44" r="5.5" fill="currentColor"/><circle cx="87" cy="44" r="5.5" fill="currentColor"/><circle cx="105" cy="44" r="5.5" fill="currentColor"/><circle cx="15" cy="66" r="5.5" fill="currentColor"/><circle cx="33" cy="66" r="5.5" fill="currentColor"/><circle cx="51" cy="66" r="5.5" fill="currentColor"/><circle cx="69" cy="66" r="5.5" fill="currentColor"/><circle cx="87" cy="66" r="5.5" fill="currentColor"/><circle cx="105" cy="66" r="5.5" fill="currentColor"/></svg><span class="index__num">III.</span><span class="index__name">The evaluation</span></a></li>
           <li class="c-gate"><a href="#gates"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><g transform="translate(26 14) scale(1.25)"><circle cx="12" cy="20" r="6"/><path d="M2 46v-8c0-6 4-10 10-10s8 2 10 5l6 7h12"/><path d="M24 38h22l6-14h-24z"/><path d="M18 46h36"/><rect x="26" y="0" width="24" height="17" rx="4"/><path d="M33 17l-3 5 7-5"/><path d="M33 8.5l3.5 3.5 6-6.5"/></g></svg><span class="index__num">IV.</span><span class="index__name">Human-in-the-loop gates</span></a></li>
+          <li class="c-data"><a href="#data-model"><svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="40" cy="20" rx="24" ry="8"/><path d="M16 20v44c0 4.4 10.7 8 24 8s24-3.6 24-8V20"/><path d="M16 42c0 4.4 10.7 8 24 8s24-3.6 24-8"/><rect x="82" y="12" width="28" height="20" rx="3"/><rect x="82" y="56" width="28" height="20" rx="3"/><path d="M64 28l18-6M64 58l18 7"/></svg><span class="index__num">V.</span><span class="index__name">The data model</span></a></li>
         </ul>
       </nav>
     </div>
@@ -105,6 +106,23 @@ import "../../../styles/pages/tfm.css";
           <figcaption class="caption">Two details of the pipeline figure above, enlarged.</figcaption>
         </figure>
         <p>The curator can override every stage: the genes assigned, the level, the characteristics. Since the level comes from tested code over the model's answers, each one traces back to the facts behind it. The providers sit behind one interface, so a lab can run it all locally, with its own model.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="part c-data" id="data-model" aria-labelledby="data-model-title">
+    <div class="container part__grid">
+      <div class="card">
+        <svg class="flip__art" viewBox="0 0 120 90" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="40" cy="20" rx="24" ry="8"/><path d="M16 20v44c0 4.4 10.7 8 24 8s24-3.6 24-8V20"/><path d="M16 42c0 4.4 10.7 8 24 8s24-3.6 24-8"/><rect x="82" y="12" width="28" height="20" rx="3"/><rect x="82" y="56" width="28" height="20" rx="3"/><path d="M64 28l18-6M64 58l18 7"/></svg>
+        <span class="card__num">V.</span>
+        <div><h2 id="data-model-title" class="card__title">The data model</h2><p class="card__sum">The app's database, as I designed it.</p></div>
+      </div>
+      <div class="body reveal">
+        <p>Genes sit at the centre, tied to their genome release, symbols and orthologues; papers meet them through paper_evidence, which keeps a curation log.</p>
+        <figure class="erd panel">
+          <img src={withBase("/work/thesis-data-model.png")} alt="The database's entity-relationship diagram: genes at the centre, released in a genome release, with many symbols and orthology pairs between genes; papers and genes joined many to many by paper_evidence, which has many curation-log entries" loading="lazy" width="693" height="556">
+          <figcaption class="caption">Its entity–relationship diagram, as I drew it.</figcaption>
+        </figure>
       </div>
     </div>
   </section>

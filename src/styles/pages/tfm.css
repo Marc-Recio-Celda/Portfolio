@@ -85,8 +85,8 @@ body{background:var(--page);color:var(--ink)}
 
 .dock--foot{display:inline-flex;margin-top:var(--space-sm);background:var(--c-ffffff);box-shadow:none}
 
-/* the four parts' colours: deep teal, the model's blue of his figure, the page's teal, and the curator's orange */
-.c-prob{--c:var(--c-1d4c56)} .c-pipe{--c:var(--c-2d58b0)} .c-eval{--c:var(--c-336f7e)} .c-gate{--c:var(--c-a65a1a)}
+/* the five parts' colours: deep teal, the model's blue of his figure, the page's teal, the curator's orange, and the database's slate */
+.c-prob{--c:var(--c-1d4c56)} .c-pipe{--c:var(--c-2d58b0)} .c-eval{--c:var(--c-336f7e)} .c-gate{--c:var(--c-a65a1a)} .c-data{--c:var(--c-44546a)}
 
 /* ---- The page's head: a teal light, the title and its full title, and the four parts as its index ---- */
 .head{position:relative;overflow:hidden;margin-top:-3.6rem;padding-top:3.6rem;--tone:var(--a-teal)}
@@ -198,6 +198,14 @@ figure{margin:0}
 .key span{display:inline-flex;align-items:center;gap:.35rem}
 .key i{width:.7rem;height:.7rem;border-radius:3px;background:var(--k)}
 .stack{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:var(--space-md)}
+/* V · the database, his entity-relationship diagram, at its own size */
+.erd{padding:.9rem;background:var(--c-ffffff)}
+.erd img{display:block;width:100%;max-width:693px;height:auto;margin-inline:auto}
+.erd .caption{margin:.5rem .3rem .2rem}
+/* the fifth part's card spans the index's two columns */
+.index li.c-data{grid-column:1 / -1}
+.index li.c-data a{min-height:6.6rem}
+.index li.c-data .flip__art{width:28%}
 
 /* ---- Where it stands ---- */
 .stands{background:var(--paper-warm);border-top:1px solid var(--rule);padding-block:var(--space-2xl);--tone:var(--a-teal)}
